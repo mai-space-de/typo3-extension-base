@@ -1,0 +1,8 @@
+# --- BEGIN: Dependencies ----------------------------------------------------------------------------------------------
+@import 'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript'
+
+# --- BEGIN: MaiSpace Dependencies -------------------------------------------------------------------------------------
+
+# --- BEGIN: Client specific alterations -------------------------------------------------------------------------------
+@import 'EXT:base/Configuration/TypoScript/Constants/pids.typoscript'
+@import 'EXT:base/Configuration/TypoScript/Constants/fluid.typoscript'

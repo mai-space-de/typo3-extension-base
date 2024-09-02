@@ -1,0 +1,4 @@
+# --- BEGIN: Include Page TsConfig -------------------------------------------------------------------------------------
+
+# Since TYPO3 v12 needed here
+@import 'EXT:alterations/Configuration/TsConfig/page.tsconfig'

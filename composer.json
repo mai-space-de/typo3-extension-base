@@ -1,0 +1,21 @@
+{
+    "name": "maispace/base",
+    "type": "typo3-cms-extension",
+    "description": "Base Extension for Maispace Projects",
+    "homepage": "https://www.maispace.de",
+    "authors": [{
+        "name": "Joel Maximilian Mai",
+        "email": "joel@maispace.de",
+        "role": "Lead Developer"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Maispace\\Base\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "base"
+        }
+    }
+}

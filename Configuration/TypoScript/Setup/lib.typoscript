@@ -1,0 +1,6 @@
+@import 'EXT:base/Configuration/TypoScript/Setup/Lib/contentRecord.typoscript'
+@import 'EXT:base/Configuration/TypoScript/Setup/Lib/dynamicContent.typoscript'
+@import 'EXT:base/Configuration/TypoScript/Setup/Lib/columns.typoscript'
+@import 'EXT:base/Configuration/TypoScript/Setup/Lib/templates.typoscript'
+@import 'EXT:base/Configuration/TypoScript/Setup/Lib/contentElement.typoscript'
+@import 'EXT:base/Configuration/TypoScript/Setup/Lib/tt_content.typoscript'

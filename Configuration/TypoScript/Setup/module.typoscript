@@ -1,0 +1,19 @@
+module {
+    tx_base {
+        settings < plugin.tx_base.settings
+
+        view {
+            layoutRootPaths {
+                5 = {$fluid.pages.partialRootPath}
+            }
+
+            templateRootPaths {
+                5 = {$fluid.pages.partialRootPath}
+            }
+
+            partialRootPaths {
+                5 = {$fluid.pages.partialRootPath}
+            }
+        }
+    }
+}

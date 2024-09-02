@@ -1,0 +1,9 @@
+fluid {
+
+    pages {
+        layoutRootPath = EXT:base/Resources/Private/Layouts/Page/
+        templateRootPath = EXT:base/Resources/Private/Templates/Page/
+        partialRootPath = EXT:base/Resources/Private/Partials/Page/
+    }
+
+}

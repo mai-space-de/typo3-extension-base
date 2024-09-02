@@ -1,0 +1,28 @@
+# --- BEGIN: BackendLayout Standard ------------------------------------------------------------------------------------
+
+mod {
+    web_layout {
+        BackendLayouts {
+            Standard {
+                title = Standard
+                # icon equals EXT:altertations/Resources/Public/Images/BackendLayouts/default.png
+                config {
+                    backend_layout {
+                        colCount = 1
+                        rowCount = 1
+                        rows {
+                            1 {
+                                columns {
+                                    1 {
+                                        name = Inhalt
+                                        colPos = 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
