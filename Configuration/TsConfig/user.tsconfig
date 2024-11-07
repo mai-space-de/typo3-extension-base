@@ -1,3 +1,0 @@
-# --- BEGIN: Include User TsConfig -------------------------------------------------------------------------------------
-
-@import 'EXT:base/Configuration/TsConfig/User/*.tsconfig'

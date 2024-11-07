@@ -1,4 +1,25 @@
-# --- BEGIN: Include Page TsConfig -------------------------------------------------------------------------------------
-
-# Since TYPO3 v12 needed here
-@import 'EXT:alterations/Configuration/TsConfig/page.tsconfig'
+mod {
+	web_layout {
+		BackendLayouts {
+			Standard {
+				title = Standard
+				config {
+					backend_layout {
+						colCount = 1
+						rowCount = 1
+						rows {
+							1 {
+								columns {
+									1 {
+										name = Inhalt
+										colPos = 0
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
