@@ -33,9 +33,15 @@ lib {
                 }
 
                 # Column content
-                # (use eg. {columnMain -> f:format.raw()} for proper output in fluid template)
+                # (use eg. {content -> f:format.raw()} for proper output in fluid template)
                 variables {
-                    columnMain =< lib.templates.columns.main
+                    popovers =< lib.templates.columns.popovers
+                    navbar =< lib.templates.columns.navbar
+                    beforeContent =< lib.templates.columns.beforeContent
+                    content =< lib.templates.columns.content
+                    afterContent =< lib.templates.columns.afterContent
+                    footer =< lib.templates.columns.footer
+                    hidden =< lib.templates.columns.hidden
                 }
 
                 dataProcessing {
