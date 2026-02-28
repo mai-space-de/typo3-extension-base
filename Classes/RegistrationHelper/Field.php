@@ -101,6 +101,6 @@ class Field
             $this->fieldName => $field[$this->fieldName],
         ];
 
-        TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns($this->tableName, $newColumns);
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns($this->tableName, $newColumns);
     }
 }
