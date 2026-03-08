@@ -1,3 +1,2 @@
-# --- BEGIN: Client specific alterations -------------------------------------------------------------------------------
 @import 'EXT:base/Configuration/TypoScript/Constants/pids.typoscript'
 @import 'EXT:base/Configuration/TypoScript/Constants/fluid.typoscript'
