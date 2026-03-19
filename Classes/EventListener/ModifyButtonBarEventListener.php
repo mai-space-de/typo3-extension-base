@@ -101,11 +101,16 @@ final class ModifyButtonBarEventListener
 
         $navigationGroup = 90;
 
+        $language = $this->getLanguageService();
+
         if ($previousUid !== null) {
             $previousUrl = $this->buildEditUrl($table, $previousUid);
+            $previousTitle = $language?->sL(
+                'LLL:EXT:base/Resources/Private/Language/locallang.xlf:button.previousRecord'
+            ) ?? 'Previous record';
             $previousButton = $buttonBar->makeLinkButton()
                 ->setHref($previousUrl)
-                ->setTitle('Previous record')
+                ->setTitle($previousTitle)
                 ->setIcon($this->iconFactory->getIcon('actions-view-go-back', IconSize::SMALL))
                 ->setShowLabelText(true);
 
@@ -114,9 +119,12 @@ final class ModifyButtonBarEventListener
 
         if ($nextUid !== null) {
             $nextUrl = $this->buildEditUrl($table, $nextUid);
+            $nextTitle = $language?->sL(
+                'LLL:EXT:base/Resources/Private/Language/locallang.xlf:button.nextRecord'
+            ) ?? 'Next record';
             $nextButton = $buttonBar->makeLinkButton()
                 ->setHref($nextUrl)
-                ->setTitle('Next record')
+                ->setTitle($nextTitle)
                 ->setIcon($this->iconFactory->getIcon('actions-view-go-forward', IconSize::SMALL))
                 ->setShowLabelText(true);
 
@@ -133,9 +141,10 @@ final class ModifyButtonBarEventListener
     {
         $sortField = $GLOBALS['TCA'][$table]['ctrl']['sortby'] ?? null;
         if ($sortField === null) {
-            $sortField = $GLOBALS['TCA'][$table]['ctrl']['default_sortby'] ?? null;
-            if ($sortField !== null) {
-                $sortField = trim(explode(' ', trim($sortField))[0]);
+            $defaultSortBy = $GLOBALS['TCA'][$table]['ctrl']['default_sortby'] ?? null;
+            if (is_string($defaultSortBy)) {
+                $parts = preg_split('/[\s,]+/', $defaultSortBy, 2);
+                $sortField = $parts[0] ?? null;
             }
         }
 
