@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Maispace\Base\:
+    resource: '../Classes/*'
+
+  Maispace\Base\EventListener\ModifyButtonBarEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'maispace-base/modify-button-bar'
+        event: TYPO3\CMS\Backend\Template\Components\ModifyButtonBarEvent
