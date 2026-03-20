@@ -1,6 +1,6 @@
 <?php
 
-namespace Maispace\Base\Utility;
+namespace Maispace\MaiBase\Utility;
 
 use TYPO3\CMS\Core\Package\PackageManager;
 use TYPO3\CMS\Core\Utility\ArrayUtility;

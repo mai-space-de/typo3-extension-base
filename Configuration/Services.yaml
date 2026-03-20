@@ -4,10 +4,10 @@ services:
     autoconfigure: true
     public: false
 
-  Maispace\Base\:
+  Maispace\MaiBase\:
     resource: '../Classes/*'
 
-  Maispace\Base\EventListener\ModifyButtonBarEventListener:
+  Maispace\MaiBase\EventListener\ModifyButtonBarEventListener:
     tags:
       - name: event.listener
         identifier: 'maispace-base/modify-button-bar'

@@ -1,5 +1,5 @@
 module {
     tx_base {
-        settings < plugin.tx_base.settings
+        settings < plugin.tx_maibase.settings
     }
 }

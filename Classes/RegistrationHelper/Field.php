@@ -1,6 +1,6 @@
 <?php
 
-namespace Maispace\Base\RegistrationHelper;
+namespace Maispace\MaiBase\RegistrationHelper;
 
 class Field
 {

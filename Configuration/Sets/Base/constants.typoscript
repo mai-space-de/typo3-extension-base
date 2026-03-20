@@ -1,1 +1,1 @@
-@import 'EXT:base/Configuration/TypoScript/Constants/pids.typoscript'
+@import 'EXT:mai_base/Configuration/TypoScript/Constants/pids.typoscript'

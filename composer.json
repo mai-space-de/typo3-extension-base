@@ -10,6 +10,10 @@
       "role": "Lead Developer"
     }
   ],
+  "require": {
+    "php": "^8.2",
+    "typo3/cms-core": "^13.4"
+  },
   "autoload": {
     "psr-4": {
       "Maispace\\MaiBase\\": "Classes/"

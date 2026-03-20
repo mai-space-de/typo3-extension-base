@@ -1,0 +1,23 @@
+page {
+    # Add class to default body tag
+    # bodyTagAdd equals class="example" itemprop="example"
+
+    # Simple body tag
+    # bodyTag equals <body class="" itemprop="example" id="123">
+
+    # Create custom body tag
+    bodyTagCObject = COA
+    bodyTagCObject {
+        stdWrap {
+            trim = 1
+            wrap = <body class="|">
+        }
+
+        # Add uid
+        20 = TEXT
+        20 {
+            data = page:uid
+            noTrimWrap = |" id=page-| |
+        }
+    }
+}

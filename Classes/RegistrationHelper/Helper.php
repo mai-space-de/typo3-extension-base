@@ -1,6 +1,6 @@
 <?php
 
-namespace Maispace\Base\RegistrationHelper;
+namespace Maispace\MaiBase\RegistrationHelper;
 
 /**
  * Static TCA Helper Class - provides some useful functions for TCA Configuration.
@@ -83,7 +83,7 @@ class Helper
      *      $tableName,
      *      'headers',
      *      $langFrontend('palette.header'),
-     *      'header;' . $langFrontend('header_formlabel') . ', --linebreak--, , tx_project_header_appearance;' . $lang('tt_content.tx_project_header_appearance') . ', header_position;' . $langFrontend('header_position_formlabel')
+     *      'header;' . $langFrontend('header_formlabel') . ', --linebreak--, , tx_maiproject_header_appearance;' . $lang('tt_content.tx_maiproject_header_appearance') . ', header_position;' . $langFrontend('header_position_formlabel')
      *  );
      *
      */

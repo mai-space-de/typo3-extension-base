@@ -1,6 +1,6 @@
 <?php
 
-namespace Maispace\Base\EventListener;
+namespace Maispace\MaiBase\EventListener;
 
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
@@ -106,7 +106,7 @@ final class ModifyButtonBarEventListener
         if ($previousUid !== null) {
             $previousUrl = $this->buildEditUrl($table, $previousUid);
             $previousTitle = $language?->sL(
-                'LLL:EXT:base/Resources/Private/Language/locallang.xlf:button.previousRecord'
+                'LLL:EXT:mai_base/Resources/Private/Language/locallang.xlf:button.previousRecord'
             ) ?? 'Previous record';
             $previousButton = $buttonBar->makeLinkButton()
                 ->setHref($previousUrl)
@@ -120,7 +120,7 @@ final class ModifyButtonBarEventListener
         if ($nextUid !== null) {
             $nextUrl = $this->buildEditUrl($table, $nextUid);
             $nextTitle = $language?->sL(
-                'LLL:EXT:base/Resources/Private/Language/locallang.xlf:button.nextRecord'
+                'LLL:EXT:mai_base/Resources/Private/Language/locallang.xlf:button.nextRecord'
             ) ?? 'Next record';
             $nextButton = $buttonBar->makeLinkButton()
                 ->setHref($nextUrl)

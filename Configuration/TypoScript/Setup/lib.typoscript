@@ -1,4 +1,4 @@
-@import 'EXT:base/Configuration/TypoScript/Setup/Lib/contentRecord.typoscript'
-@import 'EXT:base/Configuration/TypoScript/Setup/Lib/dynamicContent.typoscript'
-@import 'EXT:base/Configuration/TypoScript/Setup/Lib/columns.typoscript'
-@import 'EXT:base/Configuration/TypoScript/Setup/Lib/contentElement.typoscript'
+@import 'EXT:mai_base/Configuration/TypoScript/Setup/Lib/contentRecord.typoscript'
+@import 'EXT:mai_base/Configuration/TypoScript/Setup/Lib/dynamicContent.typoscript'
+@import 'EXT:mai_base/Configuration/TypoScript/Setup/Lib/columns.typoscript'
+@import 'EXT:mai_base/Configuration/TypoScript/Setup/Lib/contentElement.typoscript'

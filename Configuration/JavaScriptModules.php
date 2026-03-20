@@ -6,6 +6,6 @@ return [
         'core',
     ],
     'imports' => [
-        '@maispace/base/SaveAndClose.js' => 'EXT:base/Resources/Public/JavaScript/SaveAndClose.js',
+        '@maispace/base/SaveAndClose.js' => 'EXT:mai_base/Resources/Public/JavaScript/SaveAndClose.js',
     ],
 ];
