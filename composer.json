@@ -2,6 +2,7 @@
   "name": "maispace/mai-base",
   "type": "typo3-cms-extension",
   "description": "Base Extension for Maispace Projects",
+  "license": "GPL-2.0-or-later",
   "homepage": "https://www.maispace.de",
   "authors": [
     {
@@ -14,10 +15,54 @@
     "php": "^8.2",
     "typo3/cms-core": "^13.4"
   },
+  "require-dev": {
+    "armin/editorconfig-cli": "^2.1",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "helmich/typo3-typoscript-lint": "^3.1",
+    "phpstan/phpstan": "^2.0",
+    "phpunit/phpunit": "^10.5 || ^11.0",
+    "saschaegerer/phpstan-typo3": "^2.0",
+    "typo3/testing-framework": "^8.0"
+  },
   "autoload": {
     "psr-4": {
       "Maispace\\MaiBase\\": "Classes/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Maispace\\MaiBase\\Tests\\": "Tests"
+    }
+  },
+  "scripts": {
+    "lint:check": [
+      "@check:editorconfig",
+      "@check:phpcs",
+      "@check:phpstan",
+      "@check:typoscript"
+    ],
+    "lint:fix": [
+      "@fix:editorconfig",
+      "@fix:phpcs"
+    ],
+    "check:editorconfig": "ec --finder-config .editorconfig",
+    "fix:editorconfig": "ec --finder-config .editorconfig --fix",
+    "check:phpcs": "php-cs-fixer fix --dry-run --diff",
+    "fix:phpcs": "php-cs-fixer fix",
+    "check:phpstan": "phpstan analyse",
+    "check:phpstan:baseline": "phpstan analyse --generate-baseline",
+    "check:typoscript": "typoscript-lint",
+    "test": [
+      "@test:unit"
+    ],
+    "test:unit": "phpunit -c phpunit.xml.dist"
+  },
+  "config": {
+    "allow-plugins": {
+      "typo3/cms-composer-installers": true,
+      "typo3/class-alias-loader": true
+    },
+    "sort-packages": true
   },
   "extra": {
     "typo3/cms": {

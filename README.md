@@ -1,4 +1,9 @@
-# Maispace Base Extension for TYPO3
+# maispace/base — TYPO3 Base Extension
+
+[![CI](https://github.com/mai-space-de/typo3-extension-base/actions/workflows/ci.yml/badge.svg)](https://github.com/mai-space-de/typo3-extension-base/actions/workflows/ci.yml)
+[![PHP 8.2+](https://img.shields.io/badge/PHP-8.2%2B-blue)](https://www.php.net/)
+[![TYPO3 13.4+](https://img.shields.io/badge/TYPO3-13.4%2B-orange)](https://typo3.org/)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 Base Extension for Maispace Projects providing developer utilities, TCA registration helpers, and backend enhancements for TYPO3 CMS.
 
@@ -44,24 +49,37 @@ Fluent builder classes that simplify TYPO3 TCA (Table Configuration Array) regis
 - **TypoScript setup** with plugin configuration, PID management, and content rendering libraries.
 - **User TSConfig** support for backend user configuration.
 
-## Requirements
-
-- TYPO3 CMS 12.4+
-
 ## Installation
 
 Install via Composer:
 
 ```bash
-composer require maispace/base
+composer require maispace/mai-base
 ```
-
-Or install manually by placing the extension in `typo3conf/ext/base/`.
 
 After installation, activate the extension in the TYPO3 Extension Manager or via:
 
 ```bash
-vendor/bin/typo3 extension:activate base
+vendor/bin/typo3 extension:activate mai_base
+```
+
+## Development
+
+```bash
+# Install dependencies
+composer install
+
+# Check all linters
+composer lint:check
+
+# Fix auto-fixable issues
+composer lint:fix
+
+# Run unit tests
+composer test:unit
+
+# Static analysis
+composer check:phpstan
 ```
 
 ## Configuration
