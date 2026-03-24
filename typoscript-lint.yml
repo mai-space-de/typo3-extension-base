@@ -1,8 +1,8 @@
 linters:
-    - class: Helmich\TypoScriptLint\Linter\Sniff\IndentationSniff
-      parameters:
-          useSpaces: true
-          indentPerLevel: 4
-    - class: Helmich\TypoScriptLint\Linter\Sniff\OperatorWhitespaceSniff
-    - class: Helmich\TypoScriptLint\Linter\Sniff\DeadCodeSniff
-    - class: Helmich\TypoScriptLint\Linter\Sniff\NestingConsistencySniff
+  - class: Helmich\TypoScriptLint\Linter\Sniff\IndentationSniff
+    parameters:
+      useSpaces: true
+      indentPerLevel: 4
+  - class: Helmich\TypoScriptLint\Linter\Sniff\OperatorWhitespaceSniff
+  - class: Helmich\TypoScriptLint\Linter\Sniff\DeadCodeSniff
+  - class: Helmich\TypoScriptLint\Linter\Sniff\NestingConsistencySniff

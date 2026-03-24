@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "cpsit/typo3-mailqueue": "^0.5",
     "php": "^8.2",
     "typo3/cms-core": "^13.4"
   },

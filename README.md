@@ -1,9 +1,9 @@
-# maispace/base — TYPO3 Base Extension
+# maispace/mai-base — TYPO3 Base Extension
 
 [![CI](https://github.com/mai-space-de/typo3-extension-base/actions/workflows/ci.yml/badge.svg)](https://github.com/mai-space-de/typo3-extension-base/actions/workflows/ci.yml)
 [![PHP 8.2+](https://img.shields.io/badge/PHP-8.2%2B-blue)](https://www.php.net/)
 [![TYPO3 13.4+](https://img.shields.io/badge/TYPO3-13.4%2B-orange)](https://typo3.org/)
-[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![License: GPL v2 or later](https://img.shields.io/badge/License-GPL%20v2%20or%20later-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 Base Extension for Maispace Projects providing developer utilities, TCA registration helpers, and backend enhancements for TYPO3 CMS.
 
