@@ -23,7 +23,7 @@ class Helper
     public static function localLangHelperFactory(string $extensionKey = 'base', string $locallangFile = 'Default/locallang_tca.xlf'): callable
     {
         return static function (string $key) use ($extensionKey, $locallangFile): string {
-            return 'LLL:EXT:' . $extensionKey . '/Resources/Private/Language/' . $locallangFile . ':' . $key;
+            return 'LLL:EXT:'.$extensionKey.'/Resources/Private/Language/'.$locallangFile.':'.$key;
         };
     }
 
@@ -70,8 +70,8 @@ class Helper
                 'ctrl' => [
                     'typeicon_classes' => [
                         $doktype => $iconIdentifier,
-                        $doktype . '-hideinmenu' => $iconIdentifier . '-hideinmenu',
-                        $doktype . '-root' => $iconIdentifier . '-root',
+                        $doktype.'-hideinmenu' => $iconIdentifier.'-hideinmenu',
+                        $doktype.'-root' => $iconIdentifier.'-root',
                     ],
                 ],
             ]

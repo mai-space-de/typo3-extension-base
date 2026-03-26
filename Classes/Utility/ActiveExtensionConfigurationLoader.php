@@ -25,10 +25,10 @@ class ActiveExtensionConfigurationLoader
         $configuration = [];
         foreach ($this->packageManager->getActivePackages() as $activePackage) {
             $configurationFile =
-                $activePackage->getPackagePath() .
-                "Configuration/" .
-                $filename .
-                ".php";
+                $activePackage->getPackagePath().
+                'Configuration/'.
+                $filename.
+                '.php';
             if (file_exists($configurationFile)) {
                 $configArray = require $configurationFile;
                 if (is_array($configArray)) {

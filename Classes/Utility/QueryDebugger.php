@@ -15,7 +15,7 @@ class QueryDebugger
         DebuggerUtility::var_dump($queryParser->convertQueryToDoctrineQueryBuilder($query)->getSQL());
         DebuggerUtility::var_dump($queryParser->convertQueryToDoctrineQueryBuilder($query)->getParameters());
         if ($die) {
-            exit();
+            exit;
         }
     }
 }

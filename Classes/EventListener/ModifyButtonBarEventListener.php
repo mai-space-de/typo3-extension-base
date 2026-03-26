@@ -21,7 +21,8 @@ final class ModifyButtonBarEventListener
         private readonly IconFactory $iconFactory,
         private readonly UriBuilder $uriBuilder,
         private readonly ConnectionPool $connectionPool,
-    ) {}
+    ) {
+    }
 
     public function __invoke(ModifyButtonBarEvent $event): void
     {
@@ -66,7 +67,7 @@ final class ModifyButtonBarEventListener
     private function addRecordNavigationButtons(array &$buttons, ButtonBar $buttonBar): void
     {
         $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
-        if ($request === null) {
+        if (null === $request) {
             return;
         }
 
@@ -78,22 +79,22 @@ final class ModifyButtonBarEventListener
             return;
         }
 
-        $table = (string)key($editConf);
+        $table = (string) key($editConf);
         $uidList = $editConf[$table] ?? [];
 
         if (!is_array($uidList) || empty($uidList)) {
             return;
         }
 
-        $uid = (int)key($uidList);
-        $action = (string)current($uidList);
+        $uid = (int) key($uidList);
+        $action = (string) current($uidList);
 
-        if ($uid <= 0 || $action !== 'edit') {
+        if ($uid <= 0 || 'edit' !== $action) {
             return;
         }
 
         $siblings = $this->getSiblingRecords($table, $uid);
-        if ($siblings === null) {
+        if (null === $siblings) {
             return;
         }
 
@@ -103,7 +104,7 @@ final class ModifyButtonBarEventListener
 
         $language = $this->getLanguageService();
 
-        if ($previousUid !== null) {
+        if (null !== $previousUid) {
             $previousUrl = $this->buildEditUrl($table, $previousUid);
             $previousTitle = $language?->sL(
                 'LLL:EXT:mai_base/Resources/Private/Language/locallang.xlf:button.previousRecord'
@@ -117,7 +118,7 @@ final class ModifyButtonBarEventListener
             $buttons[ButtonBar::BUTTON_POSITION_RIGHT][$navigationGroup][] = $previousButton;
         }
 
-        if ($nextUid !== null) {
+        if (null !== $nextUid) {
             $nextUrl = $this->buildEditUrl($table, $nextUid);
             $nextTitle = $language?->sL(
                 'LLL:EXT:mai_base/Resources/Private/Language/locallang.xlf:button.nextRecord'
@@ -140,7 +141,7 @@ final class ModifyButtonBarEventListener
     private function getSiblingRecords(string $table, int $uid): ?array
     {
         $sortField = $GLOBALS['TCA'][$table]['ctrl']['sortby'] ?? null;
-        if ($sortField === null) {
+        if (null === $sortField) {
             $defaultSortBy = $GLOBALS['TCA'][$table]['ctrl']['default_sortby'] ?? null;
             if (is_string($defaultSortBy)) {
                 $parts = preg_split('/[\s,]+/', $defaultSortBy, 2);
@@ -148,7 +149,7 @@ final class ModifyButtonBarEventListener
             }
         }
 
-        if ($sortField === null) {
+        if (null === $sortField) {
             $sortField = 'uid';
         }
 
@@ -164,17 +165,17 @@ final class ModifyButtonBarEventListener
             ->executeQuery()
             ->fetchAssociative();
 
-        if ($currentRecord === false) {
+        if (false === $currentRecord) {
             return null;
         }
 
-        $pid = (int)$currentRecord['pid'];
+        $pid = (int) $currentRecord['pid'];
         $sortValue = $currentRecord[$sortField];
 
         $previousUid = $this->findAdjacentRecord($table, $pid, $sortField, $sortValue, $uid, 'previous');
         $nextUid = $this->findAdjacentRecord($table, $pid, $sortField, $sortValue, $uid, 'next');
 
-        if ($previousUid === null && $nextUid === null) {
+        if (null === $previousUid && null === $nextUid) {
             return null;
         }
 
@@ -200,7 +201,7 @@ final class ModifyButtonBarEventListener
             )
             ->setMaxResults(1);
 
-        if ($direction === 'previous') {
+        if ('previous' === $direction) {
             $qb->andWhere(
                 $qb->expr()->or(
                     $qb->expr()->lt($sortField, $qb->createNamedParameter($sortValue)),
@@ -226,7 +227,7 @@ final class ModifyButtonBarEventListener
 
         $record = $qb->executeQuery()->fetchAssociative();
 
-        return $record ? (int)$record['uid'] : null;
+        return $record ? (int) $record['uid'] : null;
     }
 
     private function buildEditUrl(string $table, int $uid): string
@@ -242,11 +243,11 @@ final class ModifyButtonBarEventListener
             ],
         ];
 
-        if ($returnUrl !== '') {
+        if ('' !== $returnUrl) {
             $params['returnUrl'] = $returnUrl;
         }
 
-        return (string)$this->uriBuilder->buildUriFromRoute('record_edit', $params);
+        return (string) $this->uriBuilder->buildUriFromRoute('record_edit', $params);
     }
 
     private function getLanguageService(): ?LanguageService

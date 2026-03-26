@@ -1,8 +1,14 @@
-linters:
-  - class: Helmich\TypoScriptLint\Linter\Sniff\IndentationSniff
+filePatterns:
+  - '*.tsconfig'
+  - '*.typoscript'
+
+sniffs:
+  - class: Indentation
     parameters:
       useSpaces: true
       indentPerLevel: 4
-  - class: Helmich\TypoScriptLint\Linter\Sniff\OperatorWhitespaceSniff
-  - class: Helmich\TypoScriptLint\Linter\Sniff\DeadCodeSniff
-  - class: Helmich\TypoScriptLint\Linter\Sniff\NestingConsistencySniff
+  - class: OperatorWhitespace
+  - class: DeadCode
+  - class: NestingConsistency
+    parameters:
+      commonPathPrefixThreshold: 1

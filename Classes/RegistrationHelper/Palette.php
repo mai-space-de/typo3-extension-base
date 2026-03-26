@@ -8,8 +8,6 @@ class Palette
         private readonly string $tableName,
         private readonly string $paletteName,
         private readonly string $label
-    )
-    {}
-
-
+    ) {
+    }
 }

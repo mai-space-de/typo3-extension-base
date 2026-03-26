@@ -46,8 +46,8 @@
       "@fix:editorconfig",
       "@fix:phpcs"
     ],
-    "check:editorconfig": "ec --finder-config .editorconfig",
-    "fix:editorconfig": "ec --finder-config .editorconfig --fix",
+    "check:editorconfig": "ec -unv -e vendor/",
+    "fix:editorconfig": "ec -unv -e vendor/ --fix",
     "check:phpcs": "php-cs-fixer fix --dry-run --diff",
     "fix:phpcs": "php-cs-fixer fix",
     "check:phpstan": "phpstan analyse",

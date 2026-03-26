@@ -8,8 +8,7 @@ class Table
 
     public function __construct(
         string $title,
-    )
-    {
+    ) {
         $this->config['ctrl']['title'] = $title;
     }
 
@@ -415,16 +414,15 @@ class Table
         string $localizationDisplay = '',
         string $localizationMode = '',
         string $onChange = '',
-    ): self
-    {
+    ): self {
         $this->config['columns'][$columnName]['label'] = $label;
         $this->config['columns'][$columnName]['config'] = $columnConfig;
 
-        if ($description !== '') {
+        if ('' !== $description) {
             $this->config['columns'][$columnName]['description'] = $description;
         }
 
-        if ($displayCond !== '') {
+        if ('' !== $displayCond) {
             $this->config['columns'][$columnName]['displayCond'] = $displayCond;
         }
 
@@ -432,19 +430,18 @@ class Table
             $this->config['columns'][$columnName]['exclude'] = $exclude;
         }
 
-        if ($localizationDisplay !== '') {
+        if ('' !== $localizationDisplay) {
             $this->config['columns'][$columnName]['l10n_display'] = $localizationDisplay;
         }
 
-        if ($localizationMode !== '') {
+        if ('' !== $localizationMode) {
             $this->config['columns'][$columnName]['l10n_mode'] = $localizationMode;
         }
 
-        if ($onChange !== '') {
+        if ('' !== $onChange) {
             $this->config['columns'][$columnName]['onChange'] = $onChange;
         }
 
         return $this;
     }
-
 }

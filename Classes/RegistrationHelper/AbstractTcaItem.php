@@ -18,21 +18,21 @@ abstract class AbstractTcaItem
 
     public function addDefaultLanguageTab(): static
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_core('language') . ', --palette--;;language';
+        $this->showItemConfig[] = '--div--;'.$this->ll_core('language').', --palette--;;language';
 
         return $this;
     }
 
     public function addDefaultCategoriesTab(): static
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_core('categories') . ', categories';
+        $this->showItemConfig[] = '--div--;'.$this->ll_core('categories').', categories';
 
         return $this;
     }
 
     public function addDefaultExtendedTab(): static
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_core('extended');
+        $this->showItemConfig[] = '--div--;'.$this->ll_core('extended');
 
         return $this;
     }
@@ -67,7 +67,7 @@ abstract class AbstractTcaItem
     {
         $showitem = '';
         foreach ($this->showItemConfig as $showitemText) {
-            $showitem .= trim($showitemText, ", \n\r\t") . ',';
+            $showitem .= trim($showitemText, ", \n\r\t").',';
         }
 
         return rtrim($showitem, ',');

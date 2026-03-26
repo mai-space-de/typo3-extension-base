@@ -9,7 +9,7 @@ class Doktype extends AbstractTcaItem
         private readonly string $label,
         private readonly string $iconIdentifier
     ) {
-        $this->showItemConfig[] = '--div--;' . $this->ll_core('general');
+        $this->showItemConfig[] = '--div--;'.$this->ll_core('general');
         $this->showItemConfig['general'] = '--palette--;;standard';
     }
 
@@ -29,7 +29,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultSeoTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_seo('pages.tabs.seo') .
+        $this->showItemConfig[] = '--div--;'.$this->ll_seo('pages.tabs.seo').
             ', --palette--;;seo, --palette--;;robots, --palette--;;canonical, --palette--;;sitemap';
 
         return $this;
@@ -37,7 +37,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultSocialMediaTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_seo('pages.tabs.socialmedia') .
+        $this->showItemConfig[] = '--div--;'.$this->ll_seo('pages.tabs.socialmedia').
             ', --palette--;;opengraph, --palette--;;twittercards';
 
         return $this;
@@ -45,7 +45,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultMetadataTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_frontend('pages.tabs.metadata') .
+        $this->showItemConfig[] = '--div--;'.$this->ll_frontend('pages.tabs.metadata').
             ', --palette--;;abstract, --palette--;;metatags, --palette--;;editorial';
 
         return $this;
@@ -53,7 +53,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultAppearanceTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_frontend('pages.tabs.appearance') .
+        $this->showItemConfig[] = '--div--;'.$this->ll_frontend('pages.tabs.appearance').
             ', --palette--;;layout, --palette--;;replace';
 
         return $this;
@@ -61,7 +61,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultBehaviourTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_frontend('pages.tabs.behaviour') .
+        $this->showItemConfig[] = '--div--;'.$this->ll_frontend('pages.tabs.behaviour').
             ', --palette--;;links, --palette--;;caching, --palette--;;miscellaneous, --palette--;;module';
 
         return $this;
@@ -69,7 +69,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultResourcesTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_frontend('pages.tabs.resources') .
+        $this->showItemConfig[] = '--div--;'.$this->ll_frontend('pages.tabs.resources').
             ', --palette--;;media, --palette--;;config';
 
         return $this;
@@ -77,7 +77,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultAccessTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_frontend('pages.tabs.access') .
+        $this->showItemConfig[] = '--div--;'.$this->ll_frontend('pages.tabs.access').
             ', --palette--;;visibility, --palette--;;access';
 
         return $this;
@@ -85,7 +85,7 @@ class Doktype extends AbstractTcaItem
 
     public function addDefaultNotesTab(): self
     {
-        $this->showItemConfig[] = '--div--;' . $this->ll_core('notes') . ', rowDescription';
+        $this->showItemConfig[] = '--div--;'.$this->ll_core('notes').', rowDescription';
 
         return $this;
     }
