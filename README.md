@@ -5,7 +5,7 @@
 
 Base foundation extension for Maispace TYPO3 projects. Provides shared TypoScript configuration, page layout definitions, and pulls in all TYPO3 backend/infrastructure extensions that the project requires. Mail dispatch is handled by `mai_mail` — no external mail queue package is declared here.
 
-**Requires:** TYPO3 13.4 LTS / 14.0 · PHP 8.2+
+**Requires:** TYPO3 13.4 LTS / 14.1 · PHP 8.2+
 
 ---
 

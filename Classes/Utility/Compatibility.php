@@ -11,6 +11,6 @@ class Compatibility
     {
         $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
 
-        return version_compare($versionInformation->getVersion(), '14.0.0', '>=');
+        return version_compare($versionInformation->getVersion(), '14.1.0', '>=');
     }
 }
