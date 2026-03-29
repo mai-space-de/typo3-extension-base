@@ -1,9 +1,0 @@
-composer.lock
-vendor/
-public/
-.phpunit.cache
-.php-cs-fixer.cache
-phpstan-baseline.neon
-.idea
-*.swp
-.DS_Store

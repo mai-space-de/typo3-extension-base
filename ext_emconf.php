@@ -1,27 +1,17 @@
 <?php
-
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Base',
-    'description' => 'Base Extension for Maispace Projects',
-    'version' => '12.0.0',
+    'title' => 'Mai Base',
+    'description' => 'Base foundation extension for Maispace TYPO3 projects. Provides shared TypoScript configuration, page layout definitions, and pulls in all TYPO3 backend/infrastructure extensions that the project requires. Mail dispatch is handled by `mai_mail` — no external mail queue package is declared here.',
+    'category' => 'module',
+    'author' => 'Maispace',
+    'author_email' => '',
     'state' => 'stable',
-    'category' => 'templates',
-    'author' => 'Joel Maximilian Mai',
-    'author_email' => 'joel@maispace.de',
-    'author_company' => 'Maispace',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.0-12.4.99',
+            'typo3' => '13.4.0-14.99.99',
         ],
-        'conflicts' => [
-        ],
-    ],
-    'uploadfolder' => 0,
-    'createDirs' => '',
-    'clearCacheOnLoad' => 1,
-    'autoload' => [
-        'psr-4' => [
-            'Maispace\\MaiBase\\' => 'Classes',
-        ],
+        'conflicts' => [],
+        'suggests' => [],
     ],
 ];

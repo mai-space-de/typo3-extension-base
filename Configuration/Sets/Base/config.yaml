@@ -1,4 +1,0 @@
-name: maispace/base
-label: 'MaiSpace Base'
-dependencies:
-  - typo3/fluid-styled-content
