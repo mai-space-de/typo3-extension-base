@@ -35,16 +35,22 @@ class Helper
     /**
      * This is a helper function to add a new CType to the TCA.
      */
-    public static function addCType(string $cType, string $label, string $iconIdentifier): void
+    public static function addCType(string $cType, string $label, string $iconIdentifier, string $group = ''): void
     {
+        $item = [
+            'label' => $label,
+            'value' => $cType,
+            'icon'  => $iconIdentifier,
+        ];
+
+        if ($group !== '') {
+            $item['group'] = $group;
+        }
+
         ExtensionManagementUtility::addTcaSelectItem(
             'tt_content',
             'CType',
-            [
-                'label' => $label,
-                'value' => $cType,
-                'icon' => $iconIdentifier,
-            ],
+            $item,
             'textmedia',
             'after'
         );

@@ -6,6 +6,8 @@ namespace Maispace\MaiBase\TableConfigurationArray;
 
 class CType extends AbstractTcaItem
 {
+    private string $group = '';
+
     public function __construct(
         private readonly string $cType,
         private readonly string $label,
@@ -13,6 +15,13 @@ class CType extends AbstractTcaItem
     ) {
         $this->showItemConfig[] = '--div--;' . $this->ll_core('general');
         $this->showItemConfig['general'] = '--palette--;;general';
+    }
+
+    public function setGroup(string $group): self
+    {
+        $this->group = $group;
+
+        return $this;
     }
 
     public function addDefaultHeaderPalette(): self
@@ -98,7 +107,7 @@ class CType extends AbstractTcaItem
             throw new \RuntimeException('CType is empty');
         }
 
-        Helper::addCType($this->cType, $this->label, $this->iconIdentifier);
+        Helper::addCType($this->cType, $this->label, $this->iconIdentifier, $this->group);
 
         $GLOBALS['TCA']['tt_content']['types'][$this->cType] = [
             'showitem' => $this->buildShowitem(),
