@@ -99,28 +99,47 @@ Each trait adds one or more related config keys. Traits are mixed into concrete 
 
 | Trait | Config keys covered | Applicable types |
 |---|---|---|
-| `RequiredTrait` | `required` | most |
-| `ReadOnlyTrait` | `readOnly` | most |
-| `DefaultValueTrait` | `default` | input, text, select, check, radio, number, color, datetime, email, link, slug, uuid |
-| `SizeTrait` | `size` | input, text, select, group |
-| `PlaceholderTrait` | `placeholder` | input, text, email, link, number, password |
-| `MaxLengthTrait` | `max` | input, text, email, slug, uuid |
-| `EvalTrait` | `eval` | input, text, datetime, email, number, password, slug |
-| `MinMaxItemsTrait` | `minitems`, `maxitems` | file, inline, select (multiple), group |
-| `ForeignTableTrait` | `foreign_table`, `foreign_field`, `foreign_sortby`, `foreign_label` | inline, select |
 | `AllowedFileTypesTrait` | `allowed`, `disallowed` | file, group |
-| `AppearanceTrait` | `appearance` array sub-keys | file, inline |
-| `OverrideChildTcaTrait` | `overrideChildTca` | inline |
-| `AutoSizeTrait` | `autoSizeMax` | select, group |
-| `ItemsTrait` | `items` | select, radio, check |
-| `RenderTypeTrait` | `renderType` | select, input, text, check |
-| `MmTrait` | `MM`, `MM_opposite_field`, `MM_match_fields` | select, group |
-| `FieldWizardTrait` | `fieldWizard` | most |
+| `AppearanceTrait` | `appearance` array sub-keys | file, inline, link |
+| `AuthModeTrait` | `authMode` | select (all render types) |
+| `AutoSizeTrait` | `autoSizeMax` | select, group, folder |
+| `AutocompleteTrait` | `autocomplete` | input, email, link, number, password |
+| `BehaviourTrait` | `behaviour` array sub-keys | file, inline, select, group |
+| `ColsRowsTrait` | `cols`, `rows` | text, json |
+| `DbFieldLengthTrait` | `dbFieldLength` | select (all render types) |
+| `DbTypeTrait` | `dbType` | datetime |
+| `DefaultValueTrait` | `default` | input, text, select, check, radio, number, color, datetime, email, link, slug, uuid, json, country, passthrough |
+| `EnableCopyToClipboardTrait` | `enableCopyToClipboard` | uuid |
+| `EvalTrait` | `eval` | input, text, datetime, email, number, password, slug, check |
 | `FieldControlTrait` | `fieldControl` | most |
-| `BehaviourTrait` | `behaviour` array sub-keys (`allowLanguageSynchronization`) | most |
-| `SoftRefTrait` | `softref` | input, text, link |
+| `FieldInformationTrait` | `fieldInformation` | most |
+| `FieldWizardTrait` | `fieldWizard` | most |
+| `FileFolderConfigTrait` | `fileFolderConfig` | select (all render types) |
+| `ForeignTableTrait` | `foreignTable`, `foreignField`, `foreignSortby`, `foreignLabel`, `foreignTablePrefix`, `foreignTableWhere`, `foreignTableItemGroup` | inline, select, category, group |
+| `GeneratorOptionsTrait` | `generatorOptions` | slug |
+| `ItemsProcessorsTrait` | `itemsProcessors`, `itemsProcFunc` | select, check, radio |
+| `ItemsTrait` | `items` | select, radio, check |
+| `MaxLengthTrait` | `max`, `min` | input, text |
+| `MinMaxItemsTrait` | `minitems`, `maxitems` | file, inline, select (multiple/tree), group, folder, category |
+| `MmTrait` | `MM`, `MM_opposite_field`, `MM_match_fields` | select, group, category, inline |
+| `ModeTrait` | `mode` | input, email, color, datetime, link, number, password |
+| `MultipleTrait` | `multiple` | select (all render types), group, folder |
+| `NullableTrait` | `nullable` | input, text, email, color, datetime, link, number, password |
+| `OverrideChildTcaTrait` | `overrideChildTca` | inline, file |
+| `PlaceholderTrait` | `placeholder` | input, text, email, link, number, password, color, json |
+| `RangeTrait` | `range` | datetime, number |
+| `ReadOnlyTrait` | `readOnly` | most |
+| `RenderTypeTrait` | `renderType` | select, input, text, check, user |
+| `RequiredTrait` | `required` | most |
+| `SearchableTrait` | `searchable` | most |
+| `SizeTrait` | `size` | input, text, select, group, folder, country, uuid, none |
+| `SliderTrait` | `slider` | number |
+| `SoftRefTrait` | `softref` | input, text, link, datetime |
+| `SortItemsTrait` | `sortItems` | select (single), country |
+| `TreeConfigTrait` | `treeConfig` | select (tree), category |
+| `ValuePickerTrait` | `valuePicker` | input, color, number, link |
 
-#### Example trait
+#### Example traits
 
 ```php
 // Traits/RequiredTrait.php
@@ -129,6 +148,18 @@ trait RequiredTrait
     public function setRequired(bool $required = true): static
     {
         $this->config['required'] = $required;
+        return $this;
+    }
+}
+```
+
+```php
+// Traits/NullableTrait.php
+trait NullableTrait
+{
+    public function setNullable(bool $nullable = true): static
+    {
+        $this->config['nullable'] = $nullable;
         return $this;
     }
 }
@@ -147,6 +178,42 @@ trait MinMaxItemsTrait
     public function setMaxItems(int $max): static
     {
         $this->config['maxitems'] = $max;
+        return $this;
+    }
+}
+```
+
+```php
+// Traits/RangeTrait.php
+trait RangeTrait
+{
+    public function setRange(int|float $lower, int|float $upper): static
+    {
+        $this->config['range'] = ['lower' => $lower, 'upper' => $upper];
+        return $this;
+    }
+}
+```
+
+```php
+// Traits/ValuePickerTrait.php
+trait ValuePickerTrait
+{
+    public function setValuePickerItems(array $items): static
+    {
+        $this->config['valuePicker'] = ['items' => $items];
+        return $this;
+    }
+}
+```
+
+```php
+// Traits/TreeConfigTrait.php
+trait TreeConfigTrait
+{
+    public function setTreeConfig(array $treeConfig): static
+    {
+        $this->config['treeConfig'] = $treeConfig;
         return $this;
     }
 }
@@ -172,7 +239,9 @@ Each class:
 
 Covers `type = 'file'` (FAL file references, TYPO3 12+).
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `MinMaxItemsTrait`, `AllowedFileTypesTrait`, `AppearanceTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowed`, `appearance`, `behaviour`, `disallowed`, `fieldInformation`, `fieldWizard`, `maxitems`, `minitems`, `overrideChildTca`, `readOnly`
+
+Traits used: `ReadOnlyTrait`, `MinMaxItemsTrait`, `AllowedFileTypesTrait`, `AppearanceTrait`, `BehaviourTrait`, `OverrideChildTcaTrait`, `FieldWizardTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
 - `setCropVariants(array $cropVariants): static` — sets `overrideChildTca.columns.crop.config.cropVariants`
@@ -182,7 +251,6 @@ Type-exclusive methods:
 (new FileConfig())
     ->setAllowed('jpg,jpeg,png,webp')
     ->setMaxItems(1)
-    ->setRequired()
     ->toArray();
 ```
 
@@ -194,11 +262,21 @@ Type-exclusive methods:
 
 Covers `type = 'inline'` (IRRE).
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `MinMaxItemsTrait`, `ForeignTableTrait`, `AppearanceTrait`, `OverrideChildTcaTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `appearance`, `autoSizeMax`, `behaviour`, `customControls`, `filter`, `foreignDefaultSortby`, `foreignField`, `foreignLabel`, `foreignMatchFields`, `foreignSelector`, `foreignSortby`, `foreignTable`, `foreignTableField`, `foreignUnique`, `maxitems`, `minitems`, `mm`, `overrideChildTca`, `size`, `symmetricField`, `symmetricLabel`, `symmetricSortby`
+
+Traits used: `ReadOnlyTrait`, `MinMaxItemsTrait`, `SizeTrait`, `AutoSizeTrait`, `ForeignTableTrait`, `AppearanceTrait`, `OverrideChildTcaTrait`, `BehaviourTrait`, `MmTrait`, `FieldWizardTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
-- `setForeignSortby(string $field): static`
 - `setForeignDefaultSortby(string $sorting): static`
+- `setForeignMatchFields(array $fields): static`
+- `setForeignSelector(string $field): static`
+- `setForeignTableField(string $field): static`
+- `setForeignUnique(string $field): static`
+- `setSymmetricField(string $field): static`
+- `setSymmetricLabel(string $field): static`
+- `setSymmetricSortby(string $field): static`
+- `setFilter(array $filter): static`
+- `setCustomControls(array $controls): static`
 - `enableSortable(bool $enable = true): static` — sets `appearance.useSortable`
 - `enableNewRecordLinkAddTitle(bool $enable = true): static`
 - `setLevelLinksPosition(string $position): static` — `'both'|'top'|'bottom'|'none'`
@@ -220,7 +298,12 @@ Type-exclusive methods:
 
 Covers `type = 'input'`.
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `MaxLengthTrait`, `EvalTrait`, `SoftRefTrait`, `RenderTypeTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `autocomplete`, `default`, `eval`, `fieldControl`, `fieldInformation`, `fieldWizard`, `isIn`, `max`, `min`, `mode`, `nullable`, `placeholder`, `readOnly`, `required`, `search`, `searchable`, `size`, `softref`, `valuePicker`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `MaxLengthTrait`, `EvalTrait`, `SoftRefTrait`, `RenderTypeTrait`, `NullableTrait`, `ModeTrait`, `AutocompleteTrait`, `ValuePickerTrait`, `SearchableTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `setIsIn(string $chars): static` — sets `isIn`
 
 ---
 
@@ -230,29 +313,71 @@ Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`,
 
 Covers `type = 'text'` (textarea / RTE).
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `MaxLengthTrait`, `EvalTrait`, `SoftRefTrait`, `RenderTypeTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `cols`, `default`, `enableRichtext`, `enableTabulator`, `eval`, `fieldControl`, `fieldInformation`, `fieldWizard`, `fixedFont`, `isIn`, `max`, `min`, `nullable`, `placeholder`, `readOnly`, `required`, `richtextConfiguration`, `rows`, `search`, `searchable`, `softref`, `wrap`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `MaxLengthTrait`, `EvalTrait`, `SoftRefTrait`, `RenderTypeTrait`, `NullableTrait`, `SearchableTrait`, `ColsRowsTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
 - `enableRte(bool $enable = true): static` — sets `enableRichtext`
-- `setRtePid(int $pid): static` — sets `richtextConfiguration`
 - `setRichtextConfiguration(string $configuration): static`
-- `setCols(int $cols): static`
-- `setRows(int $rows): static`
+- `enableTabulator(bool $enable = true): static`
+- `enableFixedFont(bool $enable = true): static`
+- `setWrap(string $wrap): static` — `'virtual'|'off'`
+- `setIsIn(string $chars): static`
 
 ---
 
-#### SelectSingleConfig / SelectMultipleConfig
+#### SelectSingleConfig
 
-**Files:**
-- `Classes/TableConfigurationArray/FieldConfig/SelectSingleConfig.php`
-- `Classes/TableConfigurationArray/FieldConfig/SelectMultipleConfig.php`
+**File:** `Classes/TableConfigurationArray/FieldConfig/SelectSingleConfig.php`
 
-Both cover `type = 'select'` but with distinct render types and item-count semantics.
+Covers `type = 'select'` with `renderType = 'selectSingle'`.
 
-`SelectSingleConfig`: `renderType = 'selectSingle'`, no `MinMaxItemsTrait`
-`SelectMultipleConfig`: `renderType = 'selectMultipleSideBySide'`, uses `MinMaxItemsTrait`
+TCA properties: `allowNonIdValues`, `authMode`, `autoSizeMax`, `behaviour`, `dbFieldLength`, `default`, `disableNonMatchingValueElement`, `fieldControl`, `fieldInformation`, `fieldWizard`, `fileFolderConfig`, `foreignTable`, `foreignTableItemGroup`, `foreignTablePrefix`, `foreignTableWhere`, `itemGroups`, `items`, `itemsProcessors`, `itemsProcFunc`, `maxitems`, `minitems`, `mm`, `multiple`, `readOnly`, `size`, `sortItems`
 
-Both use: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `ItemsTrait`, `ForeignTableTrait`, `AutoSizeTrait`, `MmTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `AutoSizeTrait`, `ItemsTrait`, `ItemsProcessorsTrait`, `ForeignTableTrait`, `MmTrait`, `AuthModeTrait`, `DbFieldLengthTrait`, `FileFolderConfigTrait`, `SortItemsTrait`, `MultipleTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `setAllowNonIdValues(bool $allow = true): static`
+- `setDisableNonMatchingValueElement(bool $disable = true): static`
+- `setItemGroups(array $groups): static`
+- `setMinMaxItems(int $min, int $max): static`
+
+---
+
+#### SelectMultipleConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/SelectMultipleConfig.php`
+
+Covers `type = 'select'` with `renderType = 'selectMultipleSideBySide'`.
+
+TCA properties: `allowNonIdValues`, `authMode`, `autoSizeMax`, `behaviour`, `dbFieldLength`, `default`, `disableNonMatchingValueElement`, `exclusiveKeys`, `fieldControl`, `fieldInformation`, `fieldWizard`, `fileFolderConfig`, `foreignTable`, `foreignTablePrefix`, `foreignTableWhere`, `items`, `itemsProcessors`, `itemsProcFunc`, `maxitems`, `minitems`, `mm`, `multiple`, `multiSelectFilterItems`, `readOnly`, `size`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `AutoSizeTrait`, `MinMaxItemsTrait`, `ItemsTrait`, `ItemsProcessorsTrait`, `ForeignTableTrait`, `MmTrait`, `AuthModeTrait`, `DbFieldLengthTrait`, `FileFolderConfigTrait`, `MultipleTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `setAllowNonIdValues(bool $allow = true): static`
+- `setDisableNonMatchingValueElement(bool $disable = true): static`
+- `setExclusiveKeys(string $keys): static`
+- `setMultiSelectFilterItems(array $items): static`
+
+---
+
+#### SelectTreeConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/SelectTreeConfig.php`
+
+Covers `type = 'select'` with `renderType = 'selectTree'`.
+
+TCA properties: `allowNonIdValues`, `authMode`, `behaviour`, `dbFieldLength`, `default`, `disableNonMatchingValueElement`, `exclusiveKeys`, `fieldInformation`, `fieldWizard`, `fileFolderConfig`, `foreignTable`, `foreignTableItemGroup`, `foreignTablePrefix`, `foreignTableWhere`, `items`, `itemsProcessors`, `itemsProcFunc`, `maxitems`, `minitems`, `mm`, `multiple`, `readOnly`, `size`, `treeConfig`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `MinMaxItemsTrait`, `ItemsTrait`, `ItemsProcessorsTrait`, `ForeignTableTrait`, `MmTrait`, `AuthModeTrait`, `DbFieldLengthTrait`, `FileFolderConfigTrait`, `MultipleTrait`, `TreeConfigTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `setAllowNonIdValues(bool $allow = true): static`
+- `setDisableNonMatchingValueElement(bool $disable = true): static`
+- `setExclusiveKeys(string $keys): static`
+- `setItemGroups(array $groups): static`
 
 ---
 
@@ -262,10 +387,14 @@ Both use: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `ItemsTrait`, `
 
 Covers `type = 'check'`.
 
-Traits used: `DefaultValueTrait`, `ReadOnlyTrait`, `ItemsTrait`, `RenderTypeTrait`, `BehaviourTrait`
+TCA properties: `cols`, `default`, `eval`, `fieldInformation`, `fieldWizard`, `invertStateDisplay`, `items`, `itemsProcessors`, `itemsProcFunc`, `readOnly`, `renderType`, `validation`, `allowLanguageSynchronization` (via behaviour)
+
+Traits used: `DefaultValueTrait`, `ReadOnlyTrait`, `ItemsTrait`, `ItemsProcessorsTrait`, `EvalTrait`, `RenderTypeTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
-- `setColumns(int $cols): static`
+- `setColumns(int $cols): static` — sets `cols`
+- `setInvertStateDisplay(bool $invert = true): static`
+- `setValidation(array $validation): static`
 
 ---
 
@@ -273,13 +402,22 @@ Type-exclusive methods:
 
 **File:** `Classes/TableConfigurationArray/FieldConfig/GroupConfig.php`
 
-Covers `type = 'group'` (record browser / old file reference style).
+Covers `type = 'group'` (record browser).
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `SizeTrait`, `MinMaxItemsTrait`, `AllowedFileTypesTrait`, `AutoSizeTrait`, `MmTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowed`, `allowLanguageSynchronization` (via behaviour), `autoSizeMax`, `default`, `dontRemapTablesOnCopy`, `elementBrowserEntryPoints`, `fieldControl`, `fieldInformation`, `fieldWizard`, `filter`, `foreignTable`, `hideDeleteIcon`, `hideMoveIcons`, `hideSuggest`, `localizeReferencesAtParentLocalization`, `maxitems`, `minitems`, `mm`, `multiple`, `prependTname`, `readOnly`, `size`, `suggestOptions`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `MinMaxItemsTrait`, `AllowedFileTypesTrait`, `AutoSizeTrait`, `MultipleTrait`, `MmTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
-- `setAllowedTables(string|array $tables): static` — sets `allowed`
-- `setInternalType(string $type): static` — `'db'` or `'folder'`
+- `setFilter(array $filter): static`
+- `setElementBrowserEntryPoints(array $entryPoints): static`
+- `setSuggestOptions(array $options): static`
+- `setHideDeleteIcon(bool $hide = true): static`
+- `setHideMoveIcons(bool $hide = true): static`
+- `setHideSuggest(bool $hide = true): static`
+- `setDontRemapTablesOnCopy(string $tables): static`
+- `setPrependTname(bool $prepend = true): static`
+- `setLocalizeReferencesAtParentLocalization(bool $localize = true): static`
 
 ---
 
@@ -289,12 +427,13 @@ Type-exclusive methods:
 
 Covers `type = 'datetime'`.
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `EvalTrait`, `RenderTypeTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `dbType`, `default`, `disableAgeDisplay`, `fieldControl`, `fieldInformation`, `fieldWizard`, `format`, `mode`, `nullable`, `placeholder`, `range`, `readOnly`, `search`, `searchable`, `softref`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `PlaceholderTrait`, `NullableTrait`, `ModeTrait`, `RangeTrait`, `DbTypeTrait`, `SoftRefTrait`, `SearchableTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
 - `setFormat(string $format): static` — `'datetime'|'date'|'time'|'timesec'`
-- `setRange(int $lower, int $upper): static`
-- `setDbType(string $dbType): static`
+- `setDisableAgeDisplay(bool $disable = true): static`
 
 ---
 
@@ -304,11 +443,12 @@ Type-exclusive methods:
 
 Covers `type = 'link'`.
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `PlaceholderTrait`, `SoftRefTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowedTypes`, `allowLanguageSynchronization` (via behaviour), `appearance`, `autocomplete`, `default`, `fieldControl`, `fieldInformation`, `fieldWizard`, `mode`, `nullable`, `placeholder`, `readOnly`, `required`, `search`, `searchable`, `size`, `valuePicker`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `NullableTrait`, `ModeTrait`, `AutocompleteTrait`, `ValuePickerTrait`, `AppearanceTrait`, `SoftRefTrait`, `SearchableTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
-- `setAllowedTypes(array $types): static` — restricts link picker to specific types
-- `setAppearance(array $appearance): static`
+- `setAllowedTypes(array $types): static` — e.g. `['page', 'url', 'file', 'folder', 'email', 'telephone']`
 
 ---
 
@@ -318,12 +458,12 @@ Type-exclusive methods:
 
 Covers `type = 'number'`.
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `PlaceholderTrait`, `EvalTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `autocomplete`, `default`, `fieldControl`, `fieldInformation`, `fieldWizard`, `format`, `mode`, `nullable`, `placeholder`, `range`, `readOnly`, `required`, `size`, `slider`, `valuePicker`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `NullableTrait`, `ModeTrait`, `AutocompleteTrait`, `RangeTrait`, `SliderTrait`, `ValuePickerTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
 - `setFormat(string $format): static` — `'integer'|'decimal'`
-- `setRange(int|float $lower, int|float $upper): static`
-- `setSlider(int $step, int $width): static`
 
 ---
 
@@ -333,10 +473,11 @@ Type-exclusive methods:
 
 Covers `type = 'slug'`.
 
-Traits used: `ReadOnlyTrait`, `EvalTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `appearance`, `eval`, `fallbackCharacter`, `generatorOptions`, `prependSlash`, `searchable`
+
+Traits used: `ReadOnlyTrait`, `EvalTrait`, `AppearanceTrait`, `GeneratorOptionsTrait`, `SearchableTrait`
 
 Type-exclusive methods:
-- `setGeneratorOptions(array $fields, string $separator = '/'): static`
 - `setFallbackCharacter(string $char): static`
 - `setPrependSlash(bool $prepend = true): static`
 
@@ -348,7 +489,9 @@ Type-exclusive methods:
 
 Covers `type = 'email'`.
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `PlaceholderTrait`, `SoftRefTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `autocomplete`, `eval`, `fieldInformation`, `fieldWizard`, `mode`, `nullable`, `placeholder`, `readOnly`, `required`, `searchable`, `size`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `PlaceholderTrait`, `SizeTrait`, `NullableTrait`, `ModeTrait`, `AutocompleteTrait`, `SearchableTrait`, `EvalTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldInformationTrait`
 
 ---
 
@@ -358,11 +501,14 @@ Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `Placeholder
 
 Covers `type = 'password'`.
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `PlaceholderTrait`, `EvalTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `autocomplete`, `default`, `fieldControl`, `fieldInformation`, `fieldWizard`, `hashed`, `mode`, `nullable`, `passwordGenerator`, `passwordPolicy`, `placeholder`, `readOnly`, `required`, `size`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `NullableTrait`, `ModeTrait`, `AutocompleteTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
 - `setHashed(bool $hashed = true): static`
 - `setPasswordPolicy(string $policy): static`
+- `setPasswordGenerator(array $generator): static`
 
 ---
 
@@ -372,11 +518,12 @@ Type-exclusive methods:
 
 Covers `type = 'color'`.
 
-Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `PlaceholderTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `default`, `fieldControl`, `fieldInformation`, `fieldWizard`, `mode`, `nullable`, `opacity`, `placeholder`, `readOnly`, `required`, `searchable`, `size`, `valuePicker`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `PlaceholderTrait`, `NullableTrait`, `ModeTrait`, `ValuePickerTrait`, `SearchableTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
 - `setOpacity(bool $enable = true): static` — enables opacity slider (TYPO3 13+)
-- `setValuePickerItems(array $items): static`
 
 ---
 
@@ -386,10 +533,12 @@ Type-exclusive methods:
 
 Covers `type = 'flex'`.
 
-Traits used: `BehaviourTrait`
+TCA properties: `allowLanguageSynchronization` (via behaviour), `ds`, `dsPointerField`, `fieldInformation`, `fieldWizard`, `readOnly`, `searchable`
+
+Traits used: `ReadOnlyTrait`, `SearchableTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
-- `setDataStructureIdentifier(string $identifier): static`
+- `setDataStructureIdentifier(string $identifier): static` — sets `dsPointerField`
 - `addDataStructure(string $key, string $path): static` — appends to `ds` array
 
 ---
@@ -400,11 +549,187 @@ Type-exclusive methods:
 
 Covers `type = 'uuid'`.
 
-Traits used: `ReadOnlyTrait`
+TCA properties: `enableCopyToClipboard`, `fieldInformation`, `required`, `searchable`, `size`, `version`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `SizeTrait`, `SearchableTrait`, `EnableCopyToClipboardTrait`, `FieldInformationTrait`
 
 Type-exclusive methods:
 - `setVersion(int $version): static` — UUID version (e.g. `4`, `7`)
-- `setEnableStatusField(bool $enable = true): static`
+
+---
+
+#### CategoryConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/CategoryConfig.php`
+
+Covers `type = 'category'` (TYPO3 11+, simplified `sys_category` integration).
+
+TCA properties: `default`, `exclusiveKeys`, `foreignTable`, `foreignTableItemGroup`, `foreignTablePrefix`, `foreignTableWhere`, `itemGroups`, `maxitems`, `minitems`, `mm`, `readOnly`, `relationship`, `size`, `treeConfig`
+
+Traits used: `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `MinMaxItemsTrait`, `ForeignTableTrait`, `MmTrait`, `TreeConfigTrait`
+
+Type-exclusive methods:
+- `setRelationship(string $relationship): static` — `'oneToOne'|'oneToMany'|'manyToMany'`
+- `setExclusiveKeys(string $keys): static`
+- `setItemGroups(array $groups): static`
+
+```php
+(new CategoryConfig())
+    ->setRelationship('manyToMany')
+    ->setMaxItems(10)
+    ->toArray();
+```
+
+---
+
+#### CountryConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/CountryConfig.php`
+
+Covers `type = 'country'` (TYPO3 14.0+).
+
+TCA properties: `default`, `filter`, `labelField`, `prioritizedCountries`, `readOnly`, `required`, `size`, `sortItems`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `SizeTrait`, `SortItemsTrait`
+
+Type-exclusive methods:
+- `setFilter(array $filter): static` — restrict selectable countries
+- `setLabelField(string $field): static` — `'name'|'localName'|'officialName'|'iso2'|'iso3'`
+- `setPrioritizedCountries(array $isoCodes): static` — ISO 2-letter codes shown first
+
+```php
+(new CountryConfig())
+    ->setPrioritizedCountries(['DE', 'AT', 'CH'])
+    ->setRequired()
+    ->toArray();
+```
+
+---
+
+#### FolderConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/FolderConfig.php`
+
+Covers `type = 'folder'` (TYPO3 13.0+, folder browser).
+
+TCA properties: `allowLanguageSynchronization` (via behaviour), `autoSizeMax`, `elementBrowserEntryPoints`, `fieldControl`, `fieldInformation`, `fieldWizard`, `hideDeleteIcon`, `hideMoveIcons`, `maxitems`, `minitems`, `multiple`, `readOnly`, `size`
+
+Traits used: `ReadOnlyTrait`, `SizeTrait`, `AutoSizeTrait`, `MinMaxItemsTrait`, `MultipleTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `setElementBrowserEntryPoints(array $entryPoints): static`
+- `setHideDeleteIcon(bool $hide = true): static`
+- `setHideMoveIcons(bool $hide = true): static`
+
+---
+
+#### ImageManipulationConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/ImageManipulationConfig.php`
+
+Covers `type = 'imageManipulation'` (crop/focus point editor).
+
+TCA properties: `allowedExtensions`, `allowLanguageSynchronization` (via behaviour), `cropVariants`, `fieldControl`, `fieldInformation`, `fieldWizard`, `fileField`, `readOnly`
+
+Traits used: `ReadOnlyTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `setCropVariants(array $cropVariants): static`
+- `setAllowedExtensions(string $extensions): static` — comma-separated list
+- `setFileField(string $field): static` — reference to the FAL file field
+
+---
+
+#### JsonConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/JsonConfig.php`
+
+Covers `type = 'json'` (TYPO3 13+, JSON editor).
+
+TCA properties: `allowLanguageSynchronization` (via behaviour), `cols`, `default`, `enableCodeEditor`, `fieldControl`, `fieldInformation`, `fieldWizard`, `placeholder`, `readOnly`, `required`, `rows`, `searchable`
+
+Traits used: `RequiredTrait`, `ReadOnlyTrait`, `DefaultValueTrait`, `PlaceholderTrait`, `SearchableTrait`, `ColsRowsTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `enableCodeEditor(bool $enable = true): static` — syntax-highlighted editor (requires CodeMirror)
+
+```php
+(new JsonConfig())
+    ->setRows(10)
+    ->enableCodeEditor()
+    ->setRequired()
+    ->toArray();
+```
+
+---
+
+#### LanguageConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/LanguageConfig.php`
+
+Covers `type = 'language'` (TYPO3 11+, language selector). Internally uses a select-based render type. Minimal configuration surface — primarily configured via page TSconfig.
+
+TCA properties: no dedicated config properties; type alone is sufficient for most use-cases.
+
+Traits used: `ReadOnlyTrait`
+
+> **Note:** This type selects from `sys_language` records and is typically placed on the system field `sys_language_uid`. Custom usage is uncommon. Page TSconfig `TCEFORM.keepItems` / `TCEFORM.removeItems` control available options.
+
+---
+
+#### NoneConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/NoneConfig.php`
+
+Covers `type = 'none'` (display-only, no DB column).
+
+TCA properties: `fieldInformation`, `format`, `size`
+
+Traits used: `SizeTrait`, `FieldInformationTrait`
+
+Type-exclusive methods:
+- `setFormat(string $format): static` — display format (`'int'|'float'|'date'|'datetime'|'time'|'timesec'|'filesize'`)
+
+---
+
+#### PassthroughConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/PassthroughConfig.php`
+
+Covers `type = 'passthrough'` (not rendered in the form, value passed through as-is).
+
+TCA properties: `default`
+
+Traits used: `DefaultValueTrait`
+
+---
+
+#### RadioConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/RadioConfig.php`
+
+Covers `type = 'radio'`.
+
+TCA properties: `allowLanguageSynchronization` (via behaviour), `default`, `fieldControl`, `fieldInformation`, `fieldWizard`, `items`, `itemsProcessors`, `itemsProcFunc`, `readOnly`
+
+Traits used: `ReadOnlyTrait`, `DefaultValueTrait`, `ItemsTrait`, `ItemsProcessorsTrait`, `BehaviourTrait`, `FieldWizardTrait`, `FieldControlTrait`, `FieldInformationTrait`
+
+---
+
+#### UserConfig
+
+**File:** `Classes/TableConfigurationArray/FieldConfig/UserConfig.php`
+
+Covers `type = 'user'` (custom render type via user-defined `renderType`).
+
+TCA properties: `renderType` (required; must match a registered custom render type)
+
+Traits used: `RenderTypeTrait`
+
+> **Note:** All other config keys are type-specific to the custom `renderType` and must be passed as raw array via a dedicated method.
+
+Type-exclusive methods:
+- `setParameters(array $parameters): static` — arbitrary `parameters` array passed to the custom element
 
 ---
 
@@ -440,41 +765,71 @@ Classes/
         ├── Traits/
         │   ├── AllowedFileTypesTrait.php
         │   ├── AppearanceTrait.php
+        │   ├── AuthModeTrait.php
         │   ├── AutoSizeTrait.php
+        │   ├── AutocompleteTrait.php
         │   ├── BehaviourTrait.php
+        │   ├── ColsRowsTrait.php
+        │   ├── DbFieldLengthTrait.php
+        │   ├── DbTypeTrait.php
         │   ├── DefaultValueTrait.php
+        │   ├── EnableCopyToClipboardTrait.php
         │   ├── EvalTrait.php
         │   ├── FieldControlTrait.php
+        │   ├── FieldInformationTrait.php
         │   ├── FieldWizardTrait.php
+        │   ├── FileFolderConfigTrait.php
         │   ├── ForeignTableTrait.php
+        │   ├── GeneratorOptionsTrait.php
+        │   ├── ItemsProcessorsTrait.php
         │   ├── ItemsTrait.php
         │   ├── MaxLengthTrait.php
         │   ├── MinMaxItemsTrait.php
         │   ├── MmTrait.php
+        │   ├── ModeTrait.php
+        │   ├── MultipleTrait.php
+        │   ├── NullableTrait.php
         │   ├── OverrideChildTcaTrait.php
         │   ├── PlaceholderTrait.php
+        │   ├── RangeTrait.php
         │   ├── ReadOnlyTrait.php
         │   ├── RenderTypeTrait.php
         │   ├── RequiredTrait.php
+        │   ├── SearchableTrait.php
         │   ├── SizeTrait.php
-        │   └── SoftRefTrait.php
+        │   ├── SliderTrait.php
+        │   ├── SoftRefTrait.php
+        │   ├── SortItemsTrait.php
+        │   ├── TreeConfigTrait.php
+        │   └── ValuePickerTrait.php
         │
+        ├── CategoryConfig.php
         ├── CheckboxConfig.php
         ├── ColorConfig.php
+        ├── CountryConfig.php
         ├── DatetimeConfig.php
         ├── EmailConfig.php
         ├── FileConfig.php
         ├── FlexConfig.php
+        ├── FolderConfig.php
         ├── GroupConfig.php
+        ├── ImageManipulationConfig.php
         ├── InlineConfig.php
         ├── InputConfig.php
+        ├── JsonConfig.php
+        ├── LanguageConfig.php
         ├── LinkConfig.php
+        ├── NoneConfig.php
         ├── NumberConfig.php
+        ├── PassthroughConfig.php
         ├── PasswordConfig.php
+        ├── RadioConfig.php
         ├── SelectMultipleConfig.php
         ├── SelectSingleConfig.php
+        ├── SelectTreeConfig.php
         ├── SlugConfig.php
         ├── TextConfig.php
+        ├── UserConfig.php
         └── UuidConfig.php
 ```
 
@@ -484,14 +839,15 @@ Classes/
 
 1. Create `FieldConfigInterface`
 2. Create `AbstractFieldConfig`
-3. Create all traits in `FieldConfig/Traits/`
-4. Implement concrete config classes, starting with the most-used:
-   - `FileConfig`
-   - `InlineConfig`
-   - `InputConfig`
-   - `TextConfig`
-   - `SelectSingleConfig` / `SelectMultipleConfig`
-   - Remaining types
+3. Create all traits in `FieldConfig/Traits/` (38 trait files)
+4. Implement concrete config classes (27 classes) in priority order:
+   - **High-use:** `FileConfig`, `InlineConfig`, `InputConfig`, `TextConfig`
+   - **Select family:** `SelectSingleConfig`, `SelectMultipleConfig`, `SelectTreeConfig`
+   - **Common fields:** `CheckboxConfig`, `DatetimeConfig`, `LinkConfig`, `NumberConfig`
+   - **Text variants:** `EmailConfig`, `PasswordConfig`, `SlugConfig`, `ColorConfig`
+   - **Structural:** `FlexConfig`, `GroupConfig`, `UuidConfig`, `CategoryConfig`
+   - **Newer types:** `CountryConfig` (14.0+), `JsonConfig` (13+), `FolderConfig` (13+), `ImageManipulationConfig`
+   - **Minimal types:** `RadioConfig`, `LanguageConfig`, `NoneConfig`, `PassthroughConfig`, `UserConfig`
 5. Update `Field::setConfig()` to accept `array|FieldConfigInterface`
 6. Add unit tests for each config class (`toArray()` output correctness)
 
@@ -506,7 +862,6 @@ Classes/
         (new FileConfig())
             ->setAllowed('jpg,jpeg,png,gif,webp')
             ->setMaxItems(1)
-            ->setRequired()
     )
     ->registerField();
 
@@ -543,6 +898,43 @@ Classes/
             ->setDefault('default')
     )
     ->registerField();
+
+// Category tree (sys_category)
+(new Field('tt_content', 'tx_myext_categories', 'Categories'))
+    ->setConfig(
+        (new CategoryConfig())
+            ->setRelationship('manyToMany')
+            ->setMaxItems(5)
+    )
+    ->registerField();
+
+// Country picker (TYPO3 14+)
+(new Field('tt_address', 'country', 'Country'))
+    ->setConfig(
+        (new CountryConfig())
+            ->setPrioritizedCountries(['DE', 'AT', 'CH'])
+            ->setRequired()
+    )
+    ->registerField();
+
+// JSON editor (TYPO3 13+)
+(new Field('tx_myext_domain_model_record', 'settings', 'Settings'))
+    ->setConfig(
+        (new JsonConfig())
+            ->enableCodeEditor()
+            ->setRows(15)
+    )
+    ->registerField();
+
+// Nullable datetime
+(new Field('tx_myext_domain_model_event', 'event_date', 'Event Date'))
+    ->setConfig(
+        (new DatetimeConfig())
+            ->setFormat('date')
+            ->setNullable()
+            ->setRequired()
+    )
+    ->registerField();
 ```
 
 ---
@@ -554,3 +946,7 @@ Classes/
 - **Traits over inheritance** — a deep hierarchy (e.g. `AbstractSelectConfig extends AbstractFieldConfig`) would create coupling; traits keep options orthogonal and composable.
 - **Backwards compatibility** — `Field::setConfig()` accepts both `array` and `FieldConfigInterface`, so no existing code breaks.
 - **No validation in `toArray()`** — config objects are build-time helpers, not runtime validators; TYPO3 itself validates TCA on load.
+- **`BehaviourTrait` covers `allowLanguageSynchronization`** — rather than a dedicated `AllowLanguageSynchronizationTrait`, this follows the TYPO3 convention of nesting it under `behaviour`.
+- **Select split into three classes** — `SelectSingleConfig`, `SelectMultipleConfig`, and `SelectTreeConfig` each have distinct property sets and are used differently; a single `SelectConfig` with `setRenderType()` would expose irrelevant options and obscure the render-type-specific ones.
+- **`FieldInformationTrait` split from `FieldWizardTrait` and `FieldControlTrait`** — all three are separate TCA keys and semantically distinct; merged traits would be less discoverable.
+- **`ItemsProcessorsTrait` covers both `itemsProcessors` and `itemsProcFunc`** — these two keys are functionally related (both extend item lists) and always co-occur in the same types.
