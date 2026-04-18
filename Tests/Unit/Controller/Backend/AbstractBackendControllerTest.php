@@ -16,6 +16,7 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 
 final class AbstractBackendControllerTest extends TestCase
 {
@@ -66,15 +67,67 @@ final class AbstractBackendControllerTest extends TestCase
         $controller->callAddButtonToDocHeader($moduleTemplate, '/some/url', 'actions-add', 'Create');
     }
 
+    #[Test]
+    public function flashSuccessCallsAddFlashMessageWithOkSeverity(): void
+    {
+        $controller = $this->createConcreteController();
+        $controller->callFlashSuccess('Everything worked.', 'Success');
+
+        self::assertSame(
+            [['Everything worked.', 'Success', ContextualFeedbackSeverity::OK]],
+            $controller->getFlashMessages()
+        );
+    }
+
+    #[Test]
+    public function flashErrorCallsAddFlashMessageWithErrorSeverity(): void
+    {
+        $controller = $this->createConcreteController();
+        $controller->callFlashError('Something failed.', 'Error');
+
+        self::assertSame(
+            [['Something failed.', 'Error', ContextualFeedbackSeverity::ERROR]],
+            $controller->getFlashMessages()
+        );
+    }
+
+    #[Test]
+    public function flashInfoCallsAddFlashMessageWithInfoSeverity(): void
+    {
+        $controller = $this->createConcreteController();
+        $controller->callFlashInfo('FYI.', 'Info');
+
+        self::assertSame(
+            [['FYI.', 'Info', ContextualFeedbackSeverity::INFO]],
+            $controller->getFlashMessages()
+        );
+    }
+
     private function createConcreteController(?IconFactory $iconFactory = null): object
     {
         $moduleTemplateFactory = $this->createMock(ModuleTemplateFactory::class);
         $iconFactory ??= $this->createMock(IconFactory::class);
 
         return new class ($moduleTemplateFactory, $iconFactory) extends AbstractBackendController {
+            private array $capturedFlashMessages = [];
+
             public function indexAction(): ResponseInterface
             {
                 return $this->htmlResponse('');
+            }
+
+            public function addFlashMessage(
+                string $messageBody,
+                string $messageTitle = '',
+                ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK,
+                bool $storeInSession = true,
+            ): void {
+                $this->capturedFlashMessages[] = [$messageBody, $messageTitle, $severity];
+            }
+
+            public function getFlashMessages(): array
+            {
+                return $this->capturedFlashMessages;
             }
 
             public function callAssignMultiple(ModuleTemplate $moduleTemplate, array $variables): void
@@ -89,6 +142,21 @@ final class AbstractBackendControllerTest extends TestCase
                 string $title,
             ): void {
                 $this->addButtonToDocHeader($moduleTemplate, $href, $iconIdentifier, $title);
+            }
+
+            public function callFlashSuccess(string $message, string $title = ''): void
+            {
+                $this->flashSuccess($message, $title);
+            }
+
+            public function callFlashError(string $message, string $title = ''): void
+            {
+                $this->flashError($message, $title);
+            }
+
+            public function callFlashInfo(string $message, string $title = ''): void
+            {
+                $this->flashInfo($message, $title);
             }
         };
     }

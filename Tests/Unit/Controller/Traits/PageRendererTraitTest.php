@@ -7,6 +7,8 @@ namespace Maispace\MaiBase\Tests\Unit\Controller\Traits;
 use Maispace\MaiBase\Controller\Traits\PageRendererTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use TYPO3\CMS\Core\MetaTag\MetaTagManagerInterface;
+use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Page\PageRenderer;
 
@@ -102,20 +104,41 @@ final class PageRendererTraitTest extends TestCase
         $subject->callAddFooterData('<script>alert(1)</script>');
     }
 
+    #[Test]
+    public function setMetaTagDelegatesToMetaTagManagerRegistry(): void
+    {
+        $manager = $this->createMock(MetaTagManagerInterface::class);
+        $manager->expects(self::once())
+            ->method('addProperty')
+            ->with('description', 'My description', [], true, 'name');
+
+        $registry = $this->createMock(MetaTagManagerRegistry::class);
+        $registry->method('getManagerForProperty')->with('description')->willReturn($manager);
+
+        $subject = $this->createTraitUser(metaTagManagerRegistry: $registry);
+        $subject->callSetMetaTag('name', 'description', 'My description');
+    }
+
     private function createTraitUser(
         ?PageRenderer $pageRenderer = null,
         ?AssetCollector $assetCollector = null,
+        ?MetaTagManagerRegistry $metaTagManagerRegistry = null,
     ): object {
         $pageRenderer ??= $this->createMock(PageRenderer::class);
         $assetCollector ??= $this->createMock(AssetCollector::class);
+        $metaTagManagerRegistry ??= $this->createMock(MetaTagManagerRegistry::class);
 
-        return new class ($pageRenderer, $assetCollector) {
+        return new class ($pageRenderer, $assetCollector, $metaTagManagerRegistry) {
             use PageRendererTrait;
 
-            public function __construct(PageRenderer $pageRenderer, AssetCollector $assetCollector)
-            {
+            public function __construct(
+                PageRenderer $pageRenderer,
+                AssetCollector $assetCollector,
+                MetaTagManagerRegistry $metaTagManagerRegistry,
+            ) {
                 $this->pageRenderer = $pageRenderer;
                 $this->assetCollector = $assetCollector;
+                $this->metaTagManagerRegistry = $metaTagManagerRegistry;
             }
 
             public function callSetPageTitle(string $title): void { $this->setPageTitle($title); }
@@ -133,6 +156,8 @@ final class PageRendererTraitTest extends TestCase
             public function callAddHeaderData(string $html): void { $this->addHeaderData($html); }
 
             public function callAddFooterData(string $html): void { $this->addFooterData($html); }
+
+            public function callSetMetaTag(string $type, string $name, string $content, bool $replace = true): void { $this->setMetaTag($type, $name, $content, $replace); }
         };
     }
 }

@@ -66,6 +66,45 @@ final class ResponseHelpersTraitTest extends TestCase
         self::assertSame($content, (string) $response->getBody());
     }
 
+    #[Test]
+    public function fileDownloadResponseSetsAttachmentDispositionByDefault(): void
+    {
+        $content = 'file content here';
+        $filename = 'export.txt';
+
+        $subject = $this->createTraitUser();
+        $response = $subject->callFileDownloadResponse($content, $filename, 'text/plain');
+
+        self::assertSame(200, $response->getStatusCode());
+        self::assertSame('text/plain', $response->getHeaderLine('Content-Type'));
+        self::assertSame('attachment; filename="export.txt"', $response->getHeaderLine('Content-Disposition'));
+        self::assertSame((string) strlen($content), $response->getHeaderLine('Content-Length'));
+        self::assertSame($content, (string) $response->getBody());
+    }
+
+    #[Test]
+    public function fileDownloadResponseSetsInlineDispositionWhenRequested(): void
+    {
+        $subject = $this->createTraitUser();
+        $response = $subject->callFileDownloadResponse('data', 'file.pdf', 'application/pdf', true);
+
+        self::assertSame('inline; filename="file.pdf"', $response->getHeaderLine('Content-Disposition'));
+    }
+
+    #[Test]
+    public function csvResponseSetsCsvContentTypeAndAttachmentDisposition(): void
+    {
+        $rows = [['Name', 'Age'], ['Alice', '30']];
+        $filename = 'users.csv';
+
+        $subject = $this->createTraitUser();
+        $response = $subject->callCsvResponse($rows, $filename);
+
+        self::assertSame(200, $response->getStatusCode());
+        self::assertSame('text/csv; charset=utf-8', $response->getHeaderLine('Content-Type'));
+        self::assertSame('attachment; filename="users.csv"', $response->getHeaderLine('Content-Disposition'));
+    }
+
     private function createTraitUser(): object
     {
         $responseFactory = $this->createMock(ResponseFactoryInterface::class);
@@ -197,6 +236,26 @@ final class ResponseHelpersTraitTest extends TestCase
             public function callPdfResponse(string $content, string $filename, int $status = 200): ResponseInterface
             {
                 return $this->pdfResponse($content, $filename, $status);
+            }
+
+            public function callFileDownloadResponse(
+                string $content,
+                string $filename,
+                string $contentType,
+                bool $inline = false,
+                int $status = 200,
+            ): ResponseInterface {
+                return $this->fileDownloadResponse($content, $filename, $contentType, $inline, $status);
+            }
+
+            public function callCsvResponse(
+                array $rows,
+                string $filename,
+                string $separator = ';',
+                bool $includeUtf8Bom = true,
+                int $status = 200,
+            ): ResponseInterface {
+                return $this->csvResponse($rows, $filename, $separator, $includeUtf8Bom, $status);
             }
         };
     }

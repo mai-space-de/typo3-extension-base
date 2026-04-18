@@ -11,6 +11,7 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 #[AsController]
@@ -22,20 +23,11 @@ abstract class AbstractBackendController extends ActionController implements Bac
     ) {
     }
 
-    /**
-     * Creates a fresh ModuleTemplate for the current request.
-     * Call this at the start of each action that renders a response.
-     */
     protected function createModuleTemplate(): ModuleTemplate
     {
         return $this->moduleTemplateFactory->create($this->request);
     }
 
-    /**
-     * Adds a shortcut button to the docheader button bar.
-     *
-     * @param array<string, mixed> $arguments
-     */
     protected function addShortcutButton(
         ModuleTemplate $moduleTemplate,
         string $routeIdentifier,
@@ -51,9 +43,6 @@ abstract class AbstractBackendController extends ActionController implements Bac
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
     }
 
-    /**
-     * Adds a link button to the docheader.
-     */
     protected function addButtonToDocHeader(
         ModuleTemplate $moduleTemplate,
         string $href,
@@ -72,11 +61,6 @@ abstract class AbstractBackendController extends ActionController implements Bac
         $buttonBar->addButton($button, $position, $group);
     }
 
-    /**
-     * Assigns multiple variables to a ModuleTemplate at once.
-     *
-     * @param array<string, mixed> $variables
-     */
     protected function assignMultiple(ModuleTemplate $moduleTemplate, array $variables): void
     {
         foreach ($variables as $key => $value) {
@@ -84,12 +68,23 @@ abstract class AbstractBackendController extends ActionController implements Bac
         }
     }
 
-    /**
-     * Renders the ModuleTemplate response for the given template path.
-     * The template path follows the Extbase convention: ControllerName/ActionName.
-     */
     protected function renderModuleResponse(ModuleTemplate $moduleTemplate, string $templatePath): ResponseInterface
     {
         return $moduleTemplate->renderResponse($templatePath);
+    }
+
+    protected function flashSuccess(string $message, string $title = ''): void
+    {
+        $this->addFlashMessage($message, $title, ContextualFeedbackSeverity::OK);
+    }
+
+    protected function flashError(string $message, string $title = ''): void
+    {
+        $this->addFlashMessage($message, $title, ContextualFeedbackSeverity::ERROR);
+    }
+
+    protected function flashInfo(string $message, string $title = ''): void
+    {
+        $this->addFlashMessage($message, $title, ContextualFeedbackSeverity::INFO);
     }
 }
