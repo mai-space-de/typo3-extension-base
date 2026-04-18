@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Maispace\MaiBase\TableConfigurationArray;
 
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\FieldConfigInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 class Field
@@ -72,9 +73,11 @@ class Field
         return $this;
     }
 
-    public function setConfig(array $config): self
+    public function setConfig(array|FieldConfigInterface $config): self
     {
-        $this->config = $config;
+        $this->config = $config instanceof FieldConfigInterface
+            ? $config->toArray()
+            : $config;
 
         return $this;
     }

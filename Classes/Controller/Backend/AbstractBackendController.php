@@ -9,6 +9,8 @@ use TYPO3\CMS\Backend\Attribute\AsController;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 #[AsController]
@@ -16,6 +18,7 @@ abstract class AbstractBackendController extends ActionController implements Bac
 {
     public function __construct(
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
+        protected readonly IconFactory $iconFactory,
     ) {
     }
 
@@ -46,6 +49,39 @@ abstract class AbstractBackendController extends ActionController implements Bac
             ->setArguments($arguments);
 
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
+    }
+
+    /**
+     * Adds a link button to the docheader.
+     */
+    protected function addButtonToDocHeader(
+        ModuleTemplate $moduleTemplate,
+        string $href,
+        string $iconIdentifier,
+        string $title,
+        string $position = ButtonBar::BUTTON_POSITION_LEFT,
+        int $group = 1,
+    ): void {
+        $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
+        $icon = $this->iconFactory->getIcon($iconIdentifier, IconSize::SMALL);
+        $button = $buttonBar->makeLinkButton()
+            ->setHref($href)
+            ->setTitle($title)
+            ->setIcon($icon);
+
+        $buttonBar->addButton($button, $position, $group);
+    }
+
+    /**
+     * Assigns multiple variables to a ModuleTemplate at once.
+     *
+     * @param array<string, mixed> $variables
+     */
+    protected function assignMultiple(ModuleTemplate $moduleTemplate, array $variables): void
+    {
+        foreach ($variables as $key => $value) {
+            $moduleTemplate->assign($key, $value);
+        }
     }
 
     /**

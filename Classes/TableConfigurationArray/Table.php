@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Maispace\MaiBase\TableConfigurationArray;
 
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\FieldConfigInterface;
 use Maispace\MaiBase\TableConfigurationArray\Traits\EnableFieldsTrait;
 use Maispace\MaiBase\TableConfigurationArray\Traits\LocalizationTrait;
 use Maispace\MaiBase\TableConfigurationArray\Traits\TimestampTrait;
@@ -291,7 +292,7 @@ class Table
     public function addColumn(
         string $columnName,
         string $label,
-        array $columnConfig,
+        array|FieldConfigInterface $columnConfig,
         string $description = '',
         string|array $displayCond = '',
         bool $exclude = false,
@@ -300,7 +301,9 @@ class Table
         string $onChange = '',
     ): self {
         $this->config['columns'][$columnName]['label'] = $label;
-        $this->config['columns'][$columnName]['config'] = $columnConfig;
+        $this->config['columns'][$columnName]['config'] = $columnConfig instanceof FieldConfigInterface
+            ? $columnConfig->toArray()
+            : $columnConfig;
 
         if ('' !== $description) {
             $this->config['columns'][$columnName]['description'] = $description;
