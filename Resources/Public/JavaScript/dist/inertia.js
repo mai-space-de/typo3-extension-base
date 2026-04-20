@@ -1316,14 +1316,21 @@ function Ai(e) {
 function Rr(e) {
   return decodeURIComponent(e.replace(/\+/g, " "));
 }
+function MaiSafeQueryKey(e) {
+  return e === "__proto__" || e === "constructor" || e === "prototype";
+}
 function vi(e, t, r) {
   const n = xi(t);
   let s = e;
   for (; n.length > 1; ) {
     const i = n.shift(), a = n[0] === "";
+    if (MaiSafeQueryKey(i))
+      return;
     (typeof s[i] != "object" || s[i] === null) && (s[i] = a ? [] : {}), s = s[i];
   }
   const o = n.shift();
+  if (MaiSafeQueryKey(o))
+    return;
   o === "" && Array.isArray(s) ? s.push(r) : s[o] = r;
 }
 function xi(e) {
