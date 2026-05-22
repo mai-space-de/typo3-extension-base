@@ -26,8 +26,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class SelectMultipleConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'select';
-
     use AuthModeTrait;
     use AutoSizeTrait;
     use BehaviourTrait;
@@ -46,6 +44,7 @@ final class SelectMultipleConfig extends AbstractFieldConfig
     use ReadOnlyTrait;
     use RequiredTrait;
     use SizeTrait;
+    protected const string TYPE = 'select';
 
     public function __construct()
     {

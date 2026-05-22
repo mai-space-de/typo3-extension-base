@@ -10,10 +10,9 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class NoneConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'none';
-
     use FieldInformationTrait;
     use SizeTrait;
+    protected const string TYPE = 'none';
 
     public function setFormat(string $format): static
     {

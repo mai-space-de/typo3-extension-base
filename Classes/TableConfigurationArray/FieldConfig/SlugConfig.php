@@ -13,13 +13,12 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SearchableTrait;
 
 final class SlugConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'slug';
-
     use AppearanceTrait;
     use EvalTrait;
     use GeneratorOptionsTrait;
     use ReadOnlyTrait;
     use SearchableTrait;
+    protected const string TYPE = 'slug';
 
     public function setFallbackCharacter(string $char): static
     {

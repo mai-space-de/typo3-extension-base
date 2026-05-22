@@ -21,8 +21,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class GroupConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'group';
-
     use AllowedFileTypesTrait;
     use AutoSizeTrait;
     use BehaviourTrait;
@@ -36,6 +34,7 @@ final class GroupConfig extends AbstractFieldConfig
     use ReadOnlyTrait;
     use RequiredTrait;
     use SizeTrait;
+    protected const string TYPE = 'group';
 
     public function setFilter(array $filter): static
     {

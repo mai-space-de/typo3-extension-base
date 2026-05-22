@@ -64,7 +64,7 @@ final class FieldConfigTest extends TestCase
     {
         self::assertSame(
             ['desktop' => ['title' => 'Desktop']],
-            (new FileConfig())->setCropVariants(['desktop' => ['title' => 'Desktop']])->toArray()['overrideChildTca']['columns']['crop']['config']['cropVariants']
+            (new FileConfig())->setCropVariants(['desktop' => ['title' => 'Desktop']])->toArray()['overrideChildTca']['columns']['crop']['config']['cropVariants'],
         );
     }
 
@@ -151,7 +151,10 @@ final class FieldConfigTest extends TestCase
     #[Test]
     public function testAbstractFieldConfigSetsTypeFromConstant(): void
     {
-        self::assertSame(FileConfig::TYPE, (new FileConfig())->toArray()['type']);
+        // TYPE is protected — access via reflection so we can verify the constructor
+        // correctly assigns static::TYPE to the config array without hard-coding the value.
+        $constant = (new \ReflectionClassConstant(FileConfig::class, 'TYPE'))->getValue();
+        self::assertSame($constant, (new FileConfig())->toArray()['type']);
     }
 
     #[Test]
@@ -170,7 +173,10 @@ final class FieldConfigTest extends TestCase
     #[Test]
     public function testUserConfigSetParameters(): void
     {
-        self::assertSame(['key' => 'val'], (new UserConfig())->setParameters(['key' => 'val'])->toArray()['config']['parameters']);
+        // UserConfig stores parameters at $config['parameters'], not nested under 'config'.
+        // AbstractFieldConfig::$config IS the TCA config sub-array, so toArray() returns
+        // ['type' => 'user', 'parameters' => [...]].
+        self::assertSame(['key' => 'val'], (new UserConfig())->setParameters(['key' => 'val'])->toArray()['parameters']);
     }
 
     #[Test]

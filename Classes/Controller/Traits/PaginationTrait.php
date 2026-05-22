@@ -15,10 +15,10 @@ trait PaginationTrait
         QueryResultInterface $queryResult,
         int $defaultItemsPerPage = 10,
     ): array {
-        $currentPage = max(1, (int)($this->request->hasArgument('currentPage')
+        $currentPage = max(1, (int) ($this->request->hasArgument('currentPage')
             ? $this->request->getArgument('currentPage')
             : 1));
-        $itemsPerPage = (int)($this->settings['itemsPerPage'] ?? $defaultItemsPerPage);
+        $itemsPerPage = (int) ($this->settings['itemsPerPage'] ?? $defaultItemsPerPage);
 
         $paginator = new QueryResultPaginator($queryResult, $currentPage, $itemsPerPage);
         $pagination = new SimplePagination($paginator);
@@ -30,10 +30,10 @@ trait PaginationTrait
         array $items,
         int $defaultItemsPerPage = 10,
     ): array {
-        $currentPage = max(1, (int)($this->request->hasArgument('currentPage')
+        $currentPage = max(1, (int) ($this->request->hasArgument('currentPage')
             ? $this->request->getArgument('currentPage')
             : 1));
-        $itemsPerPage = (int)($this->settings['itemsPerPage'] ?? $defaultItemsPerPage);
+        $itemsPerPage = (int) ($this->settings['itemsPerPage'] ?? $defaultItemsPerPage);
 
         $paginator = new ArrayPaginator($items, $currentPage, $itemsPerPage);
         $pagination = new SimplePagination($paginator);

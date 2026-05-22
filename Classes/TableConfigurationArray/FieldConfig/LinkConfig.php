@@ -24,8 +24,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ValuePickerTrait
 
 final class LinkConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'link';
-
     use AppearanceTrait;
     use AutocompleteTrait;
     use BehaviourTrait;
@@ -42,6 +40,7 @@ final class LinkConfig extends AbstractFieldConfig
     use SizeTrait;
     use SoftRefTrait;
     use ValuePickerTrait;
+    protected const string TYPE = 'link';
 
     public function setAllowedTypes(array $types): static
     {

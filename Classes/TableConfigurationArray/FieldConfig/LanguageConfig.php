@@ -9,7 +9,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ReadOnlyTrait;
 
 final class LanguageConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'language';
-
     use ReadOnlyTrait;
+    protected const string TYPE = 'language';
 }

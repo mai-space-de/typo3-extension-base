@@ -21,8 +21,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ValuePickerTrait
 
 final class ColorConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'color';
-
     use BehaviourTrait;
     use DefaultValueTrait;
     use FieldControlTrait;
@@ -36,6 +34,7 @@ final class ColorConfig extends AbstractFieldConfig
     use SearchableTrait;
     use SizeTrait;
     use ValuePickerTrait;
+    protected const string TYPE = 'color';
 
     public function setOpacity(bool $enable = true): static
     {

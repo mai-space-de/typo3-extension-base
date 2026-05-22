@@ -54,7 +54,7 @@ final class PageRendererTraitTest extends TestCase
         $assetCollector = $this->createMock(AssetCollector::class);
         $assetCollector->expects(self::once())
             ->method('addStyleSheet')
-            ->with('my_css', 'EXT:my_ext/Resources/Public/Css/style.css', options: ['priority' => false]);
+            ->with('my_css', 'EXT:my_ext/Resources/Public/Css/style.css', [], ['priority' => false]);
 
         $subject = $this->createTraitUser(assetCollector: $assetCollector);
         $subject->callAddCssFile('my_css', 'EXT:my_ext/Resources/Public/Css/style.css');
@@ -66,7 +66,7 @@ final class PageRendererTraitTest extends TestCase
         $assetCollector = $this->createMock(AssetCollector::class);
         $assetCollector->expects(self::once())
             ->method('addJavaScript')
-            ->with('my_js', 'EXT:my_ext/Resources/Public/Js/app.js', options: ['priority' => true]);
+            ->with('my_js', 'EXT:my_ext/Resources/Public/Js/app.js', [], ['priority' => true]);
 
         $subject = $this->createTraitUser(assetCollector: $assetCollector);
         $subject->callAddJsFile('my_js', 'EXT:my_ext/Resources/Public/Js/app.js', true);
@@ -141,23 +141,50 @@ final class PageRendererTraitTest extends TestCase
                 $this->metaTagManagerRegistry = $metaTagManagerRegistry;
             }
 
-            public function callSetPageTitle(string $title): void { $this->setPageTitle($title); }
+            public function callSetPageTitle(string $title): void
+            {
+                $this->setPageTitle($title);
+            }
 
-            public function callAddInlineCss(string $id, string $css): void { $this->addInlineCss($id, $css); }
+            public function callAddInlineCss(string $id, string $css): void
+            {
+                $this->addInlineCss($id, $css);
+            }
 
-            public function callAddInlineJs(string $id, string $js): void { $this->addInlineJs($id, $js); }
+            public function callAddInlineJs(string $id, string $js): void
+            {
+                $this->addInlineJs($id, $js);
+            }
 
-            public function callAddCssFile(string $id, string $path, bool $priority = false): void { $this->addCssFile($id, $path, $priority); }
+            public function callAddCssFile(string $id, string $path, bool $priority = false): void
+            {
+                $this->addCssFile($id, $path, $priority);
+            }
 
-            public function callAddJsFile(string $id, string $path, bool $priority = false): void { $this->addJsFile($id, $path, $priority); }
+            public function callAddJsFile(string $id, string $path, bool $priority = false): void
+            {
+                $this->addJsFile($id, $path, $priority);
+            }
 
-            public function callLoadJavaScriptModule(string $specifier): void { $this->loadJavaScriptModule($specifier); }
+            public function callLoadJavaScriptModule(string $specifier): void
+            {
+                $this->loadJavaScriptModule($specifier);
+            }
 
-            public function callAddHeaderData(string $html): void { $this->addHeaderData($html); }
+            public function callAddHeaderData(string $html): void
+            {
+                $this->addHeaderData($html);
+            }
 
-            public function callAddFooterData(string $html): void { $this->addFooterData($html); }
+            public function callAddFooterData(string $html): void
+            {
+                $this->addFooterData($html);
+            }
 
-            public function callSetMetaTag(string $type, string $name, string $content, bool $replace = true): void { $this->setMetaTag($type, $name, $content, $replace); }
+            public function callSetMetaTag(string $type, string $name, string $content, bool $replace = true): void
+            {
+                $this->setMetaTag($type, $name, $content, $replace);
+            }
         };
     }
 }

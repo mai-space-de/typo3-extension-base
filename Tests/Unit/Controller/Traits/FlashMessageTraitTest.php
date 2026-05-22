@@ -49,7 +49,7 @@ final class FlashMessageTraitTest extends TestCase
 
     private function createTraitUser(): object
     {
-        return new class () {
+        return new class {
             use FlashMessageTrait;
 
             private array $captured = [];
@@ -68,13 +68,25 @@ final class FlashMessageTraitTest extends TestCase
                 return $this->captured;
             }
 
-            public function callFlashSuccess(string $message, string $title = ''): void { $this->flashSuccess($message, $title); }
+            public function callFlashSuccess(string $message, string $title = ''): void
+            {
+                $this->flashSuccess($message, $title);
+            }
 
-            public function callFlashError(string $message, string $title = ''): void { $this->flashError($message, $title); }
+            public function callFlashError(string $message, string $title = ''): void
+            {
+                $this->flashError($message, $title);
+            }
 
-            public function callFlashInfo(string $message, string $title = ''): void { $this->flashInfo($message, $title); }
+            public function callFlashInfo(string $message, string $title = ''): void
+            {
+                $this->flashInfo($message, $title);
+            }
 
-            public function callFlashWarning(string $message, string $title = ''): void { $this->flashWarning($message, $title); }
+            public function callFlashWarning(string $message, string $title = ''): void
+            {
+                $this->flashWarning($message, $title);
+            }
         };
     }
 }

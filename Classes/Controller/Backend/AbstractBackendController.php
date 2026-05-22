@@ -20,8 +20,7 @@ abstract class AbstractBackendController extends ActionController implements Bac
     public function __construct(
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
         protected readonly IconFactory $iconFactory,
-    ) {
-    }
+    ) {}
 
     protected function createModuleTemplate(): ModuleTemplate
     {

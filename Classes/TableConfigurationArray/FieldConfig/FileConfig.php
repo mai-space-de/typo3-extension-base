@@ -16,8 +16,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ReadOnlyTrait;
 
 final class FileConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'file';
-
     use AllowedFileTypesTrait;
     use AppearanceTrait;
     use BehaviourTrait;
@@ -26,6 +24,7 @@ final class FileConfig extends AbstractFieldConfig
     use MinMaxItemsTrait;
     use OverrideChildTcaTrait;
     use ReadOnlyTrait;
+    protected const string TYPE = 'file';
 
     public function setCropVariants(array $cropVariants): static
     {

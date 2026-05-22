@@ -13,13 +13,12 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SortItemsTrait;
 
 final class CountryConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'country';
-
     use DefaultValueTrait;
     use ReadOnlyTrait;
     use RequiredTrait;
     use SizeTrait;
     use SortItemsTrait;
+    protected const string TYPE = 'country';
 
     public function setFilter(array $filter): static
     {

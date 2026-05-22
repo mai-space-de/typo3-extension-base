@@ -66,7 +66,7 @@ interface ConfigProviderTraitInterface
         int $redisStartDb = 0,
         int $redisPort = 6379,
         ?string $alternativeCacheBackend = null,
-        array $additionalCaches = []
+        array $additionalCaches = [],
     ): self;
 
     /**

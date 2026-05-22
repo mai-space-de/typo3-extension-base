@@ -24,8 +24,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SoftRefTrait;
 
 final class TextConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'text';
-
     use BehaviourTrait;
     use ColsRowsTrait;
     use DefaultValueTrait;
@@ -42,6 +40,7 @@ final class TextConfig extends AbstractFieldConfig
     use SearchableTrait;
     use SizeTrait;
     use SoftRefTrait;
+    protected const string TYPE = 'text';
 
     public function enableRte(bool $enable = true): static
     {

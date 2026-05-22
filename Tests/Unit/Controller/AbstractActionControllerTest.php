@@ -7,7 +7,7 @@ namespace Maispace\MaiBase\Tests\Unit\Controller;
 use Maispace\MaiBase\Controller\AbstractActionController;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 final class AbstractActionControllerTest extends TestCase
@@ -15,7 +15,7 @@ final class AbstractActionControllerTest extends TestCase
     #[Test]
     public function getContentObjectDataReturnsEmptyArrayWhenAttributeIsAbsent(): void
     {
-        $request = $this->createMock(ServerRequestInterface::class);
+        $request = $this->createMock(RequestInterface::class);
         $request->method('getAttribute')->with('currentContentObject')->willReturn(null);
 
         $controller = $this->createConcreteController();
@@ -32,7 +32,7 @@ final class AbstractActionControllerTest extends TestCase
         $contentObject = $this->createMock(ContentObjectRenderer::class);
         $contentObject->data = $expectedData;
 
-        $request = $this->createMock(ServerRequestInterface::class);
+        $request = $this->createMock(RequestInterface::class);
         $request->method('getAttribute')->with('currentContentObject')->willReturn($contentObject);
 
         $controller = $this->createConcreteController();
@@ -55,7 +55,7 @@ final class AbstractActionControllerTest extends TestCase
 
     private function createConcreteController(): object
     {
-        return new class () extends AbstractActionController {
+        return new class extends AbstractActionController {
             public function callGetContentObjectData(): array
             {
                 return $this->getContentObjectData();
@@ -68,7 +68,7 @@ final class AbstractActionControllerTest extends TestCase
         };
     }
 
-    private function injectRequest(object $controller, ServerRequestInterface $request): void
+    private function injectRequest(object $controller, RequestInterface $request): void
     {
         $reflection = new \ReflectionProperty($controller, 'request');
         $reflection->setValue($controller, $request);

@@ -26,8 +26,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ValuePickerTrait
 
 final class InputConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'input';
-
     use AutocompleteTrait;
     use BehaviourTrait;
     use DefaultValueTrait;
@@ -46,6 +44,7 @@ final class InputConfig extends AbstractFieldConfig
     use SizeTrait;
     use SoftRefTrait;
     use ValuePickerTrait;
+    protected const string TYPE = 'input';
 
     public function setIsIn(string $chars): static
     {

@@ -15,8 +15,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\TreeConfigTrait;
 
 final class CategoryConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'category';
-
     use DefaultValueTrait;
     use ForeignTableTrait;
     use MinMaxItemsTrait;
@@ -24,6 +22,7 @@ final class CategoryConfig extends AbstractFieldConfig
     use ReadOnlyTrait;
     use SizeTrait;
     use TreeConfigTrait;
+    protected const string TYPE = 'category';
 
     public function setRelationship(string $relationship): static
     {

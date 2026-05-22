@@ -18,8 +18,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SearchableTrait;
 
 final class JsonConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'json';
-
     use BehaviourTrait;
     use ColsRowsTrait;
     use DefaultValueTrait;
@@ -30,6 +28,7 @@ final class JsonConfig extends AbstractFieldConfig
     use ReadOnlyTrait;
     use RequiredTrait;
     use SearchableTrait;
+    protected const string TYPE = 'json';
 
     public function enableCodeEditor(bool $enable = true): static
     {

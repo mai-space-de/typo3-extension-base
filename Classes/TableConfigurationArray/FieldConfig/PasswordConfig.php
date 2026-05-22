@@ -20,8 +20,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class PasswordConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'password';
-
     use AutocompleteTrait;
     use BehaviourTrait;
     use DefaultValueTrait;
@@ -34,6 +32,7 @@ final class PasswordConfig extends AbstractFieldConfig
     use ReadOnlyTrait;
     use RequiredTrait;
     use SizeTrait;
+    protected const string TYPE = 'password';
 
     public function setHashed(bool $hashed = true): static
     {

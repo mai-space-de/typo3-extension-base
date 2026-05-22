@@ -15,8 +15,7 @@ abstract class AbstractApiMiddleware implements ApiMiddlewareInterface
     public function __construct(
         protected readonly ResponseFactoryInterface $responseFactory,
         protected readonly StreamFactoryInterface $streamFactory,
-    ) {
-    }
+    ) {}
 
     /**
      * Intercepts the request when shouldHandle() returns true,
@@ -106,7 +105,7 @@ abstract class AbstractApiMiddleware implements ApiMiddlewareInterface
     {
         return $this->jsonResponse(
             ['error' => ['message' => $message, 'code' => $status]],
-            $status
+            $status,
         );
     }
 }

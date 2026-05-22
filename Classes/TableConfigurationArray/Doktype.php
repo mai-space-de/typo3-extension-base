@@ -9,7 +9,7 @@ class Doktype extends AbstractTcaItem
     public function __construct(
         private readonly string $doktype,
         private readonly string $label,
-        private readonly string $iconIdentifier
+        private readonly string $iconIdentifier,
     ) {
         $this->showItemConfig[] = '--div--;' . $this->ll_core('general');
         $this->showItemConfig['general'] = '--palette--;;standard';

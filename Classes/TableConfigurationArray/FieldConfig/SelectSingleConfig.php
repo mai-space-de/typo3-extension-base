@@ -27,8 +27,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SortItemsTrait;
 
 final class SelectSingleConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'select';
-
     use AuthModeTrait;
     use AutoSizeTrait;
     use BehaviourTrait;
@@ -48,6 +46,7 @@ final class SelectSingleConfig extends AbstractFieldConfig
     use RequiredTrait;
     use SizeTrait;
     use SortItemsTrait;
+    protected const string TYPE = 'select';
 
     public function __construct()
     {

@@ -9,7 +9,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\DefaultValueTrai
 
 final class PassthroughConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'passthrough';
-
     use DefaultValueTrait;
+    protected const string TYPE = 'passthrough';
 }

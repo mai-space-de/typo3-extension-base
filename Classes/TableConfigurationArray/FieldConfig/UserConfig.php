@@ -9,9 +9,8 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\RenderTypeTrait;
 
 final class UserConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'user';
-
     use RenderTypeTrait;
+    protected const string TYPE = 'user';
 
     public function setParameters(array $parameters): static
     {

@@ -17,8 +17,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class FolderConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'folder';
-
     use AutoSizeTrait;
     use BehaviourTrait;
     use FieldControlTrait;
@@ -28,6 +26,7 @@ final class FolderConfig extends AbstractFieldConfig
     use MultipleTrait;
     use ReadOnlyTrait;
     use SizeTrait;
+    protected const string TYPE = 'folder';
 
     public function setElementBrowserEntryPoints(array $entryPoints): static
     {

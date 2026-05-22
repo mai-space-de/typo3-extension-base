@@ -52,7 +52,7 @@ class Helper
             'CType',
             $item,
             'textmedia',
-            'after'
+            'after',
         );
 
         $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$cType] = $iconIdentifier;
@@ -72,7 +72,7 @@ class Helper
                 'icon' => $iconIdentifier,
             ],
             '1',
-            'after'
+            'after',
         );
 
         ArrayUtility::mergeRecursiveWithOverrule(
@@ -85,7 +85,7 @@ class Helper
                         $doktype . '-root' => $iconIdentifier . '-root',
                     ],
                 ],
-            ]
+            ],
         );
     }
 
@@ -106,7 +106,7 @@ class Helper
                 'columnsOverrides' => [
                     $columnName => $newColumnConfiguration,
                 ],
-            ]
+            ],
         );
     }
 }

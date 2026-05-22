@@ -19,8 +19,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class InlineConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'inline';
-
     use AppearanceTrait;
     use AutoSizeTrait;
     use BehaviourTrait;
@@ -32,6 +30,7 @@ final class InlineConfig extends AbstractFieldConfig
     use OverrideChildTcaTrait;
     use ReadOnlyTrait;
     use SizeTrait;
+    protected const string TYPE = 'inline';
 
     public function setForeignDefaultSortby(string $sorting): static
     {

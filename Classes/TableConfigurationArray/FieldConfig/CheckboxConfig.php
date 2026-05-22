@@ -17,8 +17,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\RenderTypeTrait;
 
 final class CheckboxConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'check';
-
     use BehaviourTrait;
     use DefaultValueTrait;
     use EvalTrait;
@@ -28,6 +26,7 @@ final class CheckboxConfig extends AbstractFieldConfig
     use ItemsTrait;
     use ReadOnlyTrait;
     use RenderTypeTrait;
+    protected const string TYPE = 'check';
 
     public function setColumns(int $cols): static
     {

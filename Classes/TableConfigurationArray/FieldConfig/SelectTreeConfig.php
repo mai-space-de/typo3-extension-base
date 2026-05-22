@@ -25,8 +25,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\TreeConfigTrait;
 
 final class SelectTreeConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'select';
-
     use AuthModeTrait;
     use BehaviourTrait;
     use DbFieldLengthTrait;
@@ -44,6 +42,7 @@ final class SelectTreeConfig extends AbstractFieldConfig
     use RequiredTrait;
     use SizeTrait;
     use TreeConfigTrait;
+    protected const string TYPE = 'select';
 
     public function __construct()
     {

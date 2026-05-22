@@ -16,8 +16,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ReadOnlyTrait;
 
 final class RadioConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'radio';
-
     use BehaviourTrait;
     use DefaultValueTrait;
     use FieldControlTrait;
@@ -26,4 +24,5 @@ final class RadioConfig extends AbstractFieldConfig
     use ItemsProcessorsTrait;
     use ItemsTrait;
     use ReadOnlyTrait;
+    protected const string TYPE = 'radio';
 }

@@ -13,13 +13,12 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ReadOnlyTrait;
 
 final class ImageManipulationConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'imageManipulation';
-
     use BehaviourTrait;
     use FieldControlTrait;
     use FieldInformationTrait;
     use FieldWizardTrait;
     use ReadOnlyTrait;
+    protected const string TYPE = 'imageManipulation';
 
     public function setCropVariants(array $cropVariants): static
     {

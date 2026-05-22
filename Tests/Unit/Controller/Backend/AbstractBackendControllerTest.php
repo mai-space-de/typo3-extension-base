@@ -17,26 +17,51 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Core\View\ViewInterface;
 
+/**
+ * ModuleTemplate and ModuleTemplateFactory are both final in TYPO3 14.x and
+ * therefore cannot be doubled with PHPUnit's standard mock builder.
+ *
+ * Strategy used here:
+ * - ModuleTemplateFactory: created via ReflectionClass::newInstanceWithoutConstructor()
+ *   whenever it must be passed to the controller constructor but is never called.
+ * - ModuleTemplate: also created via newInstanceWithoutConstructor(); its internal
+ *   $view (ViewInterface) and $docHeaderComponent properties are injected through
+ *   ReflectionProperty so the production methods under test have a working surface
+ *   to delegate to.
+ */
 final class AbstractBackendControllerTest extends TestCase
 {
     #[Test]
     public function assignMultipleAssignsAllVariablesToModuleTemplate(): void
     {
-        $moduleTemplate = $this->createMock(ModuleTemplate::class);
-
-        $matcher = self::exactly(2);
-        $moduleTemplate->expects($matcher)
+        $view = $this->createMock(ViewInterface::class);
+        $view->expects(self::exactly(2))
             ->method('assign')
-            ->willReturnCallback(function (string $key, mixed $value) use ($matcher) {
-                match ($matcher->numberOfInvocations()) {
-                    1 => self::assertSame('foo', $key) ?: self::assertSame('bar', $value),
-                    2 => self::assertSame('baz', $key) ?: self::assertSame(42, $value),
+            ->willReturnCallback(static function (string $key, mixed $value) use (&$assigned): ViewInterface {
+                $assigned[$key] = $value;
+                return new class implements ViewInterface {
+                    public function assign(string $key, mixed $value): static
+                    {
+                        return $this;
+                    }
+                    public function assignMultiple(array $values): static
+                    {
+                        return $this;
+                    }
+                    public function render(string $templateFileName = ''): string
+                    {
+                        return '';
+                    }
                 };
             });
 
+        $moduleTemplate = $this->makeModuleTemplate(view: $view);
         $controller = $this->createConcreteController();
         $controller->callAssignMultiple($moduleTemplate, ['foo' => 'bar', 'baz' => 42]);
+
+        self::assertSame(['foo' => 'bar', 'baz' => 42], $assigned ?? []);
     }
 
     #[Test]
@@ -56,8 +81,7 @@ final class AbstractBackendControllerTest extends TestCase
         $docHeader = $this->createMock(DocHeaderComponent::class);
         $docHeader->method('getButtonBar')->willReturn($buttonBar);
 
-        $moduleTemplate = $this->createMock(ModuleTemplate::class);
-        $moduleTemplate->method('getDocHeaderComponent')->willReturn($docHeader);
+        $moduleTemplate = $this->makeModuleTemplate(docHeaderComponent: $docHeader);
 
         $icon = $this->createMock(Icon::class);
         $iconFactory = $this->createMock(IconFactory::class);
@@ -75,7 +99,7 @@ final class AbstractBackendControllerTest extends TestCase
 
         self::assertSame(
             [['Everything worked.', 'Success', ContextualFeedbackSeverity::OK]],
-            $controller->getFlashMessages()
+            $controller->getFlashMessages(),
         );
     }
 
@@ -87,7 +111,7 @@ final class AbstractBackendControllerTest extends TestCase
 
         self::assertSame(
             [['Something failed.', 'Error', ContextualFeedbackSeverity::ERROR]],
-            $controller->getFlashMessages()
+            $controller->getFlashMessages(),
         );
     }
 
@@ -99,13 +123,47 @@ final class AbstractBackendControllerTest extends TestCase
 
         self::assertSame(
             [['FYI.', 'Info', ContextualFeedbackSeverity::INFO]],
-            $controller->getFlashMessages()
+            $controller->getFlashMessages(),
         );
+    }
+
+    /**
+     * Creates a ModuleTemplate without calling its constructor.
+     *
+     * The $view and $docHeaderComponent properties are injected via reflection
+     * so the methods under test (assign, getDocHeaderComponent) work correctly.
+     */
+    private function makeModuleTemplate(
+        ?ViewInterface $view = null,
+        ?DocHeaderComponent $docHeaderComponent = null,
+    ): ModuleTemplate {
+        /** @var ModuleTemplate $moduleTemplate */
+        $moduleTemplate = (new \ReflectionClass(ModuleTemplate::class))
+            ->newInstanceWithoutConstructor();
+
+        if ($view !== null) {
+            $viewProp = new \ReflectionProperty(ModuleTemplate::class, 'view');
+            $viewProp->setAccessible(true);
+            $viewProp->setValue($moduleTemplate, $view);
+        }
+
+        if ($docHeaderComponent !== null) {
+            $docProp = new \ReflectionProperty(ModuleTemplate::class, 'docHeaderComponent');
+            $docProp->setAccessible(true);
+            $docProp->setValue($moduleTemplate, $docHeaderComponent);
+        }
+
+        return $moduleTemplate;
     }
 
     private function createConcreteController(?IconFactory $iconFactory = null): object
     {
-        $moduleTemplateFactory = $this->createMock(ModuleTemplateFactory::class);
+        // ModuleTemplateFactory is final readonly — bypass its constructor so we can
+        // satisfy the parent constructor's type constraint without mocking a final class.
+        /** @var ModuleTemplateFactory $moduleTemplateFactory */
+        $moduleTemplateFactory = (new \ReflectionClass(ModuleTemplateFactory::class))
+            ->newInstanceWithoutConstructor();
+
         $iconFactory ??= $this->createMock(IconFactory::class);
 
         return new class ($moduleTemplateFactory, $iconFactory) extends AbstractBackendController {

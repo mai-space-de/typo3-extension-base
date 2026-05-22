@@ -22,8 +22,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SoftRefTrait;
 
 final class DatetimeConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'datetime';
-
     use BehaviourTrait;
     use DbTypeTrait;
     use DefaultValueTrait;
@@ -38,6 +36,7 @@ final class DatetimeConfig extends AbstractFieldConfig
     use RequiredTrait;
     use SearchableTrait;
     use SoftRefTrait;
+    protected const string TYPE = 'datetime';
 
     public function setFormat(string $format): static
     {

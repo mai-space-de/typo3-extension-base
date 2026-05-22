@@ -8,9 +8,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 abstract class AbstractActionController extends ActionController
 {
-    protected function initializeAction(): void
-    {
-    }
+    protected function initializeAction(): void {}
 
     protected function getContentObjectData(): array
     {

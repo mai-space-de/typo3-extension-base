@@ -11,6 +11,7 @@ use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 final class PaginationTraitTest extends TestCase
@@ -52,15 +53,25 @@ final class PaginationTraitTest extends TestCase
         $subject = $this->createTraitUser($request, ['itemsPerPage' => '5']);
         $result = $subject->callPaginateArray(range(1, 20));
 
-        self::assertSame(5, $result['paginator']->getItemsPerPage());
+        // 20 items / 5 per page = 4 pages — verifies itemsPerPage setting was applied
+        self::assertSame(4, $result['paginator']->getNumberOfPages());
     }
 
     #[Test]
     public function paginateQueryResultReturnsQueryResultPaginatorAndSimplePagination(): void
     {
+        // QueryResultPaginator calls $queryResult->getQuery()->setLimit()->setOffset()->execute()
+        // during internal state update — all must be stubbed to avoid null-method errors.
+        $innerResult = $this->createMock(QueryResultInterface::class);
+
+        $query = $this->createMock(QueryInterface::class);
+        $query->method('setLimit')->willReturnSelf();
+        $query->method('setOffset')->willReturnSelf();
+        $query->method('execute')->willReturn($innerResult);
+
         $queryResult = $this->createMock(QueryResultInterface::class);
         $queryResult->method('count')->willReturn(0);
-        $queryResult->method('toArray')->willReturn([]);
+        $queryResult->method('getQuery')->willReturn($query);
 
         $request = $this->createMock(Request::class);
         $request->method('hasArgument')->with('currentPage')->willReturn(false);

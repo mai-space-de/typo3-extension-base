@@ -20,8 +20,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class EmailConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'email';
-
     use AutocompleteTrait;
     use BehaviourTrait;
     use EvalTrait;
@@ -34,4 +32,5 @@ final class EmailConfig extends AbstractFieldConfig
     use RequiredTrait;
     use SearchableTrait;
     use SizeTrait;
+    protected const string TYPE = 'email';
 }

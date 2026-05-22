@@ -13,13 +13,12 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SearchableTrait;
 
 final class FlexConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'flex';
-
     use BehaviourTrait;
     use FieldInformationTrait;
     use FieldWizardTrait;
     use ReadOnlyTrait;
     use SearchableTrait;
+    protected const string TYPE = 'flex';
 
     public function setDataStructureIdentifier(string $identifier): static
     {

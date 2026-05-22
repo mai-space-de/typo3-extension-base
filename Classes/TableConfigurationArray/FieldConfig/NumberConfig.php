@@ -23,8 +23,6 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\ValuePickerTrait
 
 final class NumberConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'number';
-
     use AutocompleteTrait;
     use BehaviourTrait;
     use DefaultValueTrait;
@@ -40,6 +38,7 @@ final class NumberConfig extends AbstractFieldConfig
     use SizeTrait;
     use SliderTrait;
     use ValuePickerTrait;
+    protected const string TYPE = 'number';
 
     public function setFormat(string $format): static
     {

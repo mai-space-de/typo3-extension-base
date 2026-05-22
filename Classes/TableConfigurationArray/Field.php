@@ -21,8 +21,7 @@ class Field
         private readonly string $fieldName,
         private readonly string $label,
         private readonly bool $exclude = false,
-    ) {
-    }
+    ) {}
 
     public function setDescription(string $description): self
     {

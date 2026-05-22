@@ -14,14 +14,13 @@ use Maispace\MaiBase\TableConfigurationArray\FieldConfig\Traits\SizeTrait;
 
 final class UuidConfig extends AbstractFieldConfig
 {
-    protected const string TYPE = 'uuid';
-
     use EnableCopyToClipboardTrait;
     use FieldInformationTrait;
     use ReadOnlyTrait;
     use RequiredTrait;
     use SearchableTrait;
     use SizeTrait;
+    protected const string TYPE = 'uuid';
 
     public function setVersion(int $version): static
     {

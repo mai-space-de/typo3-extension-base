@@ -17,7 +17,7 @@ trait DefaultConfigProviderTrait
         $orderedListOfContextNames = [];
         $currentContext = $this->context;
         do {
-            $orderedListOfContextNames[] = (string)$currentContext;
+            $orderedListOfContextNames[] = (string) $currentContext;
         } while (($currentContext = $currentContext->getParent()));
 
         $orderedListOfContextNames = array_reverse($orderedListOfContextNames);
@@ -37,12 +37,12 @@ trait DefaultConfigProviderTrait
             return $this;
         }
 
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $sys = (array)($typo3ConfVars['SYS'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $sys = (array) ($typo3ConfVars['SYS'] ?? []);
         $siteName = $sys['sitename'] ?? '';
-        $siteName = is_scalar($siteName) ? (string)$siteName : '';
+        $siteName = is_scalar($siteName) ? (string) $siteName : '';
 
-        $context = (string)$this->context;
+        $context = (string) $this->context;
         $contextString = '[' . $context . ']';
         $contextPosition = $contextFirst ? 0 : 1;
         $sys['sitename'] = 0 === $contextPosition ? $contextString . $delimiter . $siteName : $siteName . $delimiter . $contextString;
@@ -57,12 +57,12 @@ trait DefaultConfigProviderTrait
      */
     public function initializeDatabaseConnection(?array $options = null, string $connectionName = 'Default'): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $db = (array)($typo3ConfVars['DB'] ?? []);
-        $connections = (array)($db['Connections'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $db = (array) ($typo3ConfVars['DB'] ?? []);
+        $connections = (array) ($db['Connections'] ?? []);
         $connections[$connectionName] = array_replace_recursive(
-            (array)($connections[$connectionName] ?? []),
-            $options ?? []
+            (array) ($connections[$connectionName] ?? []),
+            $options ?? [],
         );
 
         if (empty($connections[$connectionName]['driver'])) {
@@ -78,8 +78,8 @@ trait DefaultConfigProviderTrait
 
     public function useImageMagick(string $path = '/usr/bin/'): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $gfx = (array)($typo3ConfVars['GFX'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $gfx = (array) ($typo3ConfVars['GFX'] ?? []);
         $gfx['processor'] = 'ImageMagick';
         $gfx['processor_path'] = $path;
         $gfx['processor_path_lzw'] = $path;
@@ -91,8 +91,8 @@ trait DefaultConfigProviderTrait
 
     public function useGraphicsMagick(string $path = '/usr/bin/'): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $gfx = (array)($typo3ConfVars['GFX'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $gfx = (array) ($typo3ConfVars['GFX'] ?? []);
         $gfx['processor'] = 'GraphicsMagick';
         $gfx['processor_path'] = $path;
         $gfx['processor_path_lzw'] = $path;
@@ -104,8 +104,8 @@ trait DefaultConfigProviderTrait
 
     public function useMailpit(string $host = 'localhost', ?int $port = null): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $mail = (array)($typo3ConfVars['MAIL'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $mail = (array) ($typo3ConfVars['MAIL'] ?? []);
         $mail['transport'] = 'smtp';
         $mail['transport_smtp_encrypt'] = '';
         $mail['transport_smtp_password'] = '';
@@ -124,8 +124,8 @@ trait DefaultConfigProviderTrait
 
     public function allowNoCacheQueryParameter(): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $fe = (array)($typo3ConfVars['FE'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $fe = (array) ($typo3ConfVars['FE'] ?? []);
         $fe['disableNoCacheParameter'] = false;
         $typo3ConfVars['FE'] = $fe;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -135,8 +135,8 @@ trait DefaultConfigProviderTrait
 
     public function forbidNoCacheQueryParameter(): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $fe = (array)($typo3ConfVars['FE'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $fe = (array) ($typo3ConfVars['FE'] ?? []);
         $fe['disableNoCacheParameter'] = true;
         $typo3ConfVars['FE'] = $fe;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -146,8 +146,8 @@ trait DefaultConfigProviderTrait
 
     public function allowInvalidCacheHashQueryParameter(): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $fe = (array)($typo3ConfVars['FE'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $fe = (array) ($typo3ConfVars['FE'] ?? []);
         $fe['pageNotFoundOnCHashError'] = false;
         $typo3ConfVars['FE'] = $fe;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -157,8 +157,8 @@ trait DefaultConfigProviderTrait
 
     public function forbidInvalidCacheHashQueryParameter(): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $fe = (array)($typo3ConfVars['FE'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $fe = (array) ($typo3ConfVars['FE'] ?? []);
         $fe['pageNotFoundOnCHashError'] = true;
         $typo3ConfVars['FE'] = $fe;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -168,10 +168,10 @@ trait DefaultConfigProviderTrait
 
     public function excludeQueryParameterForCacheHashCalculation(string $queryParameter): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $fe = (array)($typo3ConfVars['FE'] ?? []);
-        $cacheHash = (array)($fe['cacheHash'] ?? []);
-        $excludedParameters = (array)($cacheHash['excludedParameters'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $fe = (array) ($typo3ConfVars['FE'] ?? []);
+        $cacheHash = (array) ($fe['cacheHash'] ?? []);
+        $excludedParameters = (array) ($cacheHash['excludedParameters'] ?? []);
         $excludedParameters[] = $queryParameter;
         $cacheHash['excludedParameters'] = $excludedParameters;
         $fe['cacheHash'] = $cacheHash;
@@ -186,13 +186,13 @@ trait DefaultConfigProviderTrait
      */
     public function excludeQueryParametersForCacheHashCalculation(array $queryParameters): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $fe = (array)($typo3ConfVars['FE'] ?? []);
-        $cacheHash = (array)($fe['cacheHash'] ?? []);
-        $excludedParameters = (array)($cacheHash['excludedParameters'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $fe = (array) ($typo3ConfVars['FE'] ?? []);
+        $cacheHash = (array) ($fe['cacheHash'] ?? []);
+        $excludedParameters = (array) ($cacheHash['excludedParameters'] ?? []);
         $cacheHash['excludedParameters'] = array_merge(
             $excludedParameters,
-            $queryParameters
+            $queryParameters,
         );
         $fe['cacheHash'] = $cacheHash;
         $typo3ConfVars['FE'] = $fe;
@@ -204,8 +204,8 @@ trait DefaultConfigProviderTrait
     public function enableDeprecationLogging(): self
     {
         $path = 'TYPO3/CMS/deprecations/writerConfiguration/' . LogLevel::NOTICE . '/' . FileWriter::class . '/disabled';
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $log = (array)($typo3ConfVars['LOG'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $log = (array) ($typo3ConfVars['LOG'] ?? []);
         $log = ArrayUtility::setValueByPath($log, $path, false, '/');
         $typo3ConfVars['LOG'] = $log;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -216,8 +216,8 @@ trait DefaultConfigProviderTrait
     public function disableDeprecationLogging(): self
     {
         $path = 'TYPO3/CMS/deprecations/writerConfiguration/' . LogLevel::NOTICE . '/' . FileWriter::class . '/disabled';
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $log = (array)($typo3ConfVars['LOG'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $log = (array) ($typo3ConfVars['LOG'] ?? []);
         $log = ArrayUtility::setValueByPath($log, $path, true, '/');
         $typo3ConfVars['LOG'] = $log;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -227,8 +227,8 @@ trait DefaultConfigProviderTrait
 
     public function configureExceptionHandlers(string $productionExceptionHandlerClassName, string $debugExceptionHandlerClassName): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $sys = (array)($typo3ConfVars['SYS'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $sys = (array) ($typo3ConfVars['SYS'] ?? []);
         $sys['productionExceptionHandler'] = $productionExceptionHandlerClassName;
         $sys['debugExceptionHandler'] = $debugExceptionHandlerClassName;
         $typo3ConfVars['SYS'] = $sys;
@@ -265,8 +265,8 @@ trait DefaultConfigProviderTrait
                 ],
             ],
         ];
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $log = (array)($typo3ConfVars['LOG'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $log = (array) ($typo3ConfVars['LOG'] ?? []);
         $log = ArrayUtility::setValueByPath($log, $namespace, $value, '\\');
         $typo3ConfVars['LOG'] = $log;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -283,8 +283,8 @@ trait DefaultConfigProviderTrait
                 ],
             ],
         ];
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $log = (array)($typo3ConfVars['LOG'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $log = (array) ($typo3ConfVars['LOG'] ?? []);
         $log = ArrayUtility::setValueByPath($log, $namespace, $value, '\\');
         $typo3ConfVars['LOG'] = $log;
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
@@ -302,7 +302,7 @@ trait DefaultConfigProviderTrait
         int $redisStartDb = 0,
         int $redisPort = 6379,
         ?string $alternativeCacheBackend = null,
-        array $additionalCaches = []
+        array $additionalCaches = [],
     ): self {
         $isVersion12OrHigher = $this->version->getMajorVersion() >= 12;
         $cacheBackend = $alternativeCacheBackend ?? RedisBackend::class;
@@ -315,20 +315,20 @@ trait DefaultConfigProviderTrait
                 'rootline' => 86400 * 30,
                 'extbase' => 0,
             ],
-            $additionalCaches
+            $additionalCaches,
         );
 
         if ($isVersion12OrHigher) {
             unset($caches['pagesection'], $caches['cache_pagesection']);
         }
 
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $sys = (array)($typo3ConfVars['SYS'] ?? []);
-        $caching = (array)($sys['caching'] ?? []);
-        $cacheConfigurations = (array)($caching['cacheConfigurations'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $sys = (array) ($typo3ConfVars['SYS'] ?? []);
+        $caching = (array) ($sys['caching'] ?? []);
+        $cacheConfigurations = (array) ($caching['cacheConfigurations'] ?? []);
 
         foreach ($caches as $key => $lifetime) {
-            $cacheConfig = (array)($cacheConfigurations[$key] ?? []);
+            $cacheConfig = (array) ($cacheConfigurations[$key] ?? []);
             $cacheConfig['backend'] = $cacheBackend;
             $cacheConfig['options'] = [
                 'database' => $redisDb++,
@@ -359,14 +359,14 @@ trait DefaultConfigProviderTrait
             'l10n',
         ];
 
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-        $sys = (array)($typo3ConfVars['SYS'] ?? []);
-        $caching = (array)($sys['caching'] ?? []);
-        $cacheConfigurations = (array)($caching['cacheConfigurations'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $sys = (array) ($typo3ConfVars['SYS'] ?? []);
+        $caching = (array) ($sys['caching'] ?? []);
+        $cacheConfigurations = (array) ($caching['cacheConfigurations'] ?? []);
 
         foreach ($applyForCaches as $applyForCache) {
-            $cacheConfig = (array)($cacheConfigurations[$applyForCache] ?? []);
-            $options = (array)($cacheConfig['options'] ?? []);
+            $cacheConfig = (array) ($cacheConfigurations[$applyForCache] ?? []);
+            $options = (array) ($cacheConfig['options'] ?? []);
             $options['cacheDirectory'] = $path;
             $cacheConfig['options'] = $options;
             $cacheConfigurations[$applyForCache] = $cacheConfig;
@@ -388,7 +388,7 @@ trait DefaultConfigProviderTrait
         foreach ($settings as $key => $value) {
             try {
                 if (function_exists('ini_set') && !ini_get($key)) {
-                    $stringValue = is_scalar($value) ? (string)$value : '';
+                    $stringValue = is_scalar($value) ? (string) $value : '';
                     ini_set($key, $stringValue);
                 } else {
                     error_log(sprintf('Unable to set PHP setting %s, ini_set is disabled or already set.', $key));
@@ -406,10 +406,10 @@ trait DefaultConfigProviderTrait
      */
     public function setConfigPathValues(string $configPath, array $keyValuePairs): self
     {
-        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
 
         $currentValue = ArrayUtility::getValueByPath($typo3ConfVars, $configPath, '/');
-        $mergedValue = array_replace_recursive((array)($currentValue ?? []), $keyValuePairs);
+        $mergedValue = array_replace_recursive((array) ($currentValue ?? []), $keyValuePairs);
         $typo3ConfVars = ArrayUtility::setValueByPath($typo3ConfVars, $configPath, $mergedValue, '/');
 
         $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;

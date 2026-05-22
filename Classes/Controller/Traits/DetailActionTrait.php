@@ -17,7 +17,7 @@ trait DetailActionTrait
             throw new PageNotFoundException('No record identifier provided.', 1745000001);
         }
 
-        $uid = (int)$this->request->getArgument($argumentName);
+        $uid = (int) $this->request->getArgument($argumentName);
         $object = $repository->findByUid($uid);
 
         if ($object === null) {

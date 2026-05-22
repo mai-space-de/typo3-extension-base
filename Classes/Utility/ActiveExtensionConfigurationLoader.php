@@ -11,8 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ActiveExtensionConfigurationLoader
 {
-    private PackageManager $packageManager;
-
     /**
      * @return array<string, mixed>
      */
