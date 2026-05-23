@@ -47,3 +47,9 @@ parameters:
 			identifier: trait.unused
 			count: 1
 			path: Classes/Controller/Traits/ResponseHelpersTrait.php
+
+		-
+			message: '#^Trait Maispace\\MaiBase\\Domain\\Model\\ListableRecordTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: Classes/Domain/Model/ListableRecordTrait.php
