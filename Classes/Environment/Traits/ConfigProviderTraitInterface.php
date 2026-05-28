@@ -19,6 +19,11 @@ interface ConfigProviderTraitInterface
 
     public function useProductionPreset(): self;
 
+    /**
+     * @param array<string, string> $namespaceThresholds
+     */
+    public function configureLoggingThresholds(string $minLevel, array $namespaceThresholds = []): self;
+
     public function useDevelopmentPreset(): self;
 
     public function useImageMagick(string $path = '/usr/bin/'): self;
