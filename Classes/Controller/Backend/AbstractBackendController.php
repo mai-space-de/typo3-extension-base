@@ -69,7 +69,17 @@ abstract class AbstractBackendController extends ActionController implements Bac
 
     protected function renderModuleResponse(ModuleTemplate $moduleTemplate, string $templatePath): ResponseInterface
     {
-        return $moduleTemplate->renderResponse($this->resolveModuleTemplatePath($templatePath));
+        $resolvedPath = $this->resolveModuleTemplatePath($templatePath);
+        $controllerName = $this->request?->getControllerName() ?? 'NULL';
+        $requestClass = $this->request ? get_class($this->request) : 'NO_REQUEST';
+        error_log(sprintf(
+            'MAI_DEBUG: renderModuleResponse input=%s resolved=%s controllerName=%s requestClass=%s',
+            $templatePath,
+            $resolvedPath,
+            $controllerName,
+            $requestClass
+        ));
+        return $moduleTemplate->renderResponse($resolvedPath);
     }
 
     /**
