@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Maispace\MaiBase\Tests\Unit\Controller\Backend;
 
 use Maispace\MaiBase\Controller\Backend\AbstractBackendController;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -18,6 +19,7 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\View\ViewInterface;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 /**
  * ModuleTemplate and ModuleTemplateFactory are both final in TYPO3 14.x and
@@ -128,6 +130,49 @@ final class AbstractBackendControllerTest extends TestCase
     }
 
     /**
+     * @return array<string, array{string, string, string}>
+     */
+    public static function resolveModuleTemplatePathDataProvider(): array
+    {
+        return [
+            'simple action, backslash alias' => [
+                'Backend\\ConsentStatisticsBackend',
+                'Index',
+                'Backend/ConsentStatisticsBackend/Index',
+            ],
+            'simple action, survey alias' => [
+                'Backend\\SurveyResults',
+                'List',
+                'Backend/SurveyResults/List',
+            ],
+            'alias without subdirectory' => [
+                'MyController',
+                'Show',
+                'MyController/Show',
+            ],
+        ];
+    }
+
+    #[Test]
+    #[DataProvider('resolveModuleTemplatePathDataProvider')]
+    public function resolveModuleTemplatePathBuildsFullPath(
+        string $controllerName,
+        string $templatePath,
+        string $expected,
+    ): void {
+        $request = $this->createMock(RequestInterface::class);
+        $request->method('getControllerName')->willReturn($controllerName);
+
+        $controller = $this->createConcreteController();
+
+        $requestProp = new \ReflectionProperty($controller, 'request');
+        $requestProp->setAccessible(true);
+        $requestProp->setValue($controller, $request);
+
+        self::assertSame($expected, $controller->callResolveModuleTemplatePath($templatePath));
+    }
+
+    /**
      * Creates a ModuleTemplate without calling its constructor.
      *
      * The $view and $docHeaderComponent properties are injected via reflection
@@ -215,6 +260,11 @@ final class AbstractBackendControllerTest extends TestCase
             public function callFlashInfo(string $message, string $title = ''): void
             {
                 $this->flashInfo($message, $title);
+            }
+
+            public function callResolveModuleTemplatePath(string $templatePath): string
+            {
+                return $this->resolveModuleTemplatePath($templatePath);
             }
         };
     }

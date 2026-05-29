@@ -69,7 +69,27 @@ abstract class AbstractBackendController extends ActionController implements Bac
 
     protected function renderModuleResponse(ModuleTemplate $moduleTemplate, string $templatePath): ResponseInterface
     {
-        return $moduleTemplate->renderResponse($templatePath);
+        return $moduleTemplate->renderResponse($this->resolveModuleTemplatePath($templatePath));
+    }
+
+    /**
+     * Builds the full template path for ModuleTemplate rendering.
+     *
+     * TYPO3's ModuleTemplate::renderResponse() uses a standalone Fluid view whose rendering
+     * context has controllerName='Default'. Template resolution therefore looks for
+     * "{root}/Default/{action}.html" unless the full path is given explicitly.
+     *
+     * Extbase derives a controller alias such as "Backend\ConsentStatisticsBackend" from the
+     * FQCN. Converting the backslash to "/" yields "Backend/ConsentStatisticsBackend", which
+     * is used as the template sub-directory. Passing the composite path
+     * "Backend/ConsentStatisticsBackend/Index" makes Fluid fall back to the raw template root
+     * and resolve "Backend/ConsentStatisticsBackend/Index.html" — exactly where the template
+     * files live in this project.
+     */
+    protected function resolveModuleTemplatePath(string $templatePath): string
+    {
+        $controllerPath = str_replace('\\', '/', $this->request->getControllerName());
+        return $controllerPath . '/' . $templatePath;
     }
 
     protected function flashSuccess(string $message, string $title = ''): void
