@@ -8,13 +8,13 @@ use Maispace\MaiBase\Controller\Traits\AppendDataToPluginVariablesTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3Fluid\Fluid\View\ViewInterface;
 
 final class AppendDataToPluginVariablesTraitTest extends TestCase
 {
     #[Test]
-    public function initializeActionAssignsContentObjectDataToView(): void
+    public function initializeViewAssignsContentObjectDataToView(): void
     {
         $expectedData = ['uid' => 7, 'pid' => 3, 'CType' => 'list'];
 
@@ -29,12 +29,12 @@ final class AppendDataToPluginVariablesTraitTest extends TestCase
             ->method('assign')
             ->with('data', $expectedData);
 
-        $subject = $this->createTraitUser($request, $view);
-        $subject->callInitializeAction();
+        $subject = $this->createTraitUser($request);
+        $subject->callInitializeView($view);
     }
 
     #[Test]
-    public function initializeActionAssignsEmptyArrayWhenContentObjectIsAbsent(): void
+    public function initializeViewAssignsEmptyArrayWhenContentObjectIsAbsent(): void
     {
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getAttribute')->with('currentContentObject')->willReturn(null);
@@ -44,24 +44,22 @@ final class AppendDataToPluginVariablesTraitTest extends TestCase
             ->method('assign')
             ->with('data', []);
 
-        $subject = $this->createTraitUser($request, $view);
-        $subject->callInitializeAction();
+        $subject = $this->createTraitUser($request);
+        $subject->callInitializeView($view);
     }
 
-    private function createTraitUser(ServerRequestInterface $request, ViewInterface $view): object
+    private function createTraitUser(ServerRequestInterface $request): object
     {
-        return new class ($request, $view) {
+        return new class ($request) {
             use AppendDataToPluginVariablesTrait {
-                initializeAction as public callInitializeAction;
+                initializeView as public callInitializeView;
             }
 
             protected ServerRequestInterface $request;
-            protected ViewInterface $view;
 
-            public function __construct(ServerRequestInterface $request, ViewInterface $view)
+            public function __construct(ServerRequestInterface $request)
             {
                 $this->request = $request;
-                $this->view = $view;
             }
         };
     }

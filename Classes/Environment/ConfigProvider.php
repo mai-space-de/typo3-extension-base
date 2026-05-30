@@ -60,7 +60,8 @@ class ConfigProvider implements ConfigProviderInterface, ConfigProviderTraitInte
         $this
             ->appendContextToSiteName()
             ->forbidInvalidCacheHashQueryParameter()
-            ->forbidNoCacheQueryParameter();
+            ->forbidNoCacheQueryParameter()
+            ->excludeQueryParametersForCacheHashCalculation(['smoke_ctype', 'smoke_plugin']);
 
         if ($this->context->isDevelopment() || $this->context->isTesting()) {
             $this->useDevelopmentPreset();

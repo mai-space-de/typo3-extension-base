@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Maispace\MaiBase\Controller\Traits;
 
+use TYPO3\CMS\Core\View\ViewInterface;
+
 trait AppendDataToPluginVariablesTrait
 {
-    protected function initializeAction(): void
+    protected function initializeView(ViewInterface $view): void
     {
         $contentObject = $this->request->getAttribute('currentContentObject');
-        $this->view->assign('data', $contentObject?->data ?? []);
+        $view->assign('data', $contentObject?->data ?? []);
     }
 }
