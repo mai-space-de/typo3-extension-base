@@ -13,7 +13,7 @@ final class CsvFormatter
     ): string {
         $handle = fopen('php://temp', 'r+');
         foreach ($rows as $row) {
-            fputcsv($handle, $row, $separator);
+            fputcsv($handle, $row, $separator, '"', '\\');
         }
         rewind($handle);
         $csv = stream_get_contents($handle);
