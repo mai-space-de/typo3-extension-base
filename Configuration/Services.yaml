@@ -6,4 +6,5 @@ services:
 
   Maispace\MaiBase\:
     resource: '../Classes/*'
-    exclude: '../Classes/Domain/Model/*'
+    exclude:
+      - '../Classes/Domain/Model/*'

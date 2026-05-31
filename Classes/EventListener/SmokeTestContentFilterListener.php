@@ -6,31 +6,25 @@ namespace Maispace\MaiBase\EventListener;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Frontend\ContentObject\Event\ModifyRecordsAfterFetchingContentEvent;
+use TYPO3\CMS\Frontend\Event\AfterContentHasBeenFetchedEvent;
 
 /**
  * Renders a single CType or plugin on smoke-test pages when smoke_ctype / smoke_plugin is set.
  */
+#[AsEventListener(identifier: 'mai-base/smoke-test-filter')]
 final class SmokeTestContentFilterListener
 {
     private const CTYPE_PAGE_UID = 10001;
     private const PLUGIN_PAGE_UID = 10002;
 
-    #[AsEventListener]
-    public function __invoke(ModifyRecordsAfterFetchingContentEvent $event): void
+    public function __invoke(AfterContentHasBeenFetchedEvent $event): void
     {
-        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
-        if (!$request instanceof ServerRequestInterface) {
+        $request = $event->request;
+        $pageId = $request->getAttribute('routing')?->getPageId();
+        if ($pageId === null) {
             return;
         }
 
-        $pageArguments = $request->getAttribute('routing');
-        if (!$pageArguments instanceof PageArguments) {
-            return;
-        }
-
-        $pageId = $pageArguments->getPageId();
         $queryParams = $request->getQueryParams();
 
         $filterCType = match ($pageId) {
@@ -43,12 +37,18 @@ final class SmokeTestContentFilterListener
             return;
         }
 
-        $filteredRecords = array_values(array_filter(
-            $event->getRecords(),
-            static fn(array $record): bool => ($record['CType'] ?? '') === $filterCType,
-        ));
+        foreach ($event->groupedContent as $columnIdentifier => $column) {
+            if (!isset($column['records'])) {
+                continue;
+            }
 
-        $event->setRecords($filteredRecords);
+            $filteredRecords = array_values(array_filter(
+                $column['records'],
+                static fn(\TYPO3\CMS\Core\Domain\Record $record): bool => ($record->get('CType') ?? '') === $filterCType,
+            ));
+
+            $event->groupedContent[$columnIdentifier]['records'] = $filteredRecords;
+        }
     }
 
     private function readNonEmptyString(mixed $value): ?string

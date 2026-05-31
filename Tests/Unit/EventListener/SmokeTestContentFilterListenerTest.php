@@ -9,34 +9,31 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Frontend\ContentObject\Event\ModifyRecordsAfterFetchingContentEvent;
+use TYPO3\CMS\Frontend\Event\AfterContentHasBeenFetchedEvent;
 
 final class SmokeTestContentFilterListenerTest extends TestCase
 {
     #[Test]
     public function filtersPluginPageRecordsBySmokePluginParameter(): void
     {
-        $GLOBALS['TYPO3_REQUEST'] = $this->createRequest(10002, ['smoke_plugin' => 'maifaq_list']);
+        $request = $this->createRequest(10002, ['smoke_plugin' => 'maifaq_list']);
 
-        $event = new ModifyRecordsAfterFetchingContentEvent(
-            [
-                ['uid' => 1, 'CType' => 'maifaq_list'],
-                ['uid' => 2, 'CType' => 'mainews_list'],
+        $event = new AfterContentHasBeenFetchedEvent(
+            groupedContent: [
+                'column1' => [
+                    'records' => [
+                        ['uid' => 1, 'CType' => 'maifaq_list'],
+                        ['uid' => 2, 'CType' => 'mainews_list'],
+                    ],
+                ],
             ],
-            '',
-            0,
-            0,
-            false,
-            false,
-            [],
+            request: $request,
         );
 
         (new SmokeTestContentFilterListener())($event);
 
-        self::assertSame(
-            [['uid' => 1, 'CType' => 'maifaq_list']],
-            $event->getRecords(),
-        );
+        self::assertCount(1, $event->groupedContent['column1']['records']);
+        self::assertSame('maifaq_list', $event->groupedContent['column1']['records'][0]['CType']);
     }
 
     #[Test]
@@ -46,13 +43,18 @@ final class SmokeTestContentFilterListenerTest extends TestCase
             ['uid' => 1, 'CType' => 'maifaq_list'],
             ['uid' => 2, 'CType' => 'mainews_list'],
         ];
-        $GLOBALS['TYPO3_REQUEST'] = $this->createRequest(10002, []);
+        $request = $this->createRequest(10002, []);
 
-        $event = new ModifyRecordsAfterFetchingContentEvent($records, '', 0, 0, false, false, []);
+        $event = new AfterContentHasBeenFetchedEvent(
+            groupedContent: [
+                'column1' => ['records' => $records],
+            ],
+            request: $request,
+        );
 
         (new SmokeTestContentFilterListener())($event);
 
-        self::assertSame($records, $event->getRecords());
+        self::assertCount(2, $event->groupedContent['column1']['records']);
     }
 
     private function createRequest(int $pageId, array $queryParams): ServerRequestInterface
