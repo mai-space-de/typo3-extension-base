@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Maispace\MaiBase\Tests\Unit\EventListener;
 
 use Maispace\MaiBase\EventListener\SmokeTestContentFilterListener;
+use Maispace\MaiBase\SmokeTest\SmokeTestContentFilter;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,7 +31,7 @@ final class SmokeTestContentFilterListenerTest extends TestCase
             request: $request,
         );
 
-        (new SmokeTestContentFilterListener())($event);
+        (new SmokeTestContentFilterListener(new SmokeTestContentFilter()))($event);
 
         self::assertCount(1, $event->groupedContent['column1']['records']);
         self::assertSame('maifaq_list', $event->groupedContent['column1']['records'][0]['CType']);
@@ -52,7 +53,7 @@ final class SmokeTestContentFilterListenerTest extends TestCase
             request: $request,
         );
 
-        (new SmokeTestContentFilterListener())($event);
+        (new SmokeTestContentFilterListener(new SmokeTestContentFilter()))($event);
 
         self::assertCount(2, $event->groupedContent['column1']['records']);
     }
