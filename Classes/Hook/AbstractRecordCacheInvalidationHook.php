@@ -17,6 +17,10 @@ use TYPO3\CMS\Extbase\Service\CacheService;
  *
  * Backend saves bypass Extbase persistence, so this hook bridges the gap left
  * by enableAutomaticCacheClearing when editors use TCA forms directly.
+ *
+ * Concrete subclasses must be registered as public DI services: DataHandler
+ * creates hooks via GeneralUtility::makeInstance(), which only injects
+ * dependencies for public container entries.
  */
 abstract class AbstractRecordCacheInvalidationHook
 {
