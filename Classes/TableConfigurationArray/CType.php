@@ -101,6 +101,24 @@ class CType extends AbstractTcaItem
         return $this;
     }
 
+    /**
+     * Enable (or disable) CKEditor for the shared tt_content.bodytext field.
+     *
+     * Required in TYPO3 14+: the base bodytext column no longer has
+     * enableRichtext set, so every CType that uses bodytext as rich text
+     * must opt in via columnsOverrides.
+     */
+    public function enableBodytextRichtext(bool $enable = true): self
+    {
+        $this->columnsOverrides['bodytext'] = [
+            'config' => [
+                'enableRichtext' => $enable,
+            ],
+        ];
+
+        return $this;
+    }
+
     public function register(): void
     {
         if (empty($this->cType)) {
