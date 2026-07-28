@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-07-28T00:00:00Z" product-name="mai-base">
+        <header/>
+        <body>
+            <trans-unit id="label">
+                <source>MaiSpace Base</source>
+            </trans-unit>
+
+            <trans-unit id="categories.mai-base">
+                <source>Base</source>
+            </trans-unit>
+            <trans-unit id="categories.mai-base.recordModule">
+                <source>Records Module</source>
+            </trans-unit>
+
+            <trans-unit id="settings.records.defaultStoragePid">
+                <source>Default record storage page</source>
+            </trans-unit>
+            <trans-unit id="settings.description.records.defaultStoragePid">
+                <source>Fallback page used as the record list's storage page for tables that don't configure their own pids. Set to 0 to keep showing "no pages for this table" instead.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

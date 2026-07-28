@@ -1,0 +1,10 @@
+categories:
+  mai-base: ~
+  mai-base.recordModule:
+    parent: mai-base
+
+settings:
+  records.defaultStoragePid:
+    default: 0
+    type: page
+    category: mai-base.recordModule

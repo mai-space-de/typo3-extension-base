@@ -119,6 +119,34 @@ class Table
         return $this;
     }
 
+    public function disableRecordModule(): self
+    {
+        $existing = $this->config['ctrl']['EXT']['mai_base']['recordModule'] ?? [];
+        if (!is_array($existing)) {
+            $existing = [];
+        }
+        $this->config['ctrl']['EXT']['mai_base']['recordModule'] = array_merge($existing, [
+            'enable' => false,
+        ]);
+
+        return $this;
+    }
+
+    public function configureRecordModule(array $options): self
+    {
+        $existing = $this->config['ctrl']['EXT']['mai_base']['recordModule'] ?? [];
+        if (!is_array($existing)) {
+            $existing = [];
+        }
+        $this->config['ctrl']['EXT']['mai_base']['recordModule'] = array_merge(
+            $existing,
+            $options,
+            ['enable' => (bool) ($options['enable'] ?? true)],
+        );
+
+        return $this;
+    }
+
     public function setIconFile(string $iconFile): self
     {
         $this->config['ctrl']['iconfile'] = $iconFile;

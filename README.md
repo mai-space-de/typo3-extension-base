@@ -124,6 +124,41 @@ return [
 
 ---
 
+## Record Modules
+
+`mai_base` auto-registers a backend module group **Records** (`mai_records`) for every
+`tx_mai*` TCA table that is not `hideTable` and not opted out.
+
+Each module uses `RecordModuleController` (extends `AbstractBackendController`) and the
+Core `DatabaseRecordList`, so editors get:
+
+- paginated single-table lists
+- create / edit via the standard record editor
+- column selector, search and clipboard
+
+### Opt-out / configure via TCA builder
+
+```php
+// Disable the auto module for a table
+(new Table('…'))
+    ->disableRecordModule();
+
+// Or configure storage PIDs, parent, title, sorting, icon
+(new Table('…'))
+    ->configureRecordModule([
+        'pids' => [123],
+        'parent' => 'web',
+        'sorting' => 10,
+        'title' => 'LLL:EXT:my_ext/Resources/Private/Language/locallang.xlf:module.title',
+        'iconIdentifier' => 'mai-table',
+    ]);
+```
+
+Settings are stored under `ctrl.EXT.mai_base.recordModule`. PID lists can also be adjusted
+at runtime via `BeforeRecordModulePidsLoadedEvent` / `AfterRecordModulePidsLoadedEvent`.
+
+---
+
 ## License
 
 GPL-2.0-or-later — see [LICENSE](../../LICENSE) for details.

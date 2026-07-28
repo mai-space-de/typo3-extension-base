@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" product-name="mai_base">
+        <body>
+            <trans-unit id="mlang_tabs_tab">
+                <source>Records</source>
+                <target>Datensätze</target>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tablabel">
+                <source>Record modules</source>
+                <target>Datensatz-Module</target>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tabdescr">
+                <source>Dedicated backend modules for mai record tables with list, create and column selection.</source>
+                <target>Eigene Backend-Module für mai-Datensatztabellen mit Liste, Anlegen und Spaltenauswahl.</target>
+            </trans-unit>
+            <trans-unit id="noPagesForThisTable">
+                <source>No accessible storage pages are configured for this record module.</source>
+                <target>Für dieses Datensatz-Modul sind keine zugänglichen Speicherseiten konfiguriert.</target>
+            </trans-unit>
+            <trans-unit id="noAccess">
+                <source>You do not have permission to view this table.</source>
+                <target>Sie haben keine Berechtigung, diese Tabelle anzuzeigen.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

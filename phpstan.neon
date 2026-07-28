@@ -6,3 +6,7 @@ parameters:
   level: 5
   paths:
     - Classes
+  typo3:
+    requestGetAttributeMapping:
+      route: TYPO3\CMS\Backend\Routing\Route
+      pageContext: TYPO3\CMS\Backend\Context\PageContext

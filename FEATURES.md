@@ -7,3 +7,4 @@
 
 * Backend infrastructure — admin panel, dashboard, user management, reports, recycler, workspaces, and all standard backend modules
 * Extbase model extension — `evoweb/extender` allows other extensions to add fields to Extbase domain models without forking
+* Record modules — auto-registers backend modules for `tx_mai*` TCA tables (skip `hideTable` / opt-out); Extbase `RecordModuleController` + Core `DatabaseRecordList` with create, pagination and column selector
