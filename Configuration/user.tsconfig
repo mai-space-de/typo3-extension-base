@@ -1,0 +1,86 @@
+# User TSconfig for bgm-pulheim
+# Live Search Default Actions - Alle Tables auf "edit"
+
+# Global Default: edit für alle Tables
+options.liveSearch.actions.default = edit
+
+# Core Tables
+options.liveSearch.actions.pages.default = edit
+options.liveSearch.actions.tt_content.default = edit
+
+# mai_account
+options.liveSearch.actions.tx_maiaccount_interest.default = edit
+options.liveSearch.actions.tx_maiaccount_reminder.default = edit
+options.liveSearch.actions.tx_maiaccount_story.default = edit
+
+# mai_canteen
+options.liveSearch.actions.tx_maicanteen_dish.default = edit
+options.liveSearch.actions.tx_maicanteen_menuplan.default = edit
+
+# mai_consent
+options.liveSearch.actions.tx_maiconsent_domain_model_consentcategory.default = edit
+options.liveSearch.actions.tx_maiconsent_domain_model_consentlog.default = edit
+
+# mai_events
+options.liveSearch.actions.tx_maievents_event.default = edit
+options.liveSearch.actions.tx_maievents_registration.default = edit
+
+# mai_faq
+options.liveSearch.actions.tx_maifaq_faq.default = edit
+
+# mai_gallery
+options.liveSearch.actions.tx_maigallery_gallery.default = edit
+
+# mai_jobs
+options.liveSearch.actions.tx_maijobs_application.default = edit
+options.liveSearch.actions.tx_maijobs_job.default = edit
+
+# mai_locations
+options.liveSearch.actions.tx_mailocations_location.default = edit
+options.liveSearch.actions.tx_mailocations_opening_hours.default = edit
+
+# mai_mail
+options.liveSearch.actions.tx_maimail_log.default = edit
+options.liveSearch.actions.tx_maimail_queue.default = edit
+
+# mai_member
+options.liveSearch.actions.tx_maimember_application.default = edit
+options.liveSearch.actions.tx_maimember_member.default = edit
+
+# mai_news
+options.liveSearch.actions.tx_mainews_news.default = edit
+options.liveSearch.actions.tx_mainews_tag.default = edit
+
+# mai_newsletter
+options.liveSearch.actions.tx_mainewsletter_campaign.default = edit
+options.liveSearch.actions.tx_mainewsletter_subscriber.default = edit
+
+# mai_resource
+options.liveSearch.actions.tx_mairesource_download.default = edit
+options.liveSearch.actions.tx_mairesource_infobox.default = edit
+options.liveSearch.actions.tx_mairesource_template.default = edit
+
+# mai_survey
+options.liveSearch.actions.tx_maisurvey_answer.default = edit
+options.liveSearch.actions.tx_maisurvey_question.default = edit
+options.liveSearch.actions.tx_maisurvey_submission.default = edit
+options.liveSearch.actions.tx_maisurvey_survey.default = edit
+
+# mai_team
+options.liveSearch.actions.tx_maiteam_team_member.default = edit
+
+# mai_testimonials
+options.liveSearch.actions.tx_maitestimonials_testimonial.default = edit
+
+# mai_theme
+options.liveSearch.actions.tx_maitheme_accordion_item.default = edit
+options.liveSearch.actions.tx_maitheme_slider_item.default = edit
+options.liveSearch.actions.tx_maitheme_tab_item.default = edit
+options.liveSearch.actions.tx_maitheme_timeline_item.default = edit
+
+# mai_timeline
+options.liveSearch.actions.tx_maitimeline_entry.default = edit
+options.liveSearch.actions.tx_maitimeline_item.default = edit
+
+# mai_translate
+options.liveSearch.actions.tx_maitranslate_log.default = edit
