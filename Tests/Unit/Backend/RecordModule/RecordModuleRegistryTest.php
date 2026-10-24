@@ -183,7 +183,7 @@ final class RecordModuleRegistryTest extends TestCase
     }
 
     #[Test]
-    public function toModuleConfigurationUsesPageTreeWithoutPids(): void
+    public function toModuleConfigurationOmitsPageTreeWithoutPids(): void
     {
         $definitions = $this->subject->getDefinitions([
             'tx_mainews_news' => [
@@ -195,7 +195,9 @@ final class RecordModuleRegistryTest extends TestCase
 
         $configuration = $this->subject->toModuleConfiguration($definitions[0]);
 
-        self::assertSame('@typo3/backend/tree/page-tree-element', $configuration['navigationComponent']);
+        // Page tree would reopen the last selected page instead of default storage.
+        self::assertSame('', $configuration['navigationComponent']);
+        self::assertFalse($configuration['inheritNavigationComponentFromMainModule']);
     }
 
     #[Test]

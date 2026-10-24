@@ -70,9 +70,17 @@ final class RecordModuleControllerTest extends TestCase
     }
 
     #[Test]
-    public function resolveDefaultStoragePidIsPrivateHelper(): void
+    public function resolveDefaultStoragePidsIsPrivateHelper(): void
     {
-        $method = new \ReflectionMethod(RecordModuleController::class, 'resolveDefaultStoragePid');
+        $method = new \ReflectionMethod(RecordModuleController::class, 'resolveDefaultStoragePids');
+        self::assertTrue($method->isPrivate());
+        self::assertSame('array', $method->getReturnType()?->getName());
+    }
+
+    #[Test]
+    public function resolveActivePageIdIsPrivateHelper(): void
+    {
+        $method = new \ReflectionMethod(RecordModuleController::class, 'resolveActivePageId');
         self::assertTrue($method->isPrivate());
         self::assertSame('int', $method->getReturnType()?->getName());
     }

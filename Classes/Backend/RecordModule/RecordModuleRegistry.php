@@ -147,11 +147,9 @@ final class RecordModuleRegistry
      */
     public function toModuleConfiguration(RecordModuleDefinition $definition): array
     {
-        $navigationComponent = '';
-        if ($definition->pids === []) {
-            $navigationComponent = '@typo3/backend/tree/page-tree-element';
-        }
-
+        // Never attach the page tree: the last selected page would open instead of
+        // the site-configured default storage, so record modules looked empty.
+        // Storage pages come from TCA `pids` or site setting `records.defaultStoragePid`.
         $configuration = [
             'parent' => $definition->parent,
             'position' => ['before' => 'web_list'],
@@ -162,7 +160,7 @@ final class RecordModuleRegistry
                 'title' => $definition->title,
             ],
             'extensionName' => 'MaiBase',
-            'navigationComponent' => $navigationComponent,
+            'navigationComponent' => '',
             'inheritNavigationComponentFromMainModule' => false,
             'controllerActions' => [
                 RecordModuleController::class => [

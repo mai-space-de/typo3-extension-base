@@ -92,6 +92,7 @@ final class RecordModuleController extends AbstractBackendController
         $this->table = (string) $this->moduleData->get('table');
         $this->pageId = (int) ($parsedBody['id'] ?? $queryParams['id'] ?? 0);
         $pids = $this->resolvePids($parsedBody, $queryParams);
+        $this->pageId = $this->resolveActivePageId($pids);
 
         $this->pageRenderer->addInlineLanguageLabelFile(
             'EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf',
@@ -139,10 +140,6 @@ final class RecordModuleController extends AbstractBackendController
             ]);
 
             return $this->renderModuleResponse($moduleTemplate, 'Index');
-        }
-
-        if ($this->pageId === 0) {
-            $this->pageId = (int) reset($pids);
         }
 
         $request = $this->ensurePageContext($request, $backendUser);
@@ -290,11 +287,19 @@ final class RecordModuleController extends AbstractBackendController
             foreach ($this->moduleData->get('pids') as $pid) {
                 $pids[] = (int) $pid;
             }
-        } elseif (
-            (isset($parsedBody['id']) && $parsedBody['id'] !== '')
-            || (isset($queryParams['id']) && $queryParams['id'] !== '')
-        ) {
-            $pids = [$this->pageId];
+        } else {
+            // Prefer site default storage over a stale page-tree / request id so
+            // opening the module shows records immediately.
+            $pids = $this->resolveDefaultStoragePids();
+            if (
+                $pids === []
+                && (
+                    (isset($parsedBody['id']) && $parsedBody['id'] !== '')
+                    || (isset($queryParams['id']) && $queryParams['id'] !== '')
+                )
+            ) {
+                $pids = [$this->pageId];
+            }
         }
 
         $afterEvent = new AfterRecordModulePidsLoadedEvent($pids, $this->table);
@@ -302,10 +307,7 @@ final class RecordModuleController extends AbstractBackendController
         $pids = $afterEvent->getPids();
 
         if ($pids === []) {
-            $defaultPid = $this->resolveDefaultStoragePid();
-            if ($defaultPid > 0) {
-                $pids = [$defaultPid];
-            }
+            $pids = $this->resolveDefaultStoragePids();
         }
 
         $backendUser = $this->getBackendUserAuthentication();
@@ -321,8 +323,28 @@ final class RecordModuleController extends AbstractBackendController
         return $accessible;
     }
 
-    private function resolveDefaultStoragePid(): int
+    /**
+     * @param list<int> $pids
+     */
+    private function resolveActivePageId(array $pids): int
     {
+        if ($pids === []) {
+            return $this->pageId;
+        }
+
+        if ($this->pageId === 0 || !in_array($this->pageId, $pids, true)) {
+            return (int) reset($pids);
+        }
+
+        return $this->pageId;
+    }
+
+    /**
+     * @return list<int>
+     */
+    private function resolveDefaultStoragePids(): array
+    {
+        $pids = [];
         foreach ($this->siteFinder->getAllSites() as $site) {
             $settings = $site->getSettings();
             if (!$settings->has('records.defaultStoragePid')) {
@@ -331,11 +353,11 @@ final class RecordModuleController extends AbstractBackendController
 
             $pid = (int) $settings->get('records.defaultStoragePid');
             if ($pid > 0) {
-                return $pid;
+                $pids[] = $pid;
             }
         }
 
-        return 0;
+        return array_values(array_unique($pids));
     }
 
     private function ensurePageContext(

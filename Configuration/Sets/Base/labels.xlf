@@ -18,7 +18,7 @@
                 <source>Default record storage page</source>
             </trans-unit>
             <trans-unit id="settings.description.records.defaultStoragePid">
-                <source>Fallback page used as the record list's storage page for tables that don't configure their own pids. Set to 0 to keep showing "no pages for this table" instead.</source>
+                <source>Storage page opened automatically when a records backend module is clicked for tables that don't configure their own pids. Set to 0 to keep showing "no pages for this table" instead.</source>
             </trans-unit>
         </body>
     </file>
