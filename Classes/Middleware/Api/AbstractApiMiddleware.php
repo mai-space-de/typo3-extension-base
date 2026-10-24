@@ -10,6 +10,16 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ * Base for frontend JSON API middlewares under `/api/…`.
+ *
+ * Subclass registration checklist (`Configuration/RequestMiddlewares.php`):
+ * - `after: typo3/cms-frontend/site`
+ * - `before: typo3/cms-frontend/page-resolver` (required — otherwise unknown
+ *   paths become TYPO3 HTML 404s before this middleware runs)
+ * - Constructor must inject {@see ResponseFactoryInterface} +
+ *   {@see StreamFactoryInterface} and call `parent::__construct(...)`.
+ */
 abstract class AbstractApiMiddleware implements ApiMiddlewareInterface
 {
     public function __construct(
