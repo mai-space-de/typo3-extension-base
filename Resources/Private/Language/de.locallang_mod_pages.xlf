@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="messages" product-name="mai_base" target-language="de">
+        <body>
+            <trans-unit id="mlang_tabs_tab">
+                <source>Custom Pages</source>
+                <target>Eigene Seiten</target>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tablabel">
+                <source>Custom page modules</source>
+                <target>Module für eigene Seitentypen</target>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tabdescr">
+                <source>Backend modules listing pages filtered by custom doktype, without page-tree navigation.</source>
+                <target>Backend-Module mit Seitenliste gefiltert nach Doktype, ohne Seitenbaum-Navigation.</target>
+            </trans-unit>
+            <trans-unit id="doktype.news">
+                <source>News article</source>
+                <target>Nachrichtenartikel</target>
+            </trans-unit>
+            <trans-unit id="doktype.event">
+                <source>Event</source>
+                <target>Veranstaltung</target>
+            </trans-unit>
+            <trans-unit id="module.news">
+                <source>News</source>
+                <target>Neuigkeiten</target>
+            </trans-unit>
+            <trans-unit id="module.event">
+                <source>Events</source>
+                <target>Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="noDoktypes">
+                <source>No doktypes are configured for this custom page module.</source>
+                <target>Für dieses Custom-Pages-Modul sind keine Doktypes konfiguriert.</target>
+            </trans-unit>
+            <trans-unit id="noParentPages">
+                <source>No accessible parent pages are configured for this custom page module. Set TCA pids or the site setting parentPid.</source>
+                <target>Keine erreichbaren Elternseiten konfiguriert. TCA-pids oder Site-Setting parentPid setzen.</target>
+            </trans-unit>
+            <trans-unit id="noAccess">
+                <source>You do not have permission to view pages in this module.</source>
+                <target>Keine Berechtigung, Seiten in diesem Modul anzuzeigen.</target>
+            </trans-unit>
+            <trans-unit id="noPagesOfDoktype">
+                <source>No pages of this doktype were found under the selected parent.</source>
+                <target>Unter dem gewählten Elternknoten wurden keine Seiten dieses Doktypes gefunden.</target>
+            </trans-unit>
+            <trans-unit id="openInPageTree">
+                <source>Open parent in page tree</source>
+                <target>Elternseite im Seitenbaum öffnen</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

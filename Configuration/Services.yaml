@@ -21,3 +21,13 @@ services:
         identifier: 'mai-base/smoke-test-content-areas'
         event: TYPO3\CMS\Core\Page\ResolveContentAreasEvent
         priority: -100
+
+  Maispace\MaiBase\Backend\CustomPageModule\CustomPageModuleListingContext:
+    public: true
+    shared: true
+
+  Maispace\MaiBase\EventListener\FilterCustomPageModuleListingListener:
+    tags:
+      - name: event.listener
+        identifier: 'mai-base/filter-custom-page-module-listing'
+        event: TYPO3\CMS\Backend\View\Event\ModifyDatabaseQueryForRecordListingEvent

@@ -2,9 +2,21 @@ categories:
   mai-base: ~
   mai-base.recordModule:
     parent: mai-base
+  mai-base.customPages:
+    parent: mai-base
 
 settings:
   records.defaultStoragePid:
     default: 0
     type: page
     category: mai-base.recordModule
+
+  # Parent pages for Custom-Pages backend modules (doktype 120 = News, 121 = Event).
+  customPages.news.parentPid:
+    default: 0
+    type: page
+    category: mai-base.customPages
+  customPages.event.parentPid:
+    default: 0
+    type: page
+    category: mai-base.customPages
