@@ -1,11 +1,11 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1545_12826)">
-<path d="M7 12C8.63655 11.9975 10.2121 11.3787 11.413 10.2668C12.6138 9.1549 13.3518 7.63152 13.48 6C13.4801 5.87079 13.4302 5.74655 13.3407 5.65333C13.2512 5.56012 13.1291 5.50517 13 5.5H0.999997C0.870885 5.50517 0.748788 5.56012 0.659303 5.65333C0.569818 5.74655 0.519893 5.87079 0.519997 6C0.648204 7.63152 1.38621 9.1549 2.58704 10.2668C3.78788 11.3787 5.36345 11.9975 7 12V12Z" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M4.05 11.29L3.5 13.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M9.95 11.29L10.5 13.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M3.5 3V2" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M10.5 3V2" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M7 3V0.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
+<path d="M7 12C8.63655 11.9975 10.2121 11.3787 11.413 10.2668C12.6138 9.1549 13.3518 7.63152 13.48 6C13.4801 5.87079 13.4302 5.74655 13.3407 5.65333C13.2512 5.56012 13.1291 5.50517 13 5.5H0.999997C0.870885 5.50517 0.748788 5.56012 0.659303 5.65333C0.569818 5.74655 0.519893 5.87079 0.519997 6C0.648204 7.63152 1.38621 9.1549 2.58704 10.2668C3.78788 11.3787 5.36345 11.9975 7 12V12Z" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M4.05 11.29L3.5 13.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M9.95 11.29L10.5 13.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M3.5 3V2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M10.5 3V2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M7 3V0.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
 </g>
 <defs>
 <clipPath id="clip0_1545_12826">

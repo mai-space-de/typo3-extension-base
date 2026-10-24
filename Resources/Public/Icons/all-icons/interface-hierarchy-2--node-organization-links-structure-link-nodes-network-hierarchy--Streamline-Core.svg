@@ -1,11 +1,11 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1545_9600)">
-<path d="M8.5 2.5C8.5 3.32843 7.82843 4 7 4C6.17157 4 5.5 3.32843 5.5 2.5C5.5 1.67157 6.17157 1 7 1C7.82843 1 8.5 1.67157 8.5 2.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M3.5 11.5C3.5 12.3284 2.82843 13 2 13C1.17157 13 0.5 12.3284 0.5 11.5C0.5 10.6716 1.17157 10 2 10C2.82843 10 3.5 10.6716 3.5 11.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M8.5 11.5C8.5 12.3284 7.82843 13 7 13C6.17157 13 5.5 12.3284 5.5 11.5C5.5 10.6716 6.17157 10 7 10C7.82843 10 8.5 10.6716 8.5 11.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M13.5 11.5C13.5 12.3284 12.8284 13 12 13C11.1716 13 10.5 12.3284 10.5 11.5C10.5 10.6716 11.1716 10 12 10C12.8284 10 13.5 10.6716 13.5 11.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M2 10V8C2 7.73478 2.10536 7.48043 2.29289 7.29289C2.48043 7.10536 2.73478 7 3 7H11C11.2652 7 11.5196 7.10536 11.7071 7.29289C11.8946 7.48043 12 7.73478 12 8V10" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M7 4V10" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
+<path d="M8.5 2.5C8.5 3.32843 7.82843 4 7 4C6.17157 4 5.5 3.32843 5.5 2.5C5.5 1.67157 6.17157 1 7 1C7.82843 1 8.5 1.67157 8.5 2.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M3.5 11.5C3.5 12.3284 2.82843 13 2 13C1.17157 13 0.5 12.3284 0.5 11.5C0.5 10.6716 1.17157 10 2 10C2.82843 10 3.5 10.6716 3.5 11.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M8.5 11.5C8.5 12.3284 7.82843 13 7 13C6.17157 13 5.5 12.3284 5.5 11.5C5.5 10.6716 6.17157 10 7 10C7.82843 10 8.5 10.6716 8.5 11.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M13.5 11.5C13.5 12.3284 12.8284 13 12 13C11.1716 13 10.5 12.3284 10.5 11.5C10.5 10.6716 11.1716 10 12 10C12.8284 10 13.5 10.6716 13.5 11.5Z" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M2 10V8C2 7.73478 2.10536 7.48043 2.29289 7.29289C2.48043 7.10536 2.73478 7 3 7H11C11.2652 7 11.5196 7.10536 11.7071 7.29289C11.8946 7.48043 12 7.73478 12 8V10" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M7 4V10" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
 </g>
 <defs>
 <clipPath id="clip0_1545_9600">

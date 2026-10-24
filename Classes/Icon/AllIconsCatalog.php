@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Maispace\MaiBase\Icon;
 
-use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
-
 /**
  * Registers every Streamline SVG under Resources/Public/Icons/all-icons/ with the Icon API.
  *
@@ -54,7 +52,7 @@ final class AllIconsCatalog
             $filename = basename($absolutePath);
             $identifier = self::identifierFromFilename($filename);
             $entries[$identifier] = [
-                'provider' => SvgIconProvider::class,
+                'provider' => StreamlineSvgIconProvider::class,
                 'source' => self::ICON_PATH . $filename,
             ];
         }

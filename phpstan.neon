@@ -1,12 +1,12 @@
 includes:
-  - phpstan-baseline.neon
-  - vendor/saschaegerer/phpstan-typo3/extension.neon
+	- phpstan-baseline.neon
+	- vendor/saschaegerer/phpstan-typo3/extension.neon
 
 parameters:
-  level: 5
-  paths:
-    - Classes
-  typo3:
-    requestGetAttributeMapping:
-      route: TYPO3\CMS\Backend\Routing\Route
-      pageContext: TYPO3\CMS\Backend\Context\PageContext
+	level: 5
+	paths:
+		- Classes
+	typo3:
+		requestGetAttributeMapping:
+			route: TYPO3\CMS\Backend\Routing\Route
+			pageContext: TYPO3\CMS\Backend\Context\PageContext

@@ -1,14 +1,14 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1545_10151)">
-<path d="M9.5 7C9.5 8.38071 8.38071 9.5 7 9.5C5.61929 9.5 4.5 8.38071 4.5 7C4.5 5.61929 5.61929 4.5 7 4.5C8.38071 4.5 9.5 5.61929 9.5 7Z" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M7 0.5V2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M2.39999 2.3999L3.81999 3.8199" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M0.5 7H2.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M2.39999 11.5999L3.81999 10.1799" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M7 13.5V11.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M11.6 11.5999L10.18 10.1799" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M13.5 7H11.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M11.6 2.3999L10.18 3.8199" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
+<path d="M9.5 7C9.5 8.38071 8.38071 9.5 7 9.5C5.61929 9.5 4.5 8.38071 4.5 7C4.5 5.61929 5.61929 4.5 7 4.5C8.38071 4.5 9.5 5.61929 9.5 7Z" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M7 0.5V2.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M2.39999 2.3999L3.81999 3.8199" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M0.5 7H2.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M2.39999 11.5999L3.81999 10.1799" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M7 13.5V11.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M11.6 11.5999L10.18 10.1799" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M13.5 7H11.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M11.6 2.3999L10.18 3.8199" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
 </g>
 <defs>
 <clipPath id="clip0_1545_10151">

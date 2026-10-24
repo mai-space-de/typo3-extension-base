@@ -1,15 +1,15 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1545_12203)">
-<path d="M4 3H10C10.5523 3 11 3.44772 11 4V10C11 10.5523 10.5523 11 10 11H4C3.44772 11 3 10.5523 3 10V4C3 3.44772 3.44772 3 4 3Z" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M5 3V0.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M9 3V0.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M3 9H0.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M3 5H0.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M9 11V13.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M5 11V13.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M11 5H13.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M11 9H13.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
-<path d="M8.5 7.5H6.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000001"/>
+<path d="M4 3H10C10.5523 3 11 3.44772 11 4V10C11 10.5523 10.5523 11 10 11H4C3.44772 11 3 10.5523 3 10V4C3 3.44772 3.44772 3 4 3Z" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M5 3V0.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M9 3V0.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M3 9H0.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M3 5H0.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M9 11V13.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M5 11V13.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M11 5H13.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M11 9H13.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
+<path d="M8.5 7.5H6.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/>
 </g>
 <defs>
 <clipPath id="clip0_1545_12203">

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Maispace\MaiBase\Tests\Unit\Icon;
 
 use Maispace\MaiBase\Icon\AllIconsCatalog;
+use Maispace\MaiBase\Icon\StreamlineSvgIconProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 
 final class AllIconsCatalogTest extends TestCase
 {
@@ -48,7 +48,7 @@ final class AllIconsCatalogTest extends TestCase
 
         foreach ($entries as $identifier => $entry) {
             self::assertNotSame('', $identifier);
-            self::assertSame(SvgIconProvider::class, $entry['provider']);
+            self::assertSame(StreamlineSvgIconProvider::class, $entry['provider']);
             self::assertStringStartsWith(AllIconsCatalog::ICON_PATH, $entry['source']);
             self::assertStringEndsWith('.svg', $entry['source']);
             $filename = substr($entry['source'], strlen(AllIconsCatalog::ICON_PATH));
