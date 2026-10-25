@@ -22,6 +22,14 @@
                 <source>Event</source>
                 <target>Veranstaltung</target>
             </trans-unit>
+            <trans-unit id="doktype.job">
+                <source>Job vacancy</source>
+                <target>Stellenanzeige</target>
+            </trans-unit>
+            <trans-unit id="doktype.member">
+                <source>Member</source>
+                <target>Mitglied</target>
+            </trans-unit>
             <trans-unit id="module.news">
                 <source>News</source>
                 <target>Neuigkeiten</target>
@@ -29,6 +37,14 @@
             <trans-unit id="module.event">
                 <source>Events</source>
                 <target>Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="module.job">
+                <source>Jobs</source>
+                <target>Stellenanzeigen</target>
+            </trans-unit>
+            <trans-unit id="module.member">
+                <source>Members</source>
+                <target>Mitglieder</target>
             </trans-unit>
             <trans-unit id="noDoktypes">
                 <source>No doktypes are configured for this custom page module.</source>

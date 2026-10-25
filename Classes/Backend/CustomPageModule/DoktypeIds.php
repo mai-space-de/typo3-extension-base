@@ -8,13 +8,17 @@ namespace Maispace\MaiBase\Backend\CustomPageModule;
  * Reserved custom page doktype numbers for this project.
  *
  * Spike (2026-10-24): Core uses 1, 3, 4, 6, 7, 199, 254. Project DB only had 1, 199, 254.
- * 120/121 are free and documented for Content (News/Events) and Discovery.
+ * 120–123 are free and documented for News / Events / Jobs / Members.
  */
 final class DoktypeIds
 {
     public const NEWS = 120;
 
     public const EVENT = 121;
+
+    public const JOB = 122;
+
+    public const MEMBER = 123;
 
     /**
      * @return list<int>
@@ -24,6 +28,8 @@ final class DoktypeIds
         return [
             self::NEWS,
             self::EVENT,
+            self::JOB,
+            self::MEMBER,
         ];
     }
 

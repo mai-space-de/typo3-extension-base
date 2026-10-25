@@ -11,12 +11,20 @@ settings:
     type: page
     category: mai-base.recordModule
 
-  # Parent pages for Custom-Pages backend modules (doktype 120 = News, 121 = Event).
+  # Parent pages for Custom-Pages backend modules (120 News / 121 Event / 122 Job / 123 Member).
   customPages.news.parentPid:
     default: 0
     type: page
     category: mai-base.customPages
   customPages.event.parentPid:
+    default: 0
+    type: page
+    category: mai-base.customPages
+  customPages.job.parentPid:
+    default: 0
+    type: page
+    category: mai-base.customPages
+  customPages.member.parentPid:
     default: 0
     type: page
     category: mai-base.customPages

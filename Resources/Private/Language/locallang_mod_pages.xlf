@@ -17,11 +17,23 @@
             <trans-unit id="doktype.event">
                 <source>Event</source>
             </trans-unit>
+            <trans-unit id="doktype.job">
+                <source>Job vacancy</source>
+            </trans-unit>
+            <trans-unit id="doktype.member">
+                <source>Member</source>
+            </trans-unit>
             <trans-unit id="module.news">
                 <source>News</source>
             </trans-unit>
             <trans-unit id="module.event">
                 <source>Events</source>
+            </trans-unit>
+            <trans-unit id="module.job">
+                <source>Jobs</source>
+            </trans-unit>
+            <trans-unit id="module.member">
+                <source>Members</source>
             </trans-unit>
             <trans-unit id="noDoktypes">
                 <source>No doktypes are configured for this custom page module.</source>

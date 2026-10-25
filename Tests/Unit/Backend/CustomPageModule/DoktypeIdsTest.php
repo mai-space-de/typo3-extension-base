@@ -15,8 +15,12 @@ final class DoktypeIdsTest extends TestCase
     {
         self::assertSame(120, DoktypeIds::NEWS);
         self::assertSame(121, DoktypeIds::EVENT);
-        self::assertSame([120, 121], DoktypeIds::all());
+        self::assertSame(122, DoktypeIds::JOB);
+        self::assertSame(123, DoktypeIds::MEMBER);
+        self::assertSame([120, 121, 122, 123], DoktypeIds::all());
         self::assertTrue(DoktypeIds::isReserved(120));
+        self::assertTrue(DoktypeIds::isReserved(122));
+        self::assertTrue(DoktypeIds::isReserved(123));
         self::assertFalse(DoktypeIds::isReserved(1));
         self::assertFalse(DoktypeIds::isReserved(254));
     }

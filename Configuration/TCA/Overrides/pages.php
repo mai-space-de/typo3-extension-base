@@ -40,6 +40,36 @@ $ll = Helper::localLangHelperFactory('mai_base', 'locallang_mod_pages.xlf');
     ->addDefaultExtendedTab()
     ->register();
 
+(new Doktype((string) DoktypeIds::JOB, $ll('doktype.job'), 'mai-jobs'))
+    ->addDefaultTitlePalette()
+    ->addDefaultSeoTab()
+    ->addDefaultSocialMediaTab()
+    ->addDefaultMetadataTab()
+    ->addDefaultAppearanceTab()
+    ->addDefaultBehaviourTab()
+    ->addDefaultResourcesTab()
+    ->addDefaultAccessTab()
+    ->addDefaultLanguageTab()
+    ->addDefaultCategoriesTab()
+    ->addDefaultNotesTab()
+    ->addDefaultExtendedTab()
+    ->register();
+
+(new Doktype((string) DoktypeIds::MEMBER, $ll('doktype.member'), 'mai-member'))
+    ->addDefaultTitlePalette()
+    ->addDefaultSeoTab()
+    ->addDefaultSocialMediaTab()
+    ->addDefaultMetadataTab()
+    ->addDefaultAppearanceTab()
+    ->addDefaultBehaviourTab()
+    ->addDefaultResourcesTab()
+    ->addDefaultAccessTab()
+    ->addDefaultLanguageTab()
+    ->addDefaultCategoriesTab()
+    ->addDefaultNotesTab()
+    ->addDefaultExtendedTab()
+    ->register();
+
 $GLOBALS['TCA']['pages']['ctrl']['EXT']['mai_base']['customPageModules'] = array_replace(
     $GLOBALS['TCA']['pages']['ctrl']['EXT']['mai_base']['customPageModules'] ?? [],
     [
@@ -56,6 +86,20 @@ $GLOBALS['TCA']['pages']['ctrl']['EXT']['mai_base']['customPageModules'] = array
             'sorting' => 20,
             'iconIdentifier' => 'apps-pagetree-page-content-from-page',
             'parentPidSetting' => 'customPages.event.parentPid',
+        ],
+        'job' => [
+            'doktype' => DoktypeIds::JOB,
+            'title' => $ll('module.job'),
+            'sorting' => 30,
+            'iconIdentifier' => 'mai-jobs',
+            'parentPidSetting' => 'customPages.job.parentPid',
+        ],
+        'member' => [
+            'doktype' => DoktypeIds::MEMBER,
+            'title' => $ll('module.member'),
+            'sorting' => 40,
+            'iconIdentifier' => 'mai-member',
+            'parentPidSetting' => 'customPages.member.parentPid',
         ],
     ],
 );
