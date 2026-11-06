@@ -31,3 +31,21 @@ services:
       - name: event.listener
         identifier: 'mai-base/filter-custom-page-module-listing'
         event: TYPO3\CMS\Backend\View\Event\ModifyDatabaseQueryForRecordListingEvent
+
+  dashboard.widget.maiBaseManual:
+    class: 'ProudNerds\PnBackendManual\Widgets\ManualWidget'
+    arguments:
+      $options:
+        file: 'EXT:mai_base/Resources/Private/Manual/Manual.md'
+        numbered: true
+        contentsDepth: 2
+        printButton: true
+    tags:
+      - name: dashboard.widget
+        identifier: 'maiBaseManual'
+        groupNames: 'documentation'
+        title: 'Handbuch: Basis'
+        description: 'Kurze Anleitung zur gemeinsamen Basis und zum Modul Records.'
+        iconIdentifier: 'content-book'
+        height: 'medium'
+        width: 'medium'
