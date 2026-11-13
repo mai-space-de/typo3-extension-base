@@ -229,7 +229,7 @@ final class RecordModuleController extends AbstractBackendController
 
         if ($tableListHtml === '') {
             $moduleTemplate->addFlashMessage(
-                $languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:noRecordsOfTypeOnThisPage'),
+                $this->buildNoRecordsMessage($languageService),
                 '',
                 ContextualFeedbackSeverity::INFO,
             );
@@ -497,6 +497,20 @@ final class RecordModuleController extends AbstractBackendController
         }
 
         return $tabs;
+    }
+
+    /**
+     * The core label contains a %s placeholder for the table title and has to be filled in.
+     */
+    private function buildNoRecordsMessage(LanguageService $languageService): string
+    {
+        $label = $languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:noRecordsOfTypeOnThisPage');
+        $tableTitle = (string) ($GLOBALS['TCA'][$this->table]['ctrl']['title'] ?? $this->table);
+        if (str_starts_with($tableTitle, 'LLL:')) {
+            $tableTitle = $languageService->sL($tableTitle);
+        }
+
+        return sprintf($label, $tableTitle !== '' ? $tableTitle : $this->table);
     }
 
     private function resolveModuleTitle(LanguageService $languageService): string

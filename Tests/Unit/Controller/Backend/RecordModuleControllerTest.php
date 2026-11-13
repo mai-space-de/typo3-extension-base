@@ -13,6 +13,7 @@ use TYPO3\CMS\Backend\Context\PageContextFactory;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Site\SiteFinder;
 
@@ -83,5 +84,30 @@ final class RecordModuleControllerTest extends TestCase
         $method = new \ReflectionMethod(RecordModuleController::class, 'resolveActivePageId');
         self::assertTrue($method->isPrivate());
         self::assertSame('int', $method->getReturnType()?->getName());
+    }
+
+    #[Test]
+    public function noRecordsMessageContainsTheTableTitleInsteadOfThePlaceholder(): void
+    {
+        $GLOBALS['TCA']['tx_maitest_record']['ctrl']['title'] = 'Bewerbungen';
+
+        try {
+            $controller = (new \ReflectionClass(RecordModuleController::class))->newInstanceWithoutConstructor();
+            (new \ReflectionProperty(RecordModuleController::class, 'table'))->setValue($controller, 'tx_maitest_record');
+
+            $languageService = $this->createMock(LanguageService::class);
+            $languageService->method('sL')->willReturnCallback(
+                static fn (string $label): string => str_contains($label, 'noRecordsOfTypeOnThisPage')
+                    ? 'Es gibt keine Datensätze vom Typ "%s" auf dieser Seite.'
+                    : $label,
+            );
+
+            $message = (new \ReflectionMethod(RecordModuleController::class, 'buildNoRecordsMessage'))
+                ->invoke($controller, $languageService);
+
+            self::assertSame('Es gibt keine Datensätze vom Typ "Bewerbungen" auf dieser Seite.', $message);
+        } finally {
+            unset($GLOBALS['TCA']['tx_maitest_record']);
+        }
     }
 }
