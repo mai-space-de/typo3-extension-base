@@ -90,10 +90,18 @@ class CaptchaVerifier
         return $this->enforced ?? Environment::getContext()->isProduction();
     }
 
+    /**
+     * The project's .env loader fills $_ENV and $_SERVER; putenv() may be disabled for the web
+     * server, so getenv() alone is not reliable there.
+     */
     private function env(string $name): ?string
     {
-        $value = getenv($name);
+        foreach ([$_ENV[$name] ?? null, $_SERVER[$name] ?? null, getenv($name)] as $value) {
+            if (is_string($value) && $value !== '') {
+                return $value;
+            }
+        }
 
-        return is_string($value) && $value !== '' ? $value : null;
+        return null;
     }
 }

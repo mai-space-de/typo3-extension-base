@@ -119,6 +119,30 @@ final class CaptchaVerifierTest extends TestCase
     }
 
     #[Test]
+    public function endpointAndSecretAreReadFromEnvArraysWhenGetenvIsUnavailableTest(): void
+    {
+        $_ENV['CAP_API_ENDPOINT'] = 'https://env.example.test/site';
+        $_ENV['CAP_SECRET'] = 'env-secret';
+
+        try {
+            $verifier = new CaptchaVerifier($this->requestFactory, $this->logger, null, null, true);
+            $this->requestFactory->expects(self::once())
+                ->method('request')
+                ->with(
+                    'https://env.example.test/site/siteverify',
+                    'POST',
+                    self::callback(static fn (array $options): bool => $options['json']['secret'] === 'env-secret'),
+                )
+                ->willReturn($this->respondWith('{"success":true}'));
+
+            self::assertSame('https://env.example.test/site/', $verifier->getEndpoint());
+            self::assertTrue($verifier->verifyToken('tok'));
+        } finally {
+            unset($_ENV['CAP_API_ENDPOINT'], $_ENV['CAP_SECRET']);
+        }
+    }
+
+    #[Test]
     public function missingEndpointIsSkippedOutsideProductionTest(): void
     {
         $this->requestFactory->expects(self::never())->method('request');
