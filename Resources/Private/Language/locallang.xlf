@@ -6,6 +6,9 @@
             <trans-unit id="list.readMore">
                 <source>Read more</source>
             </trans-unit>
+            <trans-unit id="captcha.failed">
+                <source>The security check failed. Please try again.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

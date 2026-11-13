@@ -13,3 +13,6 @@ ConfigProvider::get()->configureLoggingThresholds(
         'Maispace' => LogLevel::WARNING,
     ]
 );
+
+// <captcha:field /> in any Fluid template, without an inline xmlns declaration.
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['captcha'][] = 'Maispace\\MaiBase\\ViewHelpers';

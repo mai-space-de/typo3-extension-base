@@ -7,6 +7,10 @@
                 <source>Read more</source>
                 <target>Weiterlesen</target>
             </trans-unit>
+            <trans-unit id="captcha.failed">
+                <source>The security check failed. Please try again.</source>
+                <target>Die Sicherheitsprüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

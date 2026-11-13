@@ -14,6 +14,7 @@
     "build:zod-form-validation": "vite build --config vite.zod-form-validation.config.js",
     "build:axios": "vite build --config vite.axios.config.js",
     "build:altcha": "vite build --config vite.altcha.config.js",
+    "build:cap": "vite build --config vite.cap.config.js",
     "build:lodash": "vite build --config vite.lodash.config.js",
     "build:accessible-menu": "vite build --config vite.accessible-menu.config.js",
     "build:notyf": "vite build --config vite.notyf.config.js",
@@ -32,6 +33,8 @@
     "vite": "^6.0.0"
   },
   "dependencies": {
+    "@cap.js/wasm": "0.0.8",
+    "@cap.js/widget": "0.1.63",
     "@fullcalendar/core": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
@@ -51,6 +54,7 @@
     "masonry-layout": "^4.2.2",
     "micromodal": "^0.6.1",
     "notyf": "^3.10.0",
+    "pako": "2.1.0",
     "photoswipe": "^5.4.4",
     "sortablejs": "^1.15.7",
     "tabulator-tables": "^6.4.0",
