@@ -73,6 +73,18 @@ final class PageRendererTraitTest extends TestCase
     }
 
     #[Test]
+    public function addDeferredJsFileAddsTheDeferAttribute(): void
+    {
+        $assetCollector = $this->createMock(AssetCollector::class);
+        $assetCollector->expects(self::once())
+            ->method('addJavaScript')
+            ->with('my_js', 'EXT:my_ext/Resources/Public/Js/app.js', ['defer' => 'defer'], ['priority' => false]);
+
+        $subject = $this->createTraitUser(assetCollector: $assetCollector);
+        $subject->callAddDeferredJsFile('my_js', 'EXT:my_ext/Resources/Public/Js/app.js');
+    }
+
+    #[Test]
     public function loadJavaScriptModuleDelegatesToPageRenderer(): void
     {
         $pageRenderer = $this->createMock(PageRenderer::class);
@@ -164,6 +176,11 @@ final class PageRendererTraitTest extends TestCase
             public function callAddJsFile(string $id, string $path, bool $priority = false): void
             {
                 $this->addJsFile($id, $path, $priority);
+            }
+
+            public function callAddDeferredJsFile(string $id, string $path, bool $priority = false): void
+            {
+                $this->addDeferredJsFile($id, $path, $priority);
             }
 
             public function callLoadJavaScriptModule(string $specifier): void

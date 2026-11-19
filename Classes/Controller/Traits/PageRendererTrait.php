@@ -60,6 +60,15 @@ trait PageRendererTrait
         $this->assetCollector->addJavaScript($identifier, $path, options: ['priority' => $priority]);
     }
 
+    /**
+     * Adds a script that does not block rendering and runs after the document has been parsed.
+     * Use it for scripts that are not needed for the first paint.
+     */
+    protected function addDeferredJsFile(string $identifier, string $path, bool $priority = false): void
+    {
+        $this->assetCollector->addJavaScript($identifier, $path, ['defer' => 'defer'], ['priority' => $priority]);
+    }
+
     protected function loadJavaScriptModule(string $specifier): void
     {
         $this->pageRenderer->loadJavaScriptModule($specifier);
