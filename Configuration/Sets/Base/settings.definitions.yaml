@@ -4,6 +4,8 @@ categories:
     parent: mai-base
   mai-base.customPages:
     parent: mai-base
+  mai-base.basicAuth:
+    parent: mai-base
 
 settings:
   records.defaultStoragePid:
@@ -28,3 +30,24 @@ settings:
     default: 0
     type: page
     category: mai-base.customPages
+
+  # HTTP Basic Auth (password prompt of the browser) for the whole site, all languages included.
+  # Single languages: site configuration → Languages. Single pages: page properties → Access.
+  basicAuth.enabled:
+    default: false
+    type: bool
+    category: mai-base.basicAuth
+  basicAuth.realm:
+    default: 'Protected area'
+    type: string
+    category: mai-base.basicAuth
+  # One `username:password` per entry, e.g. one login for the agency and one for the customer.
+  # The password may be a hash from password_hash() or a %env(…)% placeholder.
+  basicAuth.credentials:
+    default: []
+    type: stringlist
+    category: mai-base.basicAuth
+  basicAuth.allowBackendUsers:
+    default: true
+    type: bool
+    category: mai-base.basicAuth

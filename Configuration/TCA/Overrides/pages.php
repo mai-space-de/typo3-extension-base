@@ -3,7 +3,13 @@
 declare(strict_types=1);
 
 use Maispace\MaiBase\Backend\CustomPageModule\DoktypeIds;
+use Maispace\MaiBase\EventListener\AddBasicAuthPaletteToPageTypes;
+use Maispace\MaiBase\HttpBasicAuth\PageProtectionResolver;
 use Maispace\MaiBase\TableConfigurationArray\Doktype;
+use Maispace\MaiBase\TableConfigurationArray\Field;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\InputConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\PasswordConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\SelectSingleConfig;
 use Maispace\MaiBase\TableConfigurationArray\Helper;
 
 defined('TYPO3') or die();
@@ -103,3 +109,41 @@ $GLOBALS['TCA']['pages']['ctrl']['EXT']['mai_base']['customPageModules'] = array
         ],
     ],
 );
+
+// HTTP Basic Auth per page. The palette is added to every page type by
+// AddBasicAuthPaletteToPageTypes, after all extensions registered their doktypes.
+$basicAuthLl = Helper::localLangHelperFactory('mai_base', 'locallang_basic_auth.xlf');
+
+(new Field('pages', PageProtectionResolver::FIELD_MODE, $basicAuthLl('pages.basic_auth'), true))
+    ->setDescription($basicAuthLl('pages.basic_auth.description'))
+    ->setOnChange('reload')
+    ->setL10nMode('exclude')
+    ->setConfig(
+        (new SelectSingleConfig())
+            ->setItems([
+                ['label' => $basicAuthLl('pages.basic_auth.off'), 'value' => PageProtectionResolver::MODE_OFF],
+                ['label' => $basicAuthLl('pages.basic_auth.page'), 'value' => PageProtectionResolver::MODE_PAGE],
+                ['label' => $basicAuthLl('pages.basic_auth.subpages'), 'value' => PageProtectionResolver::MODE_PAGE_AND_SUBPAGES],
+            ])
+            ->setDefault(PageProtectionResolver::MODE_OFF),
+    )
+    ->registerField();
+
+(new Field('pages', PageProtectionResolver::FIELD_USERNAME, $basicAuthLl('pages.basic_auth_username'), true))
+    ->setDisplayCondition('FIELD:' . PageProtectionResolver::FIELD_MODE . ':>:0')
+    ->setL10nMode('exclude')
+    ->setConfig((new InputConfig())->setSize(30)->setMax(255)->setEval('trim'))
+    ->registerField();
+
+(new Field('pages', PageProtectionResolver::FIELD_PASSWORD, $basicAuthLl('pages.basic_auth_password'), true))
+    ->setDescription($basicAuthLl('pages.basic_auth_password.description'))
+    ->setDisplayCondition('FIELD:' . PageProtectionResolver::FIELD_MODE . ':>:0')
+    ->setL10nMode('exclude')
+    ->setConfig((new PasswordConfig())->setHashed()->setSize(30))
+    ->registerField();
+
+$GLOBALS['TCA']['pages']['palettes'][AddBasicAuthPaletteToPageTypes::PALETTE] = [
+    'label' => $basicAuthLl('palette.basic_auth'),
+    'showitem' => PageProtectionResolver::FIELD_MODE . ', --linebreak--, '
+        . PageProtectionResolver::FIELD_USERNAME . ', ' . PageProtectionResolver::FIELD_PASSWORD,
+];

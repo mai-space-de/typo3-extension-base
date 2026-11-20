@@ -32,6 +32,12 @@ services:
         identifier: 'mai-base/filter-custom-page-module-listing'
         event: TYPO3\CMS\Backend\View\Event\ModifyDatabaseQueryForRecordListingEvent
 
+  Maispace\MaiBase\EventListener\AddBasicAuthPaletteToPageTypes:
+    tags:
+      - name: event.listener
+        identifier: 'mai-base/add-basic-auth-palette'
+        event: TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent
+
   dashboard.widget.maiBaseManual:
     class: 'ProudNerds\PnBackendManual\Widgets\ManualWidget'
     arguments:
