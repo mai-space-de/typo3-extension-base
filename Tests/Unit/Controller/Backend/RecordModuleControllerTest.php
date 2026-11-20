@@ -97,7 +97,7 @@ final class RecordModuleControllerTest extends TestCase
 
             $languageService = $this->createMock(LanguageService::class);
             $languageService->method('sL')->willReturnCallback(
-                static fn (string $label): string => str_contains($label, 'noRecordsOfTypeOnThisPage')
+                static fn(string $label): string => str_contains($label, 'noRecordsOfTypeOnThisPage')
                     ? 'Es gibt keine Datensätze vom Typ "%s" auf dieser Seite.'
                     : $label,
             );
