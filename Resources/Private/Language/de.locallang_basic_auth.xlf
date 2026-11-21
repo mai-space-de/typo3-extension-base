@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-11-20T00:00:00Z" product-name="mai_base">
+        <header/>
+        <body>
+            <trans-unit id="pages.basic_auth">
+                <source>HTTP password protection</source>
+                <target>HTTP-Passwortschutz</target>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.description">
+                <source>Visitors only see this page after entering a username and password in the browser's login prompt. The site logins (site settings) work as well.</source>
+                <target>Besucher sehen diese Seite erst nach Eingabe von Benutzername und Passwort im Login-Fenster des Browsers. Die Logins aus den Site-Einstellungen funktionieren ebenfalls.</target>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.off">
+                <source>Off</source>
+                <target>Aus</target>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.page">
+                <source>This page only</source>
+                <target>Nur diese Seite</target>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.subpages">
+                <source>This page and all subpages</source>
+                <target>Diese Seite und alle Unterseiten</target>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth_username">
+                <source>Username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth_password">
+                <source>Password</source>
+                <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth_password.description">
+                <source>Stored encrypted. Leave both fields empty to only allow the site logins.</source>
+                <target>Wird verschlüsselt gespeichert. Beide Felder leer lassen, um nur die Logins aus den Site-Einstellungen zuzulassen.</target>
+            </trans-unit>
+            <trans-unit id="palette.basic_auth">
+                <source>HTTP password protection</source>
+                <target>HTTP-Passwortschutz</target>
+            </trans-unit>
+            <trans-unit id="site_language.basic_auth_enabled">
+                <source>Protect this language with a password (HTTP Basic Auth)</source>
+                <target>Diese Sprache mit Passwort schützen (HTTP Basic Auth)</target>
+            </trans-unit>
+            <trans-unit id="site_language.basic_auth_credentials">
+                <source>Additional logins for this language</source>
+                <target>Zusätzliche Logins für diese Sprache</target>
+            </trans-unit>
+            <trans-unit id="site_language.basic_auth_credentials.description">
+                <source>One username:password per line. The password may be a hash created with password_hash(). The site logins (site settings) also work.</source>
+                <target>Ein Login pro Zeile als benutzername:passwort. Das Passwort darf ein Hash aus password_hash() sein. Die Logins aus den Site-Einstellungen funktionieren ebenfalls.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

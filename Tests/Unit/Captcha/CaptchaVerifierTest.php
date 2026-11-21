@@ -59,7 +59,7 @@ final class CaptchaVerifierTest extends TestCase
             ->with(
                 'https://captcha.example.test/key/siteverify',
                 'POST',
-                self::callback(static fn (array $options): bool => $options['json'] === ['secret' => 'secret', 'response' => 'tok']),
+                self::callback(static fn(array $options): bool => $options['json'] === ['secret' => 'secret', 'response' => 'tok']),
             )
             ->willReturn($this->respondWith('{"success":true}'));
 
@@ -131,7 +131,7 @@ final class CaptchaVerifierTest extends TestCase
                 ->with(
                     'https://env.example.test/site/siteverify',
                     'POST',
-                    self::callback(static fn (array $options): bool => $options['json']['secret'] === 'env-secret'),
+                    self::callback(static fn(array $options): bool => $options['json']['secret'] === 'env-secret'),
                 )
                 ->willReturn($this->respondWith('{"success":true}'));
 

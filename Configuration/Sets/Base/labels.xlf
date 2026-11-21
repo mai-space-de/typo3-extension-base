@@ -20,6 +20,34 @@
             <trans-unit id="settings.description.records.defaultStoragePid">
                 <source>Storage page opened automatically when a records backend module is clicked for tables that don't configure their own pids. Set to 0 to keep showing "no pages for this table" instead.</source>
             </trans-unit>
+
+            <trans-unit id="categories.mai-base.basicAuth">
+                <source>HTTP password protection</source>
+            </trans-unit>
+            <trans-unit id="settings.basicAuth.enabled">
+                <source>Protect the whole site with a password (HTTP Basic Auth)</source>
+            </trans-unit>
+            <trans-unit id="settings.description.basicAuth.enabled">
+                <source>Locks every language and page of this site behind the browser's password prompt. Single languages can be locked in the site configuration, single pages in the page properties.</source>
+            </trans-unit>
+            <trans-unit id="settings.basicAuth.realm">
+                <source>Text in the password prompt</source>
+            </trans-unit>
+            <trans-unit id="settings.description.basicAuth.realm">
+                <source>Name of the protected area that browsers show in the login dialog.</source>
+            </trans-unit>
+            <trans-unit id="settings.basicAuth.credentials">
+                <source>Logins (username:password)</source>
+            </trans-unit>
+            <trans-unit id="settings.description.basicAuth.credentials">
+                <source>One login per entry as username:password, e.g. one for the agency and one for the customer. The password may be a hash created with password_hash(). These logins also open locked languages and locked pages.</source>
+            </trans-unit>
+            <trans-unit id="settings.basicAuth.allowBackendUsers">
+                <source>Let logged-in backend users in without a password</source>
+            </trans-unit>
+            <trans-unit id="settings.description.basicAuth.allowBackendUsers">
+                <source>Editors who are logged in to the TYPO3 backend can preview protected pages without entering the password.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

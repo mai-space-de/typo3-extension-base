@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-11-20T00:00:00Z" product-name="mai_base">
+        <header/>
+        <body>
+            <trans-unit id="pages.basic_auth">
+                <source>HTTP password protection</source>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.description">
+                <source>Visitors only see this page after entering a username and password in the browser's login prompt. The site logins (site settings) work as well.</source>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.off">
+                <source>Off</source>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.page">
+                <source>This page only</source>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth.subpages">
+                <source>This page and all subpages</source>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth_username">
+                <source>Username</source>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth_password">
+                <source>Password</source>
+            </trans-unit>
+            <trans-unit id="pages.basic_auth_password.description">
+                <source>Stored encrypted. Leave both fields empty to only allow the site logins.</source>
+            </trans-unit>
+            <trans-unit id="palette.basic_auth">
+                <source>HTTP password protection</source>
+            </trans-unit>
+            <trans-unit id="site_language.basic_auth_enabled">
+                <source>Protect this language with a password (HTTP Basic Auth)</source>
+            </trans-unit>
+            <trans-unit id="site_language.basic_auth_credentials">
+                <source>Additional logins for this language</source>
+            </trans-unit>
+            <trans-unit id="site_language.basic_auth_credentials.description">
+                <source>One username:password per line. The password may be a hash created with password_hash(). The site logins (site settings) also work.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
